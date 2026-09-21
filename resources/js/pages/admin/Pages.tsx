@@ -162,45 +162,44 @@ export default function PagesAdmin({
 
             <div className="space-y-6">
                 {/* Header & Metrics Bar */}
-                <div className="border-border-stone bg-charcoal flex flex-col justify-between gap-4 border p-6 md:flex-row md:items-center">
+                <div className="flex flex-col justify-between gap-4 border border-stone-200 bg-white p-6 shadow-2xs md:flex-row md:items-center dark:border-stone-800 dark:bg-stone-900">
                     <div>
                         <div className="flex items-center gap-3">
-                            <h1 className="font-serif text-2xl font-light tracking-wide text-white">
+                            <h1 className="font-serif text-2xl font-light text-stone-900 sm:text-3xl dark:text-stone-100">
                                 Pages CMS
                             </h1>
-                            <span className="border-champagne/30 text-champagne bg-champagne/10 rounded px-2.5 py-0.5 text-[10px] font-medium tracking-wider uppercase">
+                            <span className="border border-stone-300 bg-stone-100 px-2.5 py-0.5 text-[10px] font-medium tracking-wider text-stone-700 uppercase dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300">
                                 Structured Content
                             </span>
                         </div>
-                        <p className="text-stone-warm mt-1 text-xs">
-                            Manage editorial narratives, architectural
-                            statements, and structured section content.
+                        <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
+                            Manage editorial narratives, architectural statements, and structured section content.
                         </p>
                     </div>
 
                     {/* Status Metric Pills */}
                     <div className="flex items-center gap-2">
-                        <div className="border-border-stone/60 bg-stone-dark/60 border px-3 py-1.5 text-center">
-                            <span className="text-taupe block text-[10px] tracking-wider uppercase">
+                        <div className="border border-stone-200 bg-stone-50 px-3.5 py-1.5 text-center dark:border-stone-800 dark:bg-stone-950">
+                            <span className="block font-mono text-[9px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
                                 Total Pages
                             </span>
-                            <span className="font-serif text-base text-white">
+                            <span className="font-serif text-base font-normal text-stone-900 dark:text-stone-100">
                                 {totalCount}
                             </span>
                         </div>
-                        <div className="border border-emerald-900/40 bg-emerald-950/20 px-3 py-1.5 text-center">
-                            <span className="block text-[10px] tracking-wider text-emerald-400 uppercase">
+                        <div className="border border-emerald-300 bg-emerald-50 px-3.5 py-1.5 text-center dark:border-emerald-800 dark:bg-emerald-950/60">
+                            <span className="block font-mono text-[9px] tracking-wider text-emerald-700 uppercase dark:text-emerald-400">
                                 Published
                             </span>
-                            <span className="font-serif text-base text-emerald-300">
+                            <span className="font-serif text-base font-normal text-emerald-800 dark:text-emerald-300">
                                 {publishedCount}
                             </span>
                         </div>
-                        <div className="border border-amber-900/40 bg-amber-950/20 px-3 py-1.5 text-center">
-                            <span className="block text-[10px] tracking-wider text-amber-400 uppercase">
+                        <div className="border border-amber-300 bg-amber-50 px-3.5 py-1.5 text-center dark:border-amber-800 dark:bg-amber-950/60">
+                            <span className="block font-mono text-[9px] tracking-wider text-amber-700 uppercase dark:text-amber-400">
                                 Draft
                             </span>
-                            <span className="font-serif text-base text-amber-300">
+                            <span className="font-serif text-base font-normal text-amber-800 dark:text-amber-300">
                                 {draftCount}
                             </span>
                         </div>
@@ -208,7 +207,7 @@ export default function PagesAdmin({
                 </div>
 
                 {/* Filter & Search Bar */}
-                <div className="border-border-stone bg-charcoal flex flex-col items-center justify-between gap-4 border p-4 sm:flex-row">
+                <div className="flex flex-col items-center justify-between gap-4 border border-stone-200 bg-white p-4 shadow-2xs sm:flex-row dark:border-stone-800 dark:bg-stone-900">
                     {/* Status Filter Tabs */}
                     <div className="flex w-full items-center gap-1 sm:w-auto">
                         {(['all', 'published', 'draft'] as const).map((tab) => (
@@ -218,8 +217,8 @@ export default function PagesAdmin({
                                 onClick={() => setStatusFilter(tab)}
                                 className={`px-3 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors ${
                                     statusFilter === tab
-                                        ? 'bg-champagne text-charcoal'
-                                        : 'text-stone-warm hover:bg-stone-dark/50 hover:text-white'
+                                        ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900'
+                                        : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
                                 }`}
                             >
                                 {tab === 'all'
@@ -238,13 +237,13 @@ export default function PagesAdmin({
                             placeholder="Search by title or slug..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="border-border-stone bg-stone-dark/60 placeholder:text-stone-warm focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-stone-50/50 px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:bg-white focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                         {search && (
                             <button
                                 type="button"
                                 onClick={() => setSearch('')}
-                                className="text-stone-warm absolute top-1.5 right-2.5 text-xs hover:text-white"
+                                className="absolute top-1.5 right-2.5 text-xs text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
                             >
                                 ✕
                             </button>
@@ -254,15 +253,15 @@ export default function PagesAdmin({
 
                 {/* Pages Grid */}
                 {isLoading ? (
-                    <div className="border-border-stone bg-charcoal text-stone-warm flex h-64 items-center justify-center border text-xs">
+                    <div className="flex h-64 items-center justify-center border border-stone-200 bg-white text-xs text-stone-500 shadow-2xs dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400">
                         Loading editorial pages...
                     </div>
                 ) : pages.length === 0 ? (
-                    <div className="border-border-stone bg-charcoal flex flex-col items-center justify-center border p-12 text-center">
-                        <p className="font-serif text-lg text-white">
+                    <div className="flex flex-col items-center justify-center border border-stone-200 bg-white p-12 text-center shadow-2xs dark:border-stone-800 dark:bg-stone-900">
+                        <p className="font-serif text-lg text-stone-900 dark:text-stone-100">
                             No pages found
                         </p>
-                        <p className="text-taupe mt-1 text-xs">
+                        <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
                             {search
                                 ? 'No pages matched your search criteria.'
                                 : 'No pages found in this view.'}
@@ -271,7 +270,7 @@ export default function PagesAdmin({
                             <button
                                 type="button"
                                 onClick={() => setSearch('')}
-                                className="border-border-stone text-champagne hover:bg-stone-dark/50 mt-4 border px-3 py-1.5 text-xs"
+                                className="mt-4 border border-stone-300 px-3 py-1.5 text-xs text-stone-700 hover:bg-stone-100 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800"
                             >
                                 Clear Search
                             </button>
@@ -297,17 +296,17 @@ export default function PagesAdmin({
                             return (
                                 <div
                                     key={page.id}
-                                    className="border-border-stone bg-charcoal hover:border-border-stone/80 group flex flex-col justify-between border p-5 transition-colors"
+                                    className="group flex flex-col justify-between border border-stone-200 bg-white p-5 shadow-2xs transition-all hover:border-stone-400 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700"
                                 >
                                     <div>
                                         {/* Top Card Meta */}
                                         <div className="flex items-center justify-between gap-2">
                                             <div className="flex items-center gap-2">
-                                                <span className="text-taupe font-mono text-[11px]">
+                                                <span className="font-mono text-xs text-stone-500 dark:text-stone-400">
                                                     /{page.slug}
                                                 </span>
                                                 {isCanonical && (
-                                                    <span className="border-champagne/40 text-champagne bg-champagne/10 py-0.2 border px-1.5 text-[9px] font-medium tracking-wider uppercase">
+                                                    <span className="border border-stone-300 bg-stone-100 px-1.5 py-0.5 text-[9px] font-medium tracking-wider text-stone-700 uppercase dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300">
                                                         Canonical
                                                     </span>
                                                 )}
@@ -322,8 +321,8 @@ export default function PagesAdmin({
                                                 title="Click to toggle publish status"
                                                 className={`border px-2 py-0.5 text-[10px] font-medium tracking-wider uppercase transition-all ${
                                                     page.is_published
-                                                        ? 'border-emerald-800/50 bg-emerald-950/40 text-emerald-400 hover:bg-emerald-900/60'
-                                                        : 'border-amber-800/50 bg-amber-950/40 text-amber-400 hover:bg-amber-900/60'
+                                                        ? 'border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:border-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 dark:hover:bg-emerald-900/60'
+                                                        : 'border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 dark:border-amber-800 dark:bg-amber-950/60 dark:text-amber-300 dark:hover:bg-amber-900/60'
                                                 }`}
                                             >
                                                 {page.is_published
@@ -333,12 +332,12 @@ export default function PagesAdmin({
                                         </div>
 
                                         {/* Page Title */}
-                                        <h2 className="group-hover:text-champagne mt-3 font-serif text-lg font-light text-white transition-colors">
+                                        <h2 className="mt-3 font-serif text-lg font-normal text-stone-900 transition-colors group-hover:text-stone-700 dark:text-stone-100 dark:group-hover:text-stone-300">
                                             {page.title}
                                         </h2>
 
                                         {/* Excerpt / Subtitle */}
-                                        <p className="text-stone-warm mt-2 line-clamp-2 text-xs leading-relaxed">
+                                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-stone-500 dark:text-stone-400">
                                             {page.subtitle ||
                                                 page.excerpt ||
                                                 'No excerpt configured.'}
@@ -346,8 +345,8 @@ export default function PagesAdmin({
                                     </div>
 
                                     {/* Card Footer / Action Bar */}
-                                    <div className="border-border-stone/40 mt-5 flex items-center justify-between border-t pt-4">
-                                        <div className="text-taupe text-[11px]">
+                                    <div className="mt-5 flex items-center justify-between border-t border-stone-100 pt-4 dark:border-stone-800/80">
+                                        <div className="font-mono text-[11px] text-stone-400 dark:text-stone-500">
                                             {page.section_count
                                                 ? `${page.section_count} Sections`
                                                 : 'Structured Page'}
@@ -358,7 +357,7 @@ export default function PagesAdmin({
                                                 href={liveUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="border-border-stone/60 text-stone-warm hover:border-border-stone border px-2.5 py-1 text-[11px] transition-colors hover:text-white"
+                                                className="border border-stone-200 px-2.5 py-1 text-[11px] text-stone-600 transition-colors hover:border-stone-400 hover:bg-stone-50 hover:text-stone-900 dark:border-stone-800 dark:text-stone-400 dark:hover:border-stone-700 dark:hover:bg-stone-800 dark:hover:text-stone-200"
                                                 title="View live page on website"
                                             >
                                                 Live ↗
@@ -368,7 +367,7 @@ export default function PagesAdmin({
                                                 onClick={() =>
                                                     handleOpenEditor(page)
                                                 }
-                                                className="border border-stone-700 bg-stone-900 px-3 py-1 text-[11px] font-medium tracking-wider text-stone-100 uppercase transition-colors hover:border-stone-500 hover:bg-stone-800 hover:text-white"
+                                                className="border border-transparent bg-stone-900 px-3 py-1 text-[11px] font-medium tracking-wider text-white uppercase transition-colors hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
                                             >
                                                 Edit Page
                                             </button>

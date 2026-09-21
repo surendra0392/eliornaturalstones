@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Page } from '../../../types/page';
 import { AdminMediaPickerModal } from './AdminMediaPickerModal';
 import { apiClient } from '../../../api/client';
@@ -23,6 +23,11 @@ export function AdminPageEditor({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+    // Hero image upload state & ref
+    const heroFileInputRef = useRef<HTMLInputElement>(null);
+    const [isUploadingHero, setIsUploadingHero] = useState(false);
+    const [heroUploadError, setHeroUploadError] = useState<string | null>(null);
 
     // General & SEO Fields
     const [title, setTitle] = useState('');
@@ -172,27 +177,81 @@ export function AdminPageEditor({
         }
     };
 
+    const handleHeroImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            setHeroUploadError('Please select a valid image file (WebP, JPG, PNG, etc.).');
+            return;
+        }
+
+        if (file.size > 15 * 1024 * 1024) {
+            setHeroUploadError('Image size exceeds 15MB limit.');
+            return;
+        }
+
+        setIsUploadingHero(true);
+        setHeroUploadError(null);
+
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            if (heroImageAlt.trim()) {
+                formData.append('alt_text', heroImageAlt.trim());
+            } else {
+                formData.append(
+                    'alt_text',
+                    file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '),
+                );
+            }
+            formData.append('entity_type', 'page');
+            formData.append('entity_id', String(page.id));
+            formData.append('collection_name', 'hero');
+
+            const res = await apiClient<any>(API_ENDPOINTS.v1.admin.media, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (res?.data?.url) {
+                setHeroImage(res.data.url);
+                if (!heroImageAlt && res.data.alt_text) {
+                    setHeroImageAlt(res.data.alt_text);
+                }
+            }
+        } catch (err: any) {
+            console.error('Failed to upload hero image:', err);
+            setHeroUploadError(err?.message || 'Failed to upload hero image.');
+        } finally {
+            setIsUploadingHero(false);
+            if (heroFileInputRef.current) {
+                heroFileInputRef.current.value = '';
+            }
+        }
+    };
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-sm">
-            <div className="border-border-stone bg-charcoal flex h-full w-full max-w-4xl flex-col overflow-hidden border-l shadow-2xl">
+            <div className="flex h-full w-full max-w-4xl flex-col overflow-hidden border-l border-stone-200 bg-white shadow-2xl dark:border-stone-800 dark:bg-stone-900">
                 {/* Sticky Header Bar */}
-                <div className="border-border-stone bg-stone-dark flex items-center justify-between border-b px-6 py-4">
+                <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/80 px-6 py-4 backdrop-blur-xs dark:border-stone-800 dark:bg-stone-950/80">
                     <div className="flex items-center gap-3">
                         <div>
                             <div className="flex items-center gap-2">
-                                <h2 className="font-serif text-lg font-light text-white">
+                                <h2 className="font-serif text-lg font-normal text-stone-900 dark:text-stone-100">
                                     Edit Page: {page.title}
                                 </h2>
                                 {isCanonical && (
-                                    <span className="border-champagne/40 text-champagne bg-champagne/10 rounded px-2 py-0.5 text-[10px] tracking-wider uppercase">
+                                    <span className="border border-stone-300 bg-stone-100 px-2 py-0.5 text-[10px] font-medium tracking-wider text-stone-700 uppercase dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300">
                                         Canonical Page
                                     </span>
                                 )}
                             </div>
                             <div className="mt-1 flex items-center gap-3">
-                                <span className="text-taupe text-xs">
+                                <span className="text-xs text-stone-500 dark:text-stone-400">
                                     Slug:{' '}
-                                    <code className="text-stone-warm">
+                                    <code className="font-mono text-stone-700 dark:text-stone-300">
                                         /{page.slug}
                                     </code>
                                 </span>
@@ -203,7 +262,7 @@ export function AdminPageEditor({
                                     }
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-champagne/80 hover:text-champagne inline-flex items-center gap-1 text-xs underline"
+                                    className="inline-flex items-center gap-1 text-xs text-stone-600 underline hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
                                 >
                                     View Live ↗
                                 </a>
@@ -213,7 +272,7 @@ export function AdminPageEditor({
 
                     <div className="flex items-center gap-3">
                         <label className="flex cursor-pointer items-center gap-2 text-xs select-none">
-                            <span className="text-stone-warm text-xs">
+                            <span className="text-xs text-stone-500 dark:text-stone-400">
                                 Status:
                             </span>
                             <input
@@ -227,8 +286,8 @@ export function AdminPageEditor({
                             <span
                                 className={`border px-2.5 py-1 text-[11px] font-medium tracking-wider uppercase transition-colors ${
                                     isPublished
-                                        ? 'border-emerald-800/60 bg-emerald-950/40 text-emerald-400'
-                                        : 'border-amber-800/60 bg-amber-950/40 text-amber-400'
+                                        ? 'border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300'
+                                        : 'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-950/60 dark:text-amber-300'
                                 }`}
                             >
                                 {isPublished ? '● Published' : '○ Draft'}
@@ -238,7 +297,7 @@ export function AdminPageEditor({
                         <button
                             type="button"
                             onClick={onClose}
-                            className="border-border-stone text-stone-warm border px-3 py-1.5 text-xs uppercase transition-colors hover:text-white"
+                            className="border border-stone-300 px-3 py-1.5 text-xs font-medium uppercase text-stone-700 transition-colors hover:bg-stone-100 hover:text-stone-900 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-white"
                         >
                             Cancel
                         </button>
@@ -247,7 +306,7 @@ export function AdminPageEditor({
                             type="button"
                             onClick={handleSave}
                             disabled={isSubmitting}
-                            className="bg-champagne hover:bg-champagne/90 text-charcoal px-4 py-1.5 text-xs font-medium tracking-wider uppercase transition-colors disabled:opacity-40"
+                            className="bg-stone-900 px-4 py-1.5 text-xs font-medium tracking-wider text-white uppercase transition-colors hover:bg-stone-800 disabled:opacity-40 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
                         >
                             {isSubmitting ? 'Saving...' : 'Save Changes'}
                         </button>
@@ -256,25 +315,25 @@ export function AdminPageEditor({
 
                 {/* Status Messages */}
                 {errorMessage && (
-                    <div className="border-b border-red-800/60 bg-red-950/50 px-6 py-2.5 text-xs text-red-300">
+                    <div className="border-b border-red-300 bg-red-50 px-6 py-2.5 text-xs text-red-800 dark:border-red-800/60 dark:bg-red-950/50 dark:text-red-300">
                         {errorMessage}
                     </div>
                 )}
                 {successMessage && (
-                    <div className="border-b border-emerald-800/60 bg-emerald-950/50 px-6 py-2.5 text-xs text-emerald-300">
+                    <div className="border-b border-emerald-300 bg-emerald-50 px-6 py-2.5 text-xs text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300">
                         {successMessage}
                     </div>
                 )}
 
                 {/* Tab Navigation */}
-                <div className="border-border-stone/60 bg-stone-dark/40 flex border-b px-6">
+                <div className="flex border-b border-stone-200 bg-stone-50/40 px-6 dark:border-stone-800 dark:bg-stone-950/40">
                     <button
                         type="button"
                         onClick={() => setActiveTab('general')}
                         className={`border-b-2 px-4 py-3 text-xs font-medium tracking-wider uppercase transition-colors ${
                             activeTab === 'general'
-                                ? 'border-champagne text-champagne'
-                                : 'text-stone-warm border-transparent hover:text-white'
+                                ? 'border-stone-900 text-stone-900 dark:border-stone-100 dark:text-stone-100'
+                                : 'border-transparent text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100'
                         }`}
                     >
                         General & SEO
@@ -284,8 +343,8 @@ export function AdminPageEditor({
                         onClick={() => setActiveTab('hero')}
                         className={`border-b-2 px-4 py-3 text-xs font-medium tracking-wider uppercase transition-colors ${
                             activeTab === 'hero'
-                                ? 'border-champagne text-champagne'
-                                : 'text-stone-warm border-transparent hover:text-white'
+                                ? 'border-stone-900 text-stone-900 dark:border-stone-100 dark:text-stone-100'
+                                : 'border-transparent text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100'
                         }`}
                     >
                         Hero Section
@@ -295,8 +354,8 @@ export function AdminPageEditor({
                         onClick={() => setActiveTab('content')}
                         className={`border-b-2 px-4 py-3 text-xs font-medium tracking-wider uppercase transition-colors ${
                             activeTab === 'content'
-                                ? 'border-champagne text-champagne'
-                                : 'text-stone-warm border-transparent hover:text-white'
+                                ? 'border-stone-900 text-stone-900 dark:border-stone-100 dark:text-stone-100'
+                                : 'border-transparent text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100'
                         }`}
                     >
                         Structured Content
@@ -310,9 +369,9 @@ export function AdminPageEditor({
                         <div className="space-y-6">
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
-                                    <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                    <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         Page Title{' '}
-                                        <span className="text-champagne">
+                                        <span className="text-stone-900 dark:text-stone-100">
                                             *
                                         </span>
                                     </label>
@@ -322,15 +381,15 @@ export function AdminPageEditor({
                                         onChange={(e) =>
                                             setTitle(e.target.value)
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                         required
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                    <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         URL Slug{' '}
                                         {isCanonical && (
-                                            <span className="text-taupe">
+                                            <span className="text-stone-400 dark:text-stone-500">
                                                 (Locked)
                                             </span>
                                         )}
@@ -342,10 +401,10 @@ export function AdminPageEditor({
                                         onChange={(e) =>
                                             setSlug(e.target.value)
                                         }
-                                        className="border-border-stone bg-charcoal disabled:bg-stone-dark/40 focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none disabled:opacity-50"
+                                        className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none disabled:bg-stone-100 disabled:opacity-50 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100 dark:disabled:bg-stone-900"
                                     />
                                     {isCanonical && (
-                                        <p className="text-taupe mt-1 text-[11px]">
+                                        <p className="mt-1 text-[11px] text-stone-400 dark:text-stone-500">
                                             Canonical page slugs cannot be
                                             altered to protect route stability.
                                         </p>
@@ -354,7 +413,7 @@ export function AdminPageEditor({
                             </div>
 
                             <div>
-                                <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                     Subtitle / Secondary Line
                                 </label>
                                 <input
@@ -363,34 +422,34 @@ export function AdminPageEditor({
                                     onChange={(e) =>
                                         setSubtitle(e.target.value)
                                     }
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
 
                             <div>
-                                <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                     Page Excerpt
                                 </label>
                                 <textarea
                                     value={excerpt}
                                     onChange={(e) => setExcerpt(e.target.value)}
                                     rows={2}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
 
-                            <hr className="border-border-stone/40 my-6" />
+                            <hr className="my-6 border-stone-200 dark:border-stone-800" />
 
-                            <h3 className="font-serif text-base font-light text-white">
+                            <h3 className="font-serif text-base font-normal text-stone-900 dark:text-stone-100">
                                 Search Engine Optimization (SEO)
                             </h3>
 
                             <div>
                                 <div className="mb-1 flex items-center justify-between">
-                                    <label className="text-stone-warm text-xs font-medium tracking-wider uppercase">
+                                    <label className="text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         Meta Title
                                     </label>
-                                    <span className="text-taupe text-[11px]">
+                                    <span className="font-mono text-[11px] text-stone-400 dark:text-stone-500">
                                         {metaTitle.length}/60 chars
                                     </span>
                                 </div>
@@ -400,17 +459,17 @@ export function AdminPageEditor({
                                     onChange={(e) =>
                                         setMetaTitle(e.target.value)
                                     }
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     placeholder="ELIOR Natural Stones | ..."
                                 />
                             </div>
 
                             <div>
                                 <div className="mb-1 flex items-center justify-between">
-                                    <label className="text-stone-warm text-xs font-medium tracking-wider uppercase">
+                                    <label className="text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         Meta Description
                                     </label>
-                                    <span className="text-taupe text-[11px]">
+                                    <span className="font-mono text-[11px] text-stone-400 dark:text-stone-500">
                                         {metaDescription.length}/160 chars
                                     </span>
                                 </div>
@@ -420,26 +479,26 @@ export function AdminPageEditor({
                                         setMetaDescription(e.target.value)
                                     }
                                     rows={3}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     placeholder="Brief description for search engines and social cards..."
                                 />
                             </div>
 
                             {/* Search Preview Card */}
-                            <div className="border-border-stone/60 bg-stone-dark/30 border p-4">
-                                <span className="text-taupe mb-2 block text-[10px] tracking-wider uppercase">
+                            <div className="border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                                <span className="mb-2 block font-mono text-[10px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
                                     Google Search Result Preview
                                 </span>
                                 <div className="font-sans text-xs">
-                                    <p className="truncate text-sm font-medium text-blue-400">
+                                    <p className="truncate text-sm font-medium text-blue-600 dark:text-blue-400">
                                         {metaTitle ||
                                             `${title} | ELIOR Natural Stones`}
                                     </p>
-                                    <p className="truncate text-[11px] text-emerald-500">
+                                    <p className="truncate font-mono text-[11px] text-emerald-700 dark:text-emerald-500">
                                         https://eliornaturalstones.com/
                                         {slug === 'home' ? '' : slug}
                                     </p>
-                                    <p className="text-stone-warm mt-1 line-clamp-2 text-xs">
+                                    <p className="mt-1 line-clamp-2 text-xs text-stone-600 dark:text-stone-400">
                                         {metaDescription ||
                                             excerpt ||
                                             'ELIOR Natural Stones brings carefully selected natural stone materials to contemporary architecture.'}
@@ -454,7 +513,7 @@ export function AdminPageEditor({
                         <div className="space-y-6">
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div>
-                                    <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                    <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         Eyebrow
                                     </label>
                                     <input
@@ -464,11 +523,11 @@ export function AdminPageEditor({
                                             setHeroEyebrow(e.target.value)
                                         }
                                         placeholder="ELIOR / NATURAL STONES"
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                    <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                         Marker / Badge
                                     </label>
                                     <input
@@ -478,13 +537,13 @@ export function AdminPageEditor({
                                             setHeroMarker(e.target.value)
                                         }
                                         placeholder="SINCE 1990"
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                     Hero Headline (H1)
                                 </label>
                                 <input
@@ -493,12 +552,12 @@ export function AdminPageEditor({
                                     onChange={(e) =>
                                         setHeroTitle(e.target.value)
                                     }
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 font-serif text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 font-serif text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
 
                             <div>
-                                <label className="text-stone-warm mb-1 block text-xs font-medium tracking-wider uppercase">
+                                <label className="mb-1 block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
                                     Supporting Narrative / Subtitle
                                 </label>
                                 <textarea
@@ -507,18 +566,18 @@ export function AdminPageEditor({
                                         setHeroSecondaryLine(e.target.value)
                                     }
                                     rows={2}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
 
                             {/* Call To Action Buttons */}
-                            <div className="border-border-stone/40 bg-stone-dark/20 space-y-4 border p-4">
-                                <h4 className="text-xs font-medium tracking-wider text-white uppercase">
+                            <div className="space-y-4 border border-stone-200 bg-stone-50/40 p-4 dark:border-stone-800 dark:bg-stone-950/40">
+                                <h4 className="text-xs font-medium tracking-wider uppercase text-stone-900 dark:text-stone-100">
                                     Call To Action Actions
                                 </h4>
                                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                     <div>
-                                        <label className="text-stone-warm mb-1 block text-[11px]">
+                                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                                             Primary CTA Text
                                         </label>
                                         <input
@@ -530,11 +589,11 @@ export function AdminPageEditor({
                                                 )
                                             }
                                             placeholder="EXPLORE COLLECTIONS"
-                                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2.5 py-1.5 text-xs text-white focus:outline-none"
+                                            className="w-full border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-stone-warm mb-1 block text-[11px]">
+                                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                                             Primary CTA Destination URL
                                         </label>
                                         <input
@@ -546,11 +605,11 @@ export function AdminPageEditor({
                                                 )
                                             }
                                             placeholder="/collections"
-                                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2.5 py-1.5 text-xs text-white focus:outline-none"
+                                            className="w-full border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-stone-warm mb-1 block text-[11px]">
+                                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                                             Secondary CTA Text (Optional)
                                         </label>
                                         <input
@@ -562,11 +621,11 @@ export function AdminPageEditor({
                                                 )
                                             }
                                             placeholder="OUR STORY"
-                                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2.5 py-1.5 text-xs text-white focus:outline-none"
+                                            className="w-full border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                         />
                                     </div>
                                     <div>
-                                        <label className="text-stone-warm mb-1 block text-[11px]">
+                                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                                             Secondary CTA Destination URL
                                         </label>
                                         <input
@@ -578,81 +637,145 @@ export function AdminPageEditor({
                                                 )
                                             }
                                             placeholder="/our-story"
-                                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2.5 py-1.5 text-xs text-white focus:outline-none"
+                                            className="w-full border border-stone-300 bg-white px-2.5 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                         />
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Hero Image Picker */}
-                            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                                <div className="flex items-center justify-between">
-                                    <label className="text-stone-warm text-xs font-medium tracking-wider uppercase">
-                                        Architectural Hero Image
-                                    </label>
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setIsMediaPickerOpen(true)
-                                        }
-                                        className="bg-champagne/20 hover:bg-champagne/30 text-champagne border-champagne/40 border px-3 py-1 text-xs tracking-wider uppercase transition-colors"
-                                    >
-                                        Select from Media Library
-                                    </button>
+                            {/* Hero Image Picker & Direct Uploader */}
+                            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-5 dark:border-stone-800 dark:bg-stone-950/60">
+                                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                    <div>
+                                        <label className="block text-xs font-medium tracking-wider uppercase text-stone-700 dark:text-stone-300">
+                                            Architectural Hero Image
+                                        </label>
+                                        <p className="mt-0.5 text-[11px] text-stone-500 dark:text-stone-400">
+                                            Select from media library, upload from your device, or enter a custom path.
+                                        </p>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            ref={heroFileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            className="hidden"
+                                            onChange={handleHeroImageUpload}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => heroFileInputRef.current?.click()}
+                                            disabled={isUploadingHero}
+                                            className="inline-flex items-center gap-1.5 border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium tracking-wider uppercase text-stone-800 shadow-2xs transition-colors hover:bg-stone-50 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-700 disabled:opacity-50"
+                                        >
+                                            {isUploadingHero ? (
+                                                <>
+                                                    <svg className="h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                                    </svg>
+                                                    <span>Uploading...</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                                    </svg>
+                                                    <span>Upload Image</span>
+                                                </>
+                                            )}
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsMediaPickerOpen(true)}
+                                            className="border border-stone-300 bg-stone-100 px-3 py-1.5 text-xs font-medium tracking-wider uppercase text-stone-700 transition-colors hover:bg-stone-200 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-300 dark:hover:bg-stone-800"
+                                        >
+                                            Media Library
+                                        </button>
+
+                                        {heroImage && (
+                                            <button
+                                                type="button"
+                                                onClick={() => setHeroImage('')}
+                                                className="border border-red-200 bg-red-50 px-2.5 py-1.5 text-xs font-medium text-red-700 transition-colors hover:bg-red-100 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/60"
+                                                title="Clear Hero Image"
+                                            >
+                                                Clear
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
+
+                                {heroUploadError && (
+                                    <div className="border border-red-300 bg-red-50 p-2.5 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/50 dark:text-red-300">
+                                        {heroUploadError}
+                                    </div>
+                                )}
 
                                 <div className="flex flex-col items-start gap-4 sm:flex-row">
                                     {heroImage ? (
-                                        <div className="border-border-stone relative h-28 w-44 flex-shrink-0 overflow-hidden border bg-black/50">
+                                        <div
+                                            onClick={() => heroFileInputRef.current?.click()}
+                                            className="group relative h-32 w-52 flex-shrink-0 cursor-pointer overflow-hidden border border-stone-300 bg-black/40 shadow-xs dark:border-stone-700"
+                                            title="Click to replace image"
+                                        >
                                             <img
                                                 src={heroImage}
-                                                alt={
-                                                    heroImageAlt ||
-                                                    'Hero preview'
-                                                }
-                                                className="h-full w-full object-cover"
+                                                alt={heroImageAlt || 'Hero preview'}
+                                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                                 onError={(e) => {
-                                                    (
-                                                        e.target as HTMLElement
-                                                    ).style.display = 'none';
+                                                    (e.target as HTMLElement).style.display = 'none';
                                                 }}
                                             />
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                                                <span className="text-[11px] font-medium tracking-wider uppercase text-white">
+                                                    Change Image ↗
+                                                </span>
+                                            </div>
                                         </div>
                                     ) : (
-                                        <div className="border-border-stone text-taupe flex h-28 w-44 flex-shrink-0 items-center justify-center border border-dashed p-2 text-center text-xs">
-                                            No Hero Image Selected
+                                        <div
+                                            onClick={() => heroFileInputRef.current?.click()}
+                                            className="flex h-32 w-52 flex-shrink-0 cursor-pointer flex-col items-center justify-center border border-dashed border-stone-300 bg-stone-100/50 p-3 text-center transition-colors hover:border-stone-500 hover:bg-stone-100 dark:border-stone-700 dark:bg-stone-900/50 dark:hover:border-stone-600 dark:hover:bg-stone-900"
+                                            title="Click to upload hero image"
+                                        >
+                                            <svg className="mb-1.5 h-6 w-6 text-stone-400 dark:text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <span className="text-xs font-medium text-stone-700 dark:text-stone-300">
+                                                Upload Hero Image
+                                            </span>
+                                            <span className="mt-0.5 text-[10px] text-stone-400 dark:text-stone-500">
+                                                or choose from library
+                                            </span>
                                         </div>
                                     )}
 
-                                    <div className="w-full flex-1 space-y-2">
+                                    <div className="w-full flex-1 space-y-2.5">
                                         <div>
-                                            <label className="text-stone-warm mb-0.5 block text-[11px]">
-                                                Image URL / Path
+                                            <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
+                                                Image URL / Static Path
                                             </label>
                                             <input
                                                 type="text"
                                                 value={heroImage}
-                                                onChange={(e) =>
-                                                    setHeroImage(e.target.value)
-                                                }
+                                                onChange={(e) => setHeroImage(e.target.value)}
                                                 placeholder="/images/our-story/hero-legacy-stone.webp"
-                                                className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                                                className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                             />
                                         </div>
                                         <div>
-                                            <label className="text-stone-warm mb-0.5 block text-[11px]">
-                                                Image Alt Text
+                                            <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
+                                                Image Alt Text (SEO & Accessibility)
                                             </label>
                                             <input
                                                 type="text"
                                                 value={heroImageAlt}
-                                                onChange={(e) =>
-                                                    setHeroImageAlt(
-                                                        e.target.value,
-                                                    )
-                                                }
+                                                onChange={(e) => setHeroImageAlt(e.target.value)}
                                                 placeholder="Descriptive architectural alt text"
-                                                className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                                                className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                             />
                                         </div>
                                     </div>
@@ -788,12 +911,12 @@ function OurStorySectionEditor({
     return (
         <div className="space-y-6">
             {/* 01. Opening Statement */}
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     01. Opening Narrative Statement
                 </h4>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Statement
                     </label>
                     <input
@@ -802,11 +925,11 @@ function OurStorySectionEditor({
                         onChange={(e) =>
                             handleOpeningChange('statement', e.target.value)
                         }
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 1
                     </label>
                     <textarea
@@ -815,11 +938,11 @@ function OurStorySectionEditor({
                             handleOpeningChange('paragraph1', e.target.value)
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 2
                     </label>
                     <textarea
@@ -828,18 +951,18 @@ function OurStorySectionEditor({
                             handleOpeningChange('paragraph2', e.target.value)
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
             </div>
 
             {/* 02. Heritage Timeline Milestones */}
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-4 border p-4">
+            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
                 <div className="flex items-center justify-between">
-                    <h4 className="font-serif text-sm font-light text-white">
+                    <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                         02. Heritage Timeline Milestones (1990 – Present)
                     </h4>
-                    <span className="text-taupe text-[11px]">
+                    <span className="font-mono text-[11px] text-stone-400 dark:text-stone-500">
                         {milestones.length} Milestones
                     </span>
                 </div>
@@ -848,11 +971,11 @@ function OurStorySectionEditor({
                     {milestones.map((m: any, idx: number) => (
                         <div
                             key={idx}
-                            className="border-border-stone/40 bg-charcoal/60 space-y-2 border p-3"
+                            className="space-y-2 border border-stone-200 bg-white p-3.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
                         >
                             <div className="grid grid-cols-3 gap-2">
                                 <div>
-                                    <label className="text-stone-warm block text-[10px]">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                         Year
                                     </label>
                                     <input
@@ -865,11 +988,11 @@ function OurStorySectionEditor({
                                                 e.target.value,
                                             )
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-stone-warm block text-[10px]">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                         Company / Era
                                     </label>
                                     <input
@@ -882,11 +1005,11 @@ function OurStorySectionEditor({
                                                 e.target.value,
                                             )
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-stone-warm block text-[10px]">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                         Badge
                                     </label>
                                     <input
@@ -899,12 +1022,12 @@ function OurStorySectionEditor({
                                                 e.target.value,
                                             )
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label className="text-stone-warm block text-[10px]">
+                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                     Description
                                 </label>
                                 <textarea
@@ -917,7 +1040,7 @@ function OurStorySectionEditor({
                                         )
                                     }
                                     rows={2}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
                         </div>
@@ -966,12 +1089,12 @@ function SourceToSpaceSectionEditor({
 
     return (
         <div className="space-y-6">
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     01. Intro Statement
                 </h4>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Headline
                     </label>
                     <input
@@ -980,11 +1103,11 @@ function SourceToSpaceSectionEditor({
                         onChange={(e) =>
                             handleIntroChange('headline', e.target.value)
                         }
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 1
                     </label>
                     <textarea
@@ -993,24 +1116,24 @@ function SourceToSpaceSectionEditor({
                             handleIntroChange('paragraph1', e.target.value)
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
             </div>
 
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-4 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     02. The Six Journey Stages
                 </h4>
                 <div className="space-y-3">
                     {stages.map((stage: any, idx: number) => (
                         <div
                             key={idx}
-                            className="border-border-stone/40 bg-charcoal/60 space-y-2 border p-3"
+                            className="space-y-2 border border-stone-200 bg-white p-3.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
                         >
                             <div className="grid grid-cols-2 gap-2">
                                 <div>
-                                    <label className="text-stone-warm block text-[10px]">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                         Stage Title
                                     </label>
                                     <input
@@ -1023,11 +1146,11 @@ function SourceToSpaceSectionEditor({
                                                 e.target.value,
                                             )
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-stone-warm block text-[10px]">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                         Slug
                                     </label>
                                     <input
@@ -1040,12 +1163,12 @@ function SourceToSpaceSectionEditor({
                                                 e.target.value,
                                             )
                                         }
-                                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label className="text-stone-warm block text-[10px]">
+                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                     Description
                                 </label>
                                 <textarea
@@ -1058,7 +1181,7 @@ function SourceToSpaceSectionEditor({
                                         )
                                     }
                                     rows={2}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
                         </div>
@@ -1102,18 +1225,18 @@ function ArchitectServicesSectionEditor({
 
     return (
         <div className="space-y-6">
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-4 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     Service Disciplines
                 </h4>
                 <div className="space-y-3">
                     {disciplines.map((d: any, idx: number) => (
                         <div
                             key={idx}
-                            className="border-border-stone/40 bg-charcoal/60 space-y-2 border p-3"
+                            className="space-y-2 border border-stone-200 bg-white p-3.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
                         >
                             <div>
-                                <label className="text-stone-warm block text-[10px]">
+                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                     Discipline Title
                                 </label>
                                 <input
@@ -1126,11 +1249,11 @@ function ArchitectServicesSectionEditor({
                                             e.target.value,
                                         )
                                     }
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
                             <div>
-                                <label className="text-stone-warm block text-[10px]">
+                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
                                     Description
                                 </label>
                                 <textarea
@@ -1143,7 +1266,7 @@ function ArchitectServicesSectionEditor({
                                         )
                                     }
                                     rows={2}
-                                    className="border-border-stone bg-charcoal focus:border-champagne w-full border px-2 py-1 text-xs text-white focus:outline-none"
+                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                 />
                             </div>
                         </div>
@@ -1175,13 +1298,13 @@ function ContactSectionEditor({
 
     return (
         <div className="space-y-6">
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     Direct Contact Coordinates
                 </h4>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div>
-                        <label className="text-stone-warm mb-1 block text-[11px]">
+                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                             Phone Display
                         </label>
                         <input
@@ -1193,11 +1316,11 @@ function ContactSectionEditor({
                                     e.target.value,
                                 )
                             }
-                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                     </div>
                     <div>
-                        <label className="text-stone-warm mb-1 block text-[11px]">
+                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                             Email Value
                         </label>
                         <input
@@ -1209,11 +1332,11 @@ function ContactSectionEditor({
                                     e.target.value,
                                 )
                             }
-                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                     </div>
                     <div className="sm:col-span-2">
-                        <label className="text-stone-warm mb-1 block text-[11px]">
+                        <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                             Studio Location
                         </label>
                         <input
@@ -1225,7 +1348,7 @@ function ContactSectionEditor({
                                     e.target.value,
                                 )
                             }
-                            className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                     </div>
                 </div>
@@ -1255,12 +1378,12 @@ function HomeSectionEditor({
 
     return (
         <div className="space-y-6">
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     Brand Positioning Statement
                 </h4>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Heading
                     </label>
                     <input
@@ -1269,11 +1392,11 @@ function HomeSectionEditor({
                         onChange={(e) =>
                             handlePosChange('heading', e.target.value)
                         }
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 1
                     </label>
                     <textarea
@@ -1282,11 +1405,11 @@ function HomeSectionEditor({
                             handlePosChange('paragraph1', e.target.value)
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 2
                     </label>
                     <textarea
@@ -1295,7 +1418,7 @@ function HomeSectionEditor({
                             handlePosChange('paragraph2', e.target.value)
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
             </div>
@@ -1314,12 +1437,12 @@ function CollectionsSectionEditor({
 
     return (
         <div className="space-y-6">
-            <div className="border-border-stone/60 bg-stone-dark/30 space-y-3 border p-4">
-                <h4 className="font-serif text-sm font-light text-white">
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                     Collections Overview Intro
                 </h4>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Headline
                     </label>
                     <input
@@ -1331,11 +1454,11 @@ function CollectionsSectionEditor({
                                 intro: { ...intro, headline: e.target.value },
                             })
                         }
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
                 <div>
-                    <label className="text-stone-warm mb-1 block text-[11px]">
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
                         Paragraph 1
                     </label>
                     <textarea
@@ -1347,7 +1470,7 @@ function CollectionsSectionEditor({
                             })
                         }
                         rows={2}
-                        className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-1.5 text-xs text-white focus:outline-none"
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />
                 </div>
             </div>
@@ -1380,15 +1503,15 @@ function GenericJsonSectionEditor({
 
     return (
         <div className="space-y-3">
-            <h4 className="font-serif text-sm font-light text-white">
+            <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
                 Structured Content (JSON)
             </h4>
-            <p className="text-taupe text-xs">
+            <p className="text-xs text-stone-600 dark:text-stone-400">
                 Edit the raw structured sections for this page. Must be valid
                 JSON.
             </p>
             {parseError && (
-                <div className="border border-red-800/50 bg-red-950/40 p-2 text-xs text-red-400">
+                <div className="border border-red-300 bg-red-50 p-2 text-xs text-red-600 dark:border-red-800/50 dark:bg-red-950/40 dark:text-red-400">
                     JSON Syntax Error: {parseError}
                 </div>
             )}
@@ -1396,7 +1519,7 @@ function GenericJsonSectionEditor({
                 value={jsonString}
                 onChange={(e) => handleJsonChange(e.target.value)}
                 rows={14}
-                className="border-border-stone bg-charcoal focus:border-champagne w-full border px-3 py-2 font-mono text-xs text-white focus:outline-none"
+                className="w-full border border-stone-300 bg-white px-3 py-2 font-mono text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
             />
         </div>
     );

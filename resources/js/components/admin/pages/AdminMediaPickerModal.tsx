@@ -83,22 +83,21 @@ export function AdminMediaPickerModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
-            <div className="border-border-stone bg-charcoal flex max-h-[90vh] w-full max-w-4xl flex-col border shadow-2xl">
+            <div className="flex max-h-[90vh] w-full max-w-4xl flex-col border border-stone-200 bg-white shadow-2xl dark:border-stone-800 dark:bg-stone-900">
                 {/* Modal Header */}
-                <div className="border-border-stone flex items-center justify-between border-b px-6 py-4">
+                <div className="flex items-center justify-between border-b border-stone-200 bg-stone-50/60 px-6 py-4 dark:border-stone-800 dark:bg-stone-950/60">
                     <div>
-                        <h3 className="font-serif text-lg font-light text-white">
+                        <h3 className="font-serif text-lg font-normal text-stone-900 dark:text-stone-100">
                             Select Architectural Imagery
                         </h3>
-                        <p className="text-taupe mt-0.5 text-xs">
-                            Choose from the Media Library or specify a custom
-                            asset path.
+                        <p className="mt-0.5 text-xs text-stone-500 dark:text-stone-400">
+                            Choose from the Media Library or specify a custom asset path.
                         </p>
                     </div>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="text-stone-warm p-1 transition-colors hover:text-white"
+                        className="p-1 text-stone-400 transition-colors hover:text-stone-700 dark:text-stone-500 dark:hover:text-stone-200"
                         aria-label="Close modal"
                     >
                         ✕
@@ -106,20 +105,20 @@ export function AdminMediaPickerModal({
                 </div>
 
                 {/* Search & Custom URL Bar */}
-                <div className="border-border-stone/60 bg-stone-dark/50 flex flex-col gap-3 border-b p-4 sm:flex-row">
+                <div className="flex flex-col gap-3 border-b border-stone-200 bg-stone-50/40 p-4 sm:flex-row dark:border-stone-800 dark:bg-stone-950/40">
                     <div className="relative flex-1">
                         <input
                             type="text"
                             placeholder="Search media library by name or alt text..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="border-border-stone bg-charcoal placeholder:text-stone-warm focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                         {search && (
                             <button
                                 type="button"
                                 onClick={() => setSearch('')}
-                                className="text-stone-warm absolute top-2.5 right-3 text-xs hover:text-white"
+                                className="absolute top-2.5 right-3 text-xs text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
                             >
                                 ✕
                             </button>
@@ -134,7 +133,7 @@ export function AdminMediaPickerModal({
                                 setCustomUrl(e.target.value);
                                 setSelectedUrl(e.target.value);
                             }}
-                            className="border-border-stone bg-charcoal placeholder:text-stone-warm focus:border-champagne w-full border px-3 py-2 text-xs text-white focus:outline-none"
+                            className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
                     </div>
                 </div>
@@ -142,17 +141,17 @@ export function AdminMediaPickerModal({
                 {/* Media Grid */}
                 <div className="max-h-[450px] min-h-[300px] flex-1 overflow-y-auto p-6">
                     {isLoading ? (
-                        <div className="text-stone-warm flex h-48 items-center justify-center text-xs">
+                        <div className="flex h-48 items-center justify-center text-xs text-stone-500 dark:text-stone-400">
                             Loading media library assets...
                         </div>
                     ) : mediaList.length === 0 ? (
                         <div className="flex h-48 flex-col items-center justify-center text-center">
-                            <p className="text-stone-warm text-sm">
+                            <p className="text-sm text-stone-600 dark:text-stone-300">
                                 {search
                                     ? 'No matching media found for your search.'
                                     : 'Media library is currently empty.'}
                             </p>
-                            <p className="text-taupe mt-1 text-xs">
+                            <p className="mt-1 text-xs text-stone-400 dark:text-stone-500">
                                 You can enter a direct asset path in the field
                                 above or upload media in the Media module.
                             </p>
@@ -174,8 +173,8 @@ export function AdminMediaPickerModal({
                                         }}
                                         className={`group relative flex flex-col border p-1 text-left transition-all ${
                                             isSelected
-                                                ? 'border-champagne ring-champagne bg-stone-dark/80 ring-1'
-                                                : 'border-border-stone/40 hover:border-border-stone bg-stone-dark/30'
+                                                ? 'border-stone-900 bg-stone-100 ring-1 ring-stone-900 dark:border-stone-100 dark:bg-stone-800 dark:ring-stone-100'
+                                                : 'border-stone-200 bg-stone-50 hover:border-stone-400 dark:border-stone-800 dark:bg-stone-950 dark:hover:border-stone-700'
                                         }`}
                                     >
                                         <div className="relative aspect-square w-full overflow-hidden bg-black/40">
@@ -186,17 +185,17 @@ export function AdminMediaPickerModal({
                                                 loading="lazy"
                                             />
                                             {isSelected && (
-                                                <div className="bg-champagne/20 absolute inset-0 flex items-center justify-center">
-                                                    <span className="bg-champagne text-charcoal rounded-full px-2 py-0.5 text-[10px] font-bold">
+                                                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                                    <span className="rounded-full bg-stone-900 px-2 py-0.5 text-[10px] font-bold text-white dark:bg-stone-100 dark:text-stone-900">
                                                         ✓ Selected
                                                     </span>
                                                 </div>
                                             )}
                                         </div>
-                                        <p className="mt-1.5 truncate text-[11px] font-light text-white/90">
+                                        <p className="mt-1.5 truncate text-[11px] font-normal text-stone-800 dark:text-stone-200">
                                             {item.name || item.file_name}
                                         </p>
-                                        <span className="text-stone-warm text-[10px]">
+                                        <span className="font-mono text-[10px] text-stone-400 dark:text-stone-500">
                                             {item.size_formatted}
                                         </span>
                                     </button>
@@ -207,14 +206,14 @@ export function AdminMediaPickerModal({
                 </div>
 
                 {/* Selected Preview & Actions */}
-                <div className="border-border-stone bg-stone-dark/70 flex flex-col items-center justify-between gap-4 border-t px-6 py-4 sm:flex-row">
+                <div className="flex flex-col items-center justify-between gap-4 border-t border-stone-200 bg-stone-50/80 px-6 py-4 sm:flex-row dark:border-stone-800 dark:bg-stone-950/80">
                     <div className="flex w-full items-center gap-3 overflow-hidden sm:w-auto">
                         {selectedUrl ? (
                             <>
                                 <img
                                     src={selectedUrl}
                                     alt="Preview"
-                                    className="border-border-stone h-10 w-10 flex-shrink-0 border object-cover"
+                                    className="h-10 w-10 flex-shrink-0 border border-stone-200 object-cover dark:border-stone-700"
                                     onError={(e) => {
                                         (
                                             e.target as HTMLElement
@@ -222,7 +221,7 @@ export function AdminMediaPickerModal({
                                     }}
                                 />
                                 <div className="truncate text-xs">
-                                    <p className="max-w-xs truncate text-white">
+                                    <p className="max-w-xs truncate text-stone-900 dark:text-stone-100 font-mono text-[11px]">
                                         {selectedUrl}
                                     </p>
                                     <input
@@ -232,12 +231,12 @@ export function AdminMediaPickerModal({
                                         onChange={(e) =>
                                             setSelectedAlt(e.target.value)
                                         }
-                                        className="border-border-stone/60 bg-charcoal placeholder:text-stone-warm focus:border-champagne mt-0.5 w-64 border px-2 py-0.5 text-[11px] text-white focus:outline-none"
+                                        className="mt-0.5 w-64 border border-stone-300 bg-white px-2 py-0.5 text-[11px] text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                                     />
                                 </div>
                             </>
                         ) : (
-                            <span className="text-stone-warm text-xs">
+                            <span className="text-xs text-stone-400 dark:text-stone-500">
                                 No image selected
                             </span>
                         )}
@@ -246,7 +245,7 @@ export function AdminMediaPickerModal({
                         <button
                             type="button"
                             onClick={onClose}
-                            className="border-border-stone text-stone-warm border px-4 py-2 text-xs font-medium tracking-wider uppercase transition-colors hover:text-white"
+                            className="border border-stone-300 px-4 py-2 text-xs font-medium tracking-wider text-stone-700 uppercase transition-colors hover:bg-stone-100 hover:text-stone-900 dark:border-stone-700 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-white"
                         >
                             Cancel
                         </button>
@@ -254,7 +253,7 @@ export function AdminMediaPickerModal({
                             type="button"
                             disabled={!selectedUrl && !customUrl}
                             onClick={handleConfirm}
-                            className="bg-champagne hover:bg-champagne/90 text-charcoal px-5 py-2 text-xs font-medium tracking-wider uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+                            className="bg-stone-900 px-5 py-2 text-xs font-medium tracking-wider text-white uppercase transition-colors hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-40 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
                         >
                             Apply Selection
                         </button>
