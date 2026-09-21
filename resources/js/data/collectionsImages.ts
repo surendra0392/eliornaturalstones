@@ -1,0 +1,76 @@
+/**
+ * ELIOR Natural Stones — Curated Collections Overview Photography Registry
+ *
+ * All photography strictly adheres to ELIOR visual direction:
+ * - Monumental natural stone surfaces and refined contemporary architecture
+ * - Controlled natural light, large openings, minimal furniture, no people
+ * - Zero generic showroom or commodity warehouse imagery
+ * - Engineered quartz surfaces depicted strictly as large slabs (NO crystals)
+ * - Optimized with high-efficiency CDN parameters (WebP/AVIF, responsive sizing)
+ */
+
+export const COLLECTIONS_IMAGES = {
+    // 01 — HERO: Monumental stone architecture, controlled light, reflecting stillness
+    hero: {
+        src: '/images/elior/collections/overview/collections-hero.webp',
+        alt: 'Monumental contemporary stone residence with serene architectural geometry',
+        focalPoint: { x: 50, y: 50 },
+    },
+
+    // 02 — INTRO: Close material/slab veining detail plate
+    intro: {
+        src: '/images/elior/collections/overview/collections-intro.webp',
+        alt: 'Tactile study of bookmatched natural stone veining and honed crystalline surface',
+    },
+
+    // 03 — THE 8 CANONICAL COLLECTIONS
+    cards: {
+        'italian-marble': {
+            src: '/images/elior/collections/overview/collection-italian-marble.webp',
+            alt: 'Luminous Italian marble architectural wall with refined natural veining',
+        },
+        granites: {
+            src: '/images/elior/collections/overview/collection-granites.webp',
+            alt: 'Honed dark architectural granite monolith in contemporary setting',
+        },
+        'slate-stone': {
+            src: '/images/elior/collections/overview/collection-slate-stone.webp',
+            alt: 'Layered natural cleft slate stone surface with dark charcoal organic texture',
+        },
+        limestones: {
+            src: '/images/elior/collections/overview/collection-limestones.webp',
+            alt: 'Warm honed limestone flooring in light-drenched architectural interior',
+        },
+        sandstone: {
+            src: '/images/elior/collections/overview/collection-sandstone.webp',
+            alt: 'Warm sedimentary Sand Stone architectural pavilion terrace and walls',
+        },
+        'sand-stone': {
+            src: '/images/elior/collections/overview/collection-sandstone.webp',
+            alt: 'Warm sedimentary Sand Stone architectural pavilion terrace and walls',
+        },
+        'cobble-stones': {
+            src: '/images/elior/collections/overview/collection-cobble-stones.webp',
+            alt: 'Hand-hewn natural cobble stone courtyard promenade with distinct stone blocks',
+        },
+        pebbles: {
+            src: '/images/elior/collections/overview/collection-pebbles.webp',
+            alt: 'Selected water-smoothed natural river pebbles in contemplative landscape installation',
+        },
+        quartz: {
+            // STRICT REQUIREMENT: Large engineered quartz slab surfaces, NOT small quartz crystals, NO people
+            src: '/images/elior/collections/overview/collection-quartz.webp',
+            alt: 'Seamless monolithic engineered quartz slab island in luxury architectural kitchen',
+        },
+        sculptures: {
+            src: '/images/elior/collections/overview/collection-sculptures.webp',
+            alt: 'Classical carved marble sculpture figures in architectural gallery setting',
+        },
+    } as Record<string, { src: string; alt: string }>,
+
+    // 04 — CLOSING: Wide architectural stone closing visual
+    closing: {
+        src: '/images/elior/collections/overview/collections-closing.webp',
+        alt: 'Expansive natural stone architectural installation bathed in ambient twilight',
+    },
+};

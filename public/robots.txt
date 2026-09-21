@@ -1,0 +1,33 @@
+# ELIOR Natural Stones Robots Directives
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+# Search Engine & AI Crawler Directives (GEO & AI Discoverability)
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+User-agent: GPTBot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+Sitemap: https://eliornaturalstones.com/sitemap.xml

@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+@source '../views';
+@source '../js/**/*.{ts,tsx,js,jsx}';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+    /* Approved Typography Families */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans:
+        'Montserrat', ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+        sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    --font-display: var(--font-serif);
+
+    /* Canonical ELIOR Brand Tokens (Prompt #18) */
+    --color-brand-black: #0f0f0f;
+    --color-brand-charcoal: #4a4a4a;
+    --color-brand-neutral: #d9d6c8;
+    --color-brand-taupe: #b9987a;
+    --color-brand-brown: #7b624d;
+    --color-brand-sand: #d4b381;
+
+    /* Semantic Aliases Mapped to Approved Brand Colors */
+    --color-charcoal: #4a4a4a;
+    --color-ivory: #d9d6c8;
+    --color-ivory-warm: #d9d6c8;
+    --color-ivory-light: #d9d6c8;
+
+    --color-graphite: #0f0f0f;
+    --color-graphite-light: #4a4a4a;
+    --color-graphite-muted: #4a4a4a;
+
+    --color-stone: #d9d6c8;
+    --color-stone-light: #d9d6c8;
+    --color-stone-dark: #d4b381;
+    --color-stone-warm: #d9d6c8;
+    --color-taupe: #b9987a;
+    --color-taupe-light: #d4b381;
+    --color-beige: #d4b381;
+
+    --color-bronze: #b9987a;
+    --color-bronze-light: #d4b381;
+    --color-bronze-dark: #7b624d;
+    --color-champagne: #d4b381;
+
+    /* Architectural Borders */
+    --color-border-subtle: rgba(15, 15, 15, 0.12);
+    --color-border-stone: rgba(74, 74, 74, 0.2);
+
+    /* Animation Timing */
+    --ease-architectural: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-architectural: 800ms;
+}
+
+/* Base Body Styling */
+body {
+    background-color: var(--color-brand-neutral);
+    color: var(--color-brand-black);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Controlled Editorial Typography Scale */
+.font-display-xl {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.font-display-lg {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+}
+
+.font-display-md {
+    font-family: var(--font-serif);
+    font-size: clamp(1.85rem, 3.2vw, 2.85rem);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+}
+
+.font-heading-xl {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+}
+
+.font-heading-lg {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.005em;
+}
+
+.font-heading-md {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: 0;
+}
+
+.font-body-lg {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    letter-spacing: -0.005em;
+}
+
+.font-body {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    letter-spacing: 0;
+}
+
+.font-body-sm {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+.font-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-brand-brown);
+}
+
+.font-caption {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    color: var(--color-brand-charcoal);
+}
+
+/* Luxury Architectural Micro-Interactions */
+.card-lift {
+    transition: transform 0.6s var(--ease-architectural), box-shadow 0.6s var(--ease-architectural), border-color 0.4s ease;
+}
+
+.card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px -15px rgba(15, 15, 15, 0.08);
+}
+
+.img-zoom {
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-zoom:hover {
+    transform: scale(1.04);
+}
+
+/* Accessible Focus Ring */
+.focus-architectural:focus-visible {
+    outline: 2px solid var(--color-brand-taupe);
+    outline-offset: 3px;
+}
+
+/* Subtle Stone Grain Texture Overlay */
+.stone-grain {
+    background-image: radial-gradient(
+        rgba(15, 15, 15, 0.035) 1px,
+        transparent 0
+    );
+    background-size: 24px 24px;
+}
+
+/* Respect Prefers-Reduced-Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
