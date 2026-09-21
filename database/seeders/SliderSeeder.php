@@ -357,7 +357,7 @@ class SliderSeeder extends Seeder
             'z_index' => 10,
             'is_visible' => true,
             'content' => [
-                'text' => 'EIGHT CANONICAL COLLECTIONS',
+                'text' => 'NINE CANONICAL COLLECTIONS',
                 'secondary_text' => 'CURATED RESERVES',
                 'color' => '#D4B381',
                 'font_family' => 'Montserrat',

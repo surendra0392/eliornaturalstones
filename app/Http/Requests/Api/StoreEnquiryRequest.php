@@ -9,8 +9,7 @@ use Illuminate\Validation\Rule;
 class StoreEnquiryRequest extends FormRequest
 {
     /**
-     * The 8 canonical ELIOR collections permitted for enquiry.
-     * Note: Sandstone is strictly prohibited.
+     * The canonical ELIOR collections permitted for enquiry.
      */
     public const CANONICAL_COLLECTIONS = [
         'Italian Marble',

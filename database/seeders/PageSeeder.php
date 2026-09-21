@@ -604,7 +604,7 @@ class PageSeeder extends Seeder
                                 'id' => 'collection-enquiries',
                                 'number' => '02',
                                 'title' => 'Collection Enquiries',
-                                'description' => 'Detailed insights into slab inventory, veining patterns, quarry origins, and block availability across our eight collections.',
+                                'description' => 'Detailed insights into slab inventory, veining patterns, quarry origins, and block availability across our nine collections.',
                             ],
                             [
                                 'id' => 'project-collaboration',

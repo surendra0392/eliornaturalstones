@@ -49,7 +49,7 @@ export function CollectionHeroSection({
                                 aria-hidden="true"
                             />
                             <span className="text-ivory/80 text-[11px] tracking-[0.28em] uppercase">
-                                {editorialData.index} / 08
+                                {editorialData.index} / 09
                             </span>
                         </div>
 

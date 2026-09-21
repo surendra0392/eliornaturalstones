@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class VarietySeeder extends Seeder
 {
     /**
-     * Seed authentic material varieties for the 8 canonical ELIOR collections.
+     * Seed authentic material varieties for the 9 canonical ELIOR collections.
      * Content is strictly descriptive and defensible without speculative lab specs.
      */
     public function run(): void
