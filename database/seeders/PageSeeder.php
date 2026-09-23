@@ -264,9 +264,9 @@ class PageSeeder extends Seeder
                             ],
                             [
                                 'index' => '05',
-                                'title' => 'WORLDWIDE',
-                                'description' => 'Moving selected material toward its intended destination.',
-                                'slug' => 'worldwide',
+                                'title' => 'ALL OVER INDIA',
+                                'description' => 'Moving selected material to project destinations all across India.',
+                                'slug' => 'all-over-india',
                             ],
                             [
                                 'index' => '06',
@@ -324,9 +324,9 @@ class PageSeeder extends Seeder
                     'movement' => [
                         'stageIndex' => '05',
                         'heading' => '05 — From One Place to Another',
-                        'stageLabel' => '05 — WORLDWIDE',
-                        'subtitle' => 'TRANSIT TOWARD DESTINATION',
-                        'paragraph1' => 'Material moves because architecture moves. The journey continues from preparation toward the place where the stone will be used.',
+                        'stageLabel' => '05 — ALL OVER INDIA',
+                        'subtitle' => 'TRANSIT ACROSS INDIA',
+                        'paragraph1' => 'Material moves because architecture moves. The journey continues from preparation toward project sites and architectural spaces all across India.',
                     ],
                     'architecture' => [
                         'stageIndex' => '06',

@@ -48,16 +48,26 @@ export function MovementSection({ content }: MovementSectionProps = {}) {
         }
     }, []);
 
+    const rawLabel = content?.stageLabel;
+    const stageLabel =
+        !rawLabel || rawLabel.includes('WORLDWIDE')
+            ? SOURCE_TO_SPACE_CONTENT.movement.stageLabel
+            : rawLabel;
+
+    const rawParagraph = content?.paragraph1;
+    const paragraph1 =
+        !rawParagraph || rawParagraph.includes('preparation toward the place')
+            ? SOURCE_TO_SPACE_CONTENT.movement.paragraph1
+            : rawParagraph;
+
     const movement = {
         stageIndex:
             content?.stageIndex || SOURCE_TO_SPACE_CONTENT.movement.stageIndex,
-        stageLabel:
-            content?.stageLabel || SOURCE_TO_SPACE_CONTENT.movement.stageLabel,
+        stageLabel,
         heading: content?.heading || SOURCE_TO_SPACE_CONTENT.movement.heading,
         subtitle:
             content?.subtitle || SOURCE_TO_SPACE_CONTENT.movement.subtitle,
-        paragraph1:
-            content?.paragraph1 || SOURCE_TO_SPACE_CONTENT.movement.paragraph1,
+        paragraph1,
     };
 
     return (

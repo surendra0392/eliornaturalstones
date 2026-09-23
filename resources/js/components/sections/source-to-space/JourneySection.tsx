@@ -68,6 +68,8 @@ export function JourneySection({ content }: JourneySectionProps = {}) {
                 return SOURCE_TO_SPACE_IMAGES.journey.selection;
             case 'packaging':
                 return SOURCE_TO_SPACE_IMAGES.journey.packaging;
+            case 'all-over-india':
+            case 'pan-india':
             case 'worldwide':
                 return SOURCE_TO_SPACE_IMAGES.journey.worldwide;
             case 'spaces':

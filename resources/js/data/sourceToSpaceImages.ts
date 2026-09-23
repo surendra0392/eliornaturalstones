@@ -24,27 +24,27 @@ export const SOURCE_TO_SPACE_IMAGES = {
     // 03 — THE SIX-STAGE JOURNEY (Thumbnails)
     journey: {
         quarries: {
-            src: '/images/elior/source-to-space/source-to-space-01-quarries.webp',
-            alt: 'Raw natural stone blocks at geological quarry source',
+            src: '/images/elior/source-to-space/source-to-space-01-quarries.jpg',
+            alt: 'Raw natural stone blocks at geological Indian quarry source',
         },
         processing: {
-            src: '/images/elior/source-to-space/source-to-space-02-processing.webp',
+            src: '/images/elior/source-to-space/source-to-space-02-processing.jpg',
             alt: 'Calibrated diamond saw precision cutting and slab thickness calibration',
         },
         selection: {
-            src: '/images/elior/source-to-space/source-to-space-03-selection.webp',
+            src: '/images/elior/source-to-space/source-to-space-03-selection.jpg',
             alt: 'Curatorial evaluation of stone veining, tone, and character',
         },
         packaging: {
-            src: '/images/elior/source-to-space/source-to-space-04-packaging.webp',
+            src: '/images/elior/source-to-space/source-to-space-04-packaging.jpg',
             alt: 'Protected stone slabs securely prepared for movement',
         },
         worldwide: {
-            src: '/images/elior/source-to-space/source-to-space-05-worldwide.webp',
-            alt: 'Architectural material in transit toward its destination',
+            src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
+            alt: 'Architectural stone material in transit toward destinations across India',
         },
         spaces: {
-            src: '/images/elior/source-to-space/source-to-space-06-spaces.webp',
+            src: '/images/elior/source-to-space/source-to-space-06-spaces.jpg',
             alt: 'Finished architectural interior with bookmatched stone surfaces',
         },
     },
@@ -52,27 +52,27 @@ export const SOURCE_TO_SPACE_IMAGES = {
     // 04–09 — FEATURE DEEP DIVES
     features: {
         source: {
-            src: '/images/elior/source-to-space/source-to-space-01-quarries.webp',
-            alt: 'Authentic quarry origin with monumental stone blocks and natural stratification',
+            src: '/images/elior/source-to-space/source-to-space-01-quarries.jpg',
+            alt: 'Authentic Indian quarry origin with monumental stone blocks and natural stratification',
         },
         processing: {
-            src: '/images/elior/source-to-space/source-to-space-02-processing.webp',
+            src: '/images/elior/source-to-space/source-to-space-02-processing.jpg',
             alt: 'Honed edge detail and precision surface calibration',
         },
         selection: {
-            src: '/images/elior/source-to-space/source-to-space-03-selection.webp',
+            src: '/images/elior/source-to-space/source-to-space-03-selection.jpg',
             alt: 'Expansive natural stone slab selection in clean architectural gallery setting',
         },
         packaging: {
-            src: '/images/elior/source-to-space/source-to-space-04-packaging.webp',
+            src: '/images/elior/source-to-space/source-to-space-04-packaging.jpg',
             alt: 'Protected natural stone surfaces carefully arranged for architectural delivery',
         },
         movement: {
-            src: '/images/elior/source-to-space/source-to-space-05-worldwide.webp',
-            alt: 'Architectural stone material transitioning from preparation toward destination',
+            src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
+            alt: 'Architectural stone material transitioning toward project destinations across India',
         },
         architecture: {
-            src: '/images/elior/source-to-space/source-to-space-06-spaces.webp',
+            src: '/images/elior/source-to-space/source-to-space-06-spaces.jpg',
             alt: 'Monumental stone architecture where natural material defines spatial rhythm',
         },
     },

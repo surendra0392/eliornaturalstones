@@ -58,9 +58,9 @@ test('from-source-to-space page contains the six journey stages in sequence', fu
     $response->assertSee('PACKAGING');
     $response->assertSee('Protecting the material through careful preparation for movement.');
 
-    // 05 Worldwide
-    $response->assertSee('WORLDWIDE');
-    $response->assertSee('Moving selected material toward its intended destination.');
+    // 05 All Over India
+    $response->assertSee('ALL OVER INDIA');
+    $response->assertSee('Moving selected material to project destinations all across India.');
 
     // 06 Inspiring Spaces
     $response->assertSee('INSPIRING SPACES');

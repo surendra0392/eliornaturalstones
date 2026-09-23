@@ -54,7 +54,7 @@ export default function ArchitectDesignerServices({
         description: pageDescription,
         url: canonicalUrl,
         serviceType: 'Architectural Stone Consultation',
-        areaServed: 'Worldwide',
+        areaServed: 'India',
     };
 
     const tradeFaqs = [

@@ -105,43 +105,43 @@ export const HOMEPAGE_IMAGES = {
             stage: '01',
             title: 'Quarries',
             description:
-                'Carefully identified geological formations and noble mineral reserves worldwide.',
-            src: '/images/elior/source-to-space/source-to-space-01-quarries.webp',
+                'Carefully identified geological formations and noble mineral reserves across India.',
+            src: '/images/elior/source-to-space/source-to-space-01-quarries.jpg',
         },
         {
             stage: '02',
             title: 'Processing',
             description:
                 'Precision diamond saw calibration, block slicing, and artisan surface treatment.',
-            src: '/images/elior/source-to-space/source-to-space-02-processing.webp',
+            src: '/images/elior/source-to-space/source-to-space-02-processing.jpg',
         },
         {
             stage: '03',
             title: 'Selection',
             description:
                 'Rigorous visual grading, tone pairing, and vein-matching for architectural harmony.',
-            src: '/images/elior/source-to-space/source-to-space-03-selection.webp',
+            src: '/images/elior/source-to-space/source-to-space-03-selection.jpg',
         },
         {
             stage: '04',
             title: 'Packaging',
             description:
                 'Bespoke timber framing, moisture barriers, and shock-cushioned slab crating.',
-            src: '/images/elior/source-to-space/source-to-space-04-packaging.webp',
+            src: '/images/elior/source-to-space/source-to-space-04-packaging.jpg',
         },
         {
             stage: '05',
-            title: 'Worldwide',
+            title: 'All Over India',
             description:
-                'Reliable freight logistics delivering intact monumental slabs to project sites.',
-            src: '/images/elior/source-to-space/source-to-space-05-worldwide.webp',
+                'Reliable freight logistics delivering intact monumental slabs to project sites across India.',
+            src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
         },
         {
             stage: '06',
             title: 'Inspiring Spaces',
             description:
                 'Flawless dry-lay installation in discerning residential and commercial sanctums.',
-            src: '/images/elior/source-to-space/source-to-space-06-spaces.webp',
+            src: '/images/elior/source-to-space/source-to-space-06-spaces.jpg',
         },
     ],
 

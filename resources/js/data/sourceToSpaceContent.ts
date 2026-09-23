@@ -72,10 +72,10 @@ export const SOURCE_TO_SPACE_CONTENT = {
             },
             {
                 index: '05',
-                title: 'WORLDWIDE',
+                title: 'ALL OVER INDIA',
                 description:
-                    'Moving selected material toward its intended destination.',
-                slug: 'worldwide',
+                    'Moving selected material to project destinations all across India.',
+                slug: 'all-over-india',
             },
             {
                 index: '06',
@@ -154,10 +154,10 @@ export const SOURCE_TO_SPACE_CONTENT = {
     movement: {
         stageIndex: '05',
         heading: '05 — From One Place to Another',
-        stageLabel: '05 — WORLDWIDE',
-        subtitle: 'TRANSIT TOWARD DESTINATION',
+        stageLabel: '05 — ALL OVER INDIA',
+        subtitle: 'TRANSIT ACROSS INDIA',
         paragraph1:
-            'Material moves because architecture moves. The journey continues from preparation toward the place where the stone will be used.',
+            'Material moves because architecture moves. The journey continues from preparation toward project sites and architectural spaces all across India.',
     },
 
     // 09 — SPACE / ARCHITECTURE
