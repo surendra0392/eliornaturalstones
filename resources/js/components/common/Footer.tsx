@@ -26,17 +26,6 @@ export function Footer() {
         siteSettings?.pinterest_url || siteSettings?.social_links?.pinterest;
     const hasSocial = Boolean(instagramUrl || linkedinUrl || pinterestUrl);
 
-    const scrollToTop = () => {
-        const prefersReducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)',
-        ).matches;
-
-        window.scrollTo({
-            top: 0,
-            behavior: prefersReducedMotion ? 'auto' : 'smooth',
-        });
-    };
-
     return (
         <footer
             role="contentinfo"
@@ -231,31 +220,15 @@ export function Footer() {
                     </div>
                 </div>
 
-                {/* Sub-Footer Legal / Principles */}
+                {/* Sub-Footer Legal / Brand Affiliation */}
                 <div className="border-border-stone text-taupe mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 text-[11px] tracking-wider sm:flex-row sm:gap-0">
                     <p>
                         © {new Date().getFullYear()} ELIOR Natural Stones. All
                         rights reserved.
                     </p>
-                    <div className="flex items-center gap-6">
-                        <p className="text-graphite-muted font-serif italic">
-                            Material first. Text second.
-                        </p>
-                        <button
-                            type="button"
-                            onClick={scrollToTop}
-                            aria-label="Scroll to top of page"
-                            className="group text-taupe hover:text-bronze focus-visible:outline-graphite inline-flex cursor-pointer items-center gap-1.5 text-[10px] tracking-widest uppercase transition-colors focus-visible:outline-2"
-                        >
-                            <span>Back to top</span>
-                            <span
-                                className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5"
-                                aria-hidden="true"
-                            >
-                                ↑
-                            </span>
-                        </button>
-                    </div>
+                    <p className="text-taupe">
+                        A brand of Stone X
+                    </p>
                 </div>
             </Container>
         </footer>
