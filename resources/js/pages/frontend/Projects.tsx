@@ -196,7 +196,7 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
             {/* 01 — HERO SECTION */}
             <section
                 aria-label="Projects Hero"
-                className="relative flex min-h-[60vh] items-center justify-center overflow-hidden border-b border-border-subtle bg-ivory-warm pt-28 pb-16 lg:min-h-[70vh] lg:pt-36 lg:pb-24"
+                className="relative flex min-h-[46vh] items-center justify-center overflow-hidden border-b border-border-subtle bg-ivory-warm pt-20 pb-12 sm:pt-24 sm:pb-14 lg:min-h-[52vh] lg:pt-28 lg:pb-16"
             >
                 {/* Background Architectural Canvas */}
                 <div className="absolute inset-0 z-0">
