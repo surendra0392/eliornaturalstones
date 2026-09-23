@@ -48,7 +48,7 @@ class StorePageRequest extends FormRequest
                 'alpha_dash',
                 'max:255',
                 'unique:pages,slug',
-                Rule::notIn(['admin', 'projects']),
+                Rule::notIn(['admin']),
             ],
             'subtitle' => ['nullable', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],

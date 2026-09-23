@@ -224,8 +224,8 @@ test('12: API validation rejects invalid email format', function () {
         ->assertJsonValidationErrors(['email']);
 });
 
-test('13: /projects strictly returns HTTP 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('13: /projects strictly returns HTTP 200 OK', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('14: all previously established public routes remain 200 OK', function (string $route) {
@@ -243,6 +243,6 @@ test('14: all previously established public routes remain 200 OK', function (str
     '/collections/sculptures',
     '/our-story',
     '/from-source-to-space',
-    '/architect-designer-services',
+    '/projects',
     '/contact',
 ]);

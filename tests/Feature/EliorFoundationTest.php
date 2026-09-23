@@ -20,12 +20,12 @@ test('public routes are accessible and return 200', function (string $route) {
     '/collections/italian-marble',
     '/our-story',
     '/from-source-to-space',
-    '/architect-designer-services',
+    '/projects',
     '/contact',
 ]);
 
-test('strictly no projects route exists', function () {
-    $this->get('/projects')->assertNotFound();
+test('projects route exists and renders successfully', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('api v1 collections returns standardized envelope with canonical collections', function () {

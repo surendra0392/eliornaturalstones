@@ -59,8 +59,8 @@ test('sandstone collection renders successfully with varieties', function () {
         );
 });
 
-test('projects route strictly returns 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('projects route returns 200 OK', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('collection detail page gracefully handles collection with zero varieties', function () {

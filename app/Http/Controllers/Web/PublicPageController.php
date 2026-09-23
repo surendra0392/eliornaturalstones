@@ -25,7 +25,7 @@ class PublicPageController extends Controller
             ->where('slug', $slug)
             ->first();
 
-        if (! $page && Page::count() === 0) {
+        if (! $page) {
             (new PageSeeder)->run();
             $page = Page::query()->where('slug', $slug)->first();
         }
@@ -144,12 +144,12 @@ class PublicPageController extends Controller
     }
 
     /**
-     * Architect & Designer Trade Services.
+     * Architectural Projects Portfolio Showcase.
      */
-    public function architectDesignerServices(): Response
+    public function projects(): Response
     {
-        return Inertia::render('frontend/ArchitectDesignerServices', [
-            'cmsContent' => $this->getCmsContent('architect-designer-services'),
+        return Inertia::render('frontend/Projects', [
+            'cmsContent' => $this->getCmsContent('projects'),
         ]);
     }
 

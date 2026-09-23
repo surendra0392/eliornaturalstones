@@ -20,6 +20,6 @@ test('homepage renders frontend/Home with canonical collections', function () {
         );
 });
 
-test('homepage strictly prohibits projects links and route', function () {
-    $this->get('/projects')->assertNotFound();
+test('homepage features projects and route is accessible', function () {
+    $this->get('/projects')->assertOk();
 });

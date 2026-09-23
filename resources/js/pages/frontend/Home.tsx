@@ -13,7 +13,7 @@ import { MaterialPhilosophySection } from '../../components/sections/home/Materi
 import { HeritageSection } from '../../components/sections/home/HeritageSection';
 import { SignatureMaterialSection } from '../../components/sections/home/SignatureMaterialSection';
 import { SourceToSpaceSection } from '../../components/sections/home/SourceToSpaceSection';
-import { ArchitectServicesSection } from '../../components/sections/home/ArchitectServicesSection';
+import { FeaturedProjectsSection } from '../../components/sections/home/FeaturedProjectsSection';
 import { FinalStatementSection } from '../../components/sections/home/FinalStatementSection';
 import { HOMEPAGE_IMAGES } from '../../data/homepageImages';
 import type { Collection } from '../../types/stone';
@@ -122,9 +122,12 @@ export default function Home({
                 content={cmsContent?.content?.sourceToSpace}
             />
 
-            {/* 08 — ARCHITECT & DESIGNER SERVICES */}
-            <ArchitectServicesSection
-                content={cmsContent?.content?.architectServices}
+            {/* 08 — FEATURED ARCHITECTURAL COMMISSIONS (PROJECTS) */}
+            <FeaturedProjectsSection
+                content={
+                    cmsContent?.content?.featuredProjects ||
+                    cmsContent?.content?.architectServices
+                }
             />
 
             {/* 09 — FINAL BRAND STATEMENT */}

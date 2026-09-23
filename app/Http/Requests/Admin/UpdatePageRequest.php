@@ -20,7 +20,7 @@ class UpdatePageRequest extends FormRequest
         'collections',
         'our-story',
         'from-source-to-space',
-        'architect-designer-services',
+        'projects',
         'contact',
     ];
 
@@ -57,7 +57,7 @@ class UpdatePageRequest extends FormRequest
                 'alpha_dash',
                 'max:255',
                 Rule::unique('pages', 'slug')->ignore($pageId),
-                Rule::notIn(['admin', 'projects']),
+                Rule::notIn(['admin']),
             ],
             'subtitle' => ['nullable', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],

@@ -192,8 +192,8 @@ test('14: placeholder admin module routes are protected and accessible to admin'
     ['/admin/settings', 'admin/Settings'],
 ]);
 
-test('15: /projects and /admin/projects strictly return HTTP 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('15: /projects returns 200 and /admin/projects strictly returns HTTP 404', function () {
+    $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });
 
@@ -212,6 +212,6 @@ test('16: all public website routes remain 200 OK', function (string $route) {
     '/collections/sculptures',
     '/our-story',
     '/from-source-to-space',
-    '/architect-designer-services',
+    '/projects',
     '/contact',
 ]);

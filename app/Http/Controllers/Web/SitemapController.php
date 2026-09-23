@@ -20,7 +20,7 @@ class SitemapController extends Controller
             ['url' => route('collections.index'), 'lastmod' => $pages->get('collections')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.9', 'changefreq' => 'weekly'],
             ['url' => route('our-story'), 'lastmod' => $pages->get('our-story')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ['url' => route('from-source-to-space'), 'lastmod' => $pages->get('from-source-to-space')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.8', 'changefreq' => 'monthly'],
-            ['url' => route('architect-designer-services'), 'lastmod' => $pages->get('architect-designer-services')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['url' => route('projects'), 'lastmod' => $pages->get('projects')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ['url' => route('contact'), 'lastmod' => $pages->get('contact')?->updated_at?->toAtomString() ?? now()->toAtomString(), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ];
 

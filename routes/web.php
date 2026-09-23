@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Public architectural website routes & custom React admin namespace.
-| Strictly NO Projects route per brand architecture requirements.
+| Showcasing collections, material journey, projects portfolio, and private enquiries.
 |
 */
 
@@ -22,7 +22,8 @@ Route::get('/collections', [PublicPageController::class, 'collections'])->name('
 Route::get('/collections/{slug}', [PublicPageController::class, 'collection'])->name('collections.show');
 Route::get('/our-story', [PublicPageController::class, 'ourStory'])->name('our-story');
 Route::get('/from-source-to-space', [PublicPageController::class, 'fromSourceToSpace'])->name('from-source-to-space');
-Route::get('/architect-designer-services', [PublicPageController::class, 'architectDesignerServices'])->name('architect-designer-services');
+Route::get('/projects', [PublicPageController::class, 'projects'])->name('projects');
+Route::permanentRedirect('/architect-designer-services', '/projects');
 Route::get('/contact', [PublicPageController::class, 'contact'])->name('contact');
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 

@@ -18,7 +18,7 @@ beforeEach(function () {
     if (User::where('email', 'admin@eliornaturalstones.com')->count() === 0) {
         $this->seed(AdminUserSeeder::class);
     }
-    if (Page::count() === 0) {
+    if (Page::where('slug', 'projects')->count() === 0 || Page::where('slug', 'our-story')->count() === 0) {
         $this->seed(PageSeeder::class);
     }
 });
@@ -203,7 +203,7 @@ test('09: Update page API updates SEO metadata correctly', function () {
 
 test('10: Quick publish toggle /api/v1/admin/pages/{page}/publish toggles publish state', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $page = Page::where('slug', 'architect-designer-services')->firstOrFail();
+    $page = Page::where('slug', 'projects')->firstOrFail();
     expect($page->is_published)->toBeTrue();
 
     // Toggle to draft
@@ -354,14 +354,14 @@ test('19: Public /from-source-to-space renders published CMS content', function 
         );
 });
 
-test('20: Public /architect-designer-services renders published CMS content', function () {
-    $response = $this->get('/architect-designer-services');
+test('20: Public /projects renders published CMS content', function () {
+    $response = $this->get('/projects');
 
     $response->assertOk()
         ->assertInertia(fn (Assert $page) => $page
-            ->component('frontend/ArchitectDesignerServices')
+            ->component('frontend/Projects')
             ->has('cmsContent')
-            ->where('cmsContent.slug', 'architect-designer-services')
+            ->where('cmsContent.slug', 'projects')
         );
 });
 
@@ -416,11 +416,11 @@ test('24: Reserved slugs prohibited in page slugs', function () {
         ->assertJsonValidationErrors(['slug']);
 });
 
-test('25: Reserved projects slug prohibited in page slugs', function () {
+test('25: Duplicate page slug rejected during page creation', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
 
     $response = $this->actingAs($admin)->postJson('/api/v1/admin/pages', [
-        'title' => 'Architectural Projects',
+        'title' => 'Architectural Projects Duplicate',
         'slug' => 'projects',
         'content' => ['template' => 'standard'],
     ]);
@@ -429,9 +429,12 @@ test('25: Reserved projects slug prohibited in page slugs', function () {
         ->assertJsonValidationErrors(['slug']);
 });
 
-test('26: Projects ban enforced: /projects returns 404', function () {
+test('26: Canonical /projects returns 200 OK and legacy architect services redirects 301', function () {
     $response = $this->get('/projects');
-    $response->assertNotFound();
+    $response->assertOk();
+
+    $redirectResponse = $this->get('/architect-designer-services');
+    $redirectResponse->assertStatus(301)->assertRedirect('/projects');
 });
 
 test('27: Existing Collections Admin remains fully functional', function () {

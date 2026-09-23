@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Collection;
+use App\Models\Page;
 use App\Models\Variety;
 use Database\Seeders\CollectionSeeder;
+use Database\Seeders\PageSeeder;
 use Database\Seeders\VarietySeeder;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -12,6 +14,9 @@ beforeEach(function () {
     }
     if (Variety::count() === 0) {
         $this->seed(VarietySeeder::class);
+    }
+    if (Page::where('slug', 'our-story')->count() === 0) {
+        $this->seed(PageSeeder::class);
     }
 });
 
@@ -92,8 +97,8 @@ test('our story page contains final brand statement and collections link', funct
     $response->assertSee('/collections');
 });
 
-test('projects route strictly remains 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('canonical projects route is operational', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('unrelated public routes remain operational and untouched', function () {

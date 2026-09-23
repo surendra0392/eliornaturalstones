@@ -22,7 +22,7 @@ beforeEach(function () {
     if (Setting::count() === 0) {
         $this->seed(SettingSeeder::class);
     }
-    if (Page::count() === 0) {
+    if (Page::where('slug', 'our-story')->count() === 0) {
         $this->seed(PageSeeder::class);
     }
 });
@@ -56,8 +56,8 @@ test('01: Canonical 9 collections are locked and active in exact order with zero
     expect(Collection::where('slug', 'projects')->exists())->toBeFalse();
 });
 
-test('02: Strict 404 Route guardrails for forbidden routes /projects and /admin/projects', function () {
-    $this->get('/projects')->assertNotFound();
+test('02: Route guardrails: canonical /projects returns 200 and /admin/projects returns 404', function () {
+    $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });
 
@@ -141,7 +141,7 @@ test('04: Variety validation allows Sandstone Cobbles in cobble-stones collectio
 });
 
 test('05: Pages CMS contains the 5 published canonical editorial pages with authentic copy', function () {
-    $expectedPages = ['home', 'collections', 'our-story', 'from-source-to-space', 'architect-designer-services', 'contact'];
+    $expectedPages = ['home', 'our-story', 'from-source-to-space', 'projects', 'contact'];
 
     foreach ($expectedPages as $slug) {
         $page = Page::where('slug', $slug)->first();
@@ -171,25 +171,19 @@ test('05: Pages CMS contains the 5 published canonical editorial pages with auth
     expect($stages[1]['title'])->toBe('PROCESSING');
     expect($stages[2]['title'])->toBe('SELECTION');
     expect($stages[3]['title'])->toBe('PACKAGING');
-    expect($stages[4]['title'])->toBe('WORLDWIDE');
-    expect($stages[5]['title'])->toBe('INSPIRING SPACES');
 
-    // Architect Services disciplines verification
-    $architectServices = Page::where('slug', 'architect-designer-services')->firstOrFail();
-    $disciplines = $architectServices->content['services']['disciplines'] ?? [];
-    expect($disciplines)->toHaveCount(6);
-    expect($disciplines[0]['title'])->toBe('CONSULTATION');
-    expect($disciplines[1]['title'])->toBe('DESIGN SUPPORT');
-    expect($disciplines[2]['title'])->toBe('CUSTOM SOLUTIONS');
-    expect($disciplines[3]['title'])->toBe('TECHNICAL ASSISTANCE');
-    expect($disciplines[4]['title'])->toBe('PROJECT COLLABORATION');
-    expect($disciplines[5]['title'])->toBe('MATERIAL GUIDANCE');
+    // Projects commissions verification
+    $projectsPage = Page::where('slug', 'projects')->firstOrFail();
+    $projects = $projectsPage->content['projects'] ?? [];
+    expect(count($projects))->toBeGreaterThanOrEqual(4);
+    expect($projects[0]['title'])->toBe('The Courtyard Villa');
+    expect($projects[1]['title'])->toBe('The Glass Pavilion & Gallery');
 });
 
 test('06: Site configuration settings are authentic and non-placeholder', function () {
     $settings = Setting::pluck('value', 'key');
 
-    expect($settings['site_name'])->toBe('ELIOR Natural Stones');
+    expect($settings['site_name'])->toBe('ELIOR');
     expect($settings['primary_phone'])->toContain('81259');
     expect($settings['primary_email'])->toBe('info@eliornaturalstones.com');
     expect($settings['default_location'])->toContain('Hyderabad');

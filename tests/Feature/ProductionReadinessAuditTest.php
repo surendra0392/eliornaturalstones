@@ -37,7 +37,7 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
     expect($content)->toContain('<loc>'.route('collections.index').'</loc>');
     expect($content)->toContain('<loc>'.route('our-story').'</loc>');
     expect($content)->toContain('<loc>'.route('from-source-to-space').'</loc>');
-    expect($content)->toContain('<loc>'.route('architect-designer-services').'</loc>');
+    expect($content)->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
 
     // 8 canonical collections
@@ -58,7 +58,7 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
     }
 
     // Critical exclusions
-    expect($content)->not->toContain('/projects');
+    expect($content)->not->toContain('/architect-designer-services');
     expect($content)->not->toContain('/admin');
     expect($content)->not->toContain('/api');
 });
@@ -85,9 +85,9 @@ test('03: AdminUserSeeder refuses default password in production environment', f
     app()->detectEnvironment(fn () => 'testing');
 });
 
-test('04: Strict Route Guardrails: /projects and /admin/projects return 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('04: Strict Route Guardrails: /admin/projects returns 404 and legacy route redirects', function () {
     $this->get('/admin/projects')->assertNotFound();
+    $this->get('/architect-designer-services')->assertRedirect('/projects');
 });
 
 test('05: Security Headers are attached to all web responses', function () {

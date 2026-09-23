@@ -399,8 +399,8 @@ test('23: Public variety image output reflects assigned slab image', function ()
     expect($apiResponse->json('data.slab_image'))->not->toBeNull();
 });
 
-test('24: /projects route remains HTTP 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('24: /projects route remains HTTP 200 OK', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('25: Existing Collections Admin remains fully functional', function () {
@@ -428,6 +428,6 @@ test('28: Existing public pages remain functional', function () {
     $this->get('/collections')->assertOk();
     $this->get('/our-story')->assertOk();
     $this->get('/from-source-to-space')->assertOk();
-    $this->get('/architect-designer-services')->assertOk();
+    $this->get('/projects')->assertOk();
     $this->get('/contact')->assertOk();
 });

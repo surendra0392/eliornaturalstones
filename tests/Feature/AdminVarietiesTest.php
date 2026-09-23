@@ -473,8 +473,8 @@ test('25: Existing Admin authentication remains functional', function () {
     $this->assertAuthenticated();
 });
 
-test('26: /projects and /admin/projects strictly return HTTP 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('26: /projects returns 200 and /admin/projects strictly returns HTTP 404', function () {
+    $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });
 
@@ -493,6 +493,6 @@ test('27: Existing public routes remain functional with HTTP 200', function (str
     '/collections/sculptures',
     '/our-story',
     '/from-source-to-space',
-    '/architect-designer-services',
+    '/projects',
     '/contact',
 ]);

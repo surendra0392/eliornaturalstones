@@ -97,8 +97,8 @@ test('from-source-to-space page contains closing statement and contact conversat
     $response->assertSee('/contact');
 });
 
-test('projects route strictly remains 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('projects route returns 200 OK', function () {
+    $this->get('/projects')->assertOk();
 });
 
 test('existing collection routes remain operational and unaffected', function () {

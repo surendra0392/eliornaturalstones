@@ -286,7 +286,7 @@ export default function PagesAdmin({
                                     'collections',
                                     'our-story',
                                     'from-source-to-space',
-                                    'architect-designer-services',
+                                    'projects',
                                     'contact',
                                 ].includes(page.slug);
                             const liveUrl =

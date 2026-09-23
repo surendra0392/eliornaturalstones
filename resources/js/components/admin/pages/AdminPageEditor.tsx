@@ -103,7 +103,7 @@ export function AdminPageEditor({
             'collections',
             'our-story',
             'from-source-to-space',
-            'architect-designer-services',
+            'projects',
             'contact',
         ].includes(page.slug);
 
@@ -802,8 +802,8 @@ export function AdminPageEditor({
                                 />
                             )}
 
-                            {page.slug === 'architect-designer-services' && (
-                                <ArchitectServicesSectionEditor
+                            {page.slug === 'projects' && (
+                                <ProjectsSectionEditor
                                     content={content}
                                     onChange={setContent}
                                 />
@@ -833,7 +833,7 @@ export function AdminPageEditor({
                             {![
                                 'our-story',
                                 'from-source-to-space',
-                                'architect-designer-services',
+                                'projects',
                                 'contact',
                                 'home',
                                 'collections',
@@ -1192,81 +1192,166 @@ function SourceToSpaceSectionEditor({
     );
 }
 
-function ArchitectServicesSectionEditor({
+function ProjectsSectionEditor({
     content,
     onChange,
 }: {
     content: Record<string, any>;
     onChange: (val: Record<string, any>) => void;
 }) {
-    const services = content.services || {};
-    const disciplines = Array.isArray(services.disciplines)
-        ? services.disciplines
-        : [];
+    const intro = content.intro || {};
+    const projects = Array.isArray(content.projects) ? content.projects : [];
 
-    const handleDisciplineChange = (
+    const handleIntroChange = (field: string, val: string) => {
+        onChange({
+            ...content,
+            intro: {
+                ...intro,
+                [field]: val,
+            },
+        });
+    };
+
+    const handleProjectChange = (
         index: number,
         field: string,
-        val: string,
+        val: any,
     ) => {
-        const newDisciplines = [...disciplines];
-        newDisciplines[index] = {
-            ...newDisciplines[index],
+        const newProjects = [...projects];
+        newProjects[index] = {
+            ...newProjects[index],
             [field]: val,
         };
         onChange({
             ...content,
-            services: {
-                ...services,
-                disciplines: newDisciplines,
-            },
+            projects: newProjects,
         });
     };
 
     return (
         <div className="space-y-6">
-            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+            {/* Intro Editorial */}
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
                 <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
-                    Service Disciplines
+                    Introductory Philosophy
                 </h4>
-                <div className="space-y-3">
-                    {disciplines.map((d: any, idx: number) => (
+                <div>
+                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                        Headline
+                    </label>
+                    <input
+                        type="text"
+                        value={intro.headline || ''}
+                        onChange={(e) => handleIntroChange('headline', e.target.value)}
+                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                    />
+                </div>
+                <div>
+                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                        Lead Paragraph
+                    </label>
+                    <textarea
+                        value={intro.paragraph1 || ''}
+                        onChange={(e) => handleIntroChange('paragraph1', e.target.value)}
+                        rows={2}
+                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                    />
+                </div>
+            </div>
+
+            {/* Architectural Projects */}
+            <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <div className="flex items-center justify-between">
+                    <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
+                        Architectural Projects ({projects.length})
+                    </h4>
+                </div>
+                <div className="space-y-4">
+                    {projects.map((proj: any, idx: number) => (
                         <div
                             key={idx}
-                            className="space-y-2 border border-stone-200 bg-white p-3.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
+                            className="space-y-3 border border-stone-200 bg-white p-4 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
                         >
-                            <div>
-                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                    Discipline Title
-                                </label>
-                                <input
-                                    type="text"
-                                    value={d.title || ''}
-                                    onChange={(e) =>
-                                        handleDisciplineChange(
-                                            idx,
-                                            'title',
-                                            e.target.value,
-                                        )
-                                    }
-                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
-                                />
+                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                                <div>
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Project Title
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={proj.title || ''}
+                                        onChange={(e) =>
+                                            handleProjectChange(idx, 'title', e.target.value)
+                                        }
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Typology
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={proj.typology || ''}
+                                        onChange={(e) =>
+                                            handleProjectChange(idx, 'typology', e.target.value)
+                                        }
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                                <div>
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Location
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={proj.location || ''}
+                                        onChange={(e) =>
+                                            handleProjectChange(idx, 'location', e.target.value)
+                                        }
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Year
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={proj.year || ''}
+                                        onChange={(e) =>
+                                            handleProjectChange(idx, 'year', e.target.value)
+                                        }
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Image URL
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={proj.image || ''}
+                                        onChange={(e) =>
+                                            handleProjectChange(idx, 'image', e.target.value)
+                                        }
+                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                    />
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                    Description
+                                    Project Description
                                 </label>
                                 <textarea
-                                    value={d.description || ''}
+                                    value={proj.description || ''}
                                     onChange={(e) =>
-                                        handleDisciplineChange(
-                                            idx,
-                                            'description',
-                                            e.target.value,
-                                        )
+                                        handleProjectChange(idx, 'description', e.target.value)
                                     }
                                     rows={2}
-                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
+                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
                                 />
                             </div>
                         </div>

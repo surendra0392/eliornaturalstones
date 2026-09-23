@@ -109,7 +109,7 @@ class AdminController extends Controller
             'collections',
             'our-story',
             'from-source-to-space',
-            'architect-designer-services',
+            'projects',
             'contact',
         ];
 

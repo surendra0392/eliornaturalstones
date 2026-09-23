@@ -434,8 +434,8 @@ test('21: Public collection detail route remains functional', function () {
         );
 });
 
-test('22: /projects and /admin/projects strictly return HTTP 404', function () {
-    $this->get('/projects')->assertNotFound();
+test('22: /projects returns 200 and /admin/projects strictly returns HTTP 404', function () {
+    $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });
 
@@ -464,6 +464,6 @@ test('24: Existing public pages remain functional with HTTP 200', function (stri
     '/collections/sculptures',
     '/our-story',
     '/from-source-to-space',
-    '/architect-designer-services',
+    '/projects',
     '/contact',
 ]);

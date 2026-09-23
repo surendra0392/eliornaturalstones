@@ -28,8 +28,8 @@ test('collections overview page renders frontend/Collections/Index with 9 canoni
         );
 });
 
-test('collections page contains sandstone and does not contain projects', function () {
+test('collections page contains sandstone and canonical projects page is accessible', function () {
     expect(Collection::where('slug', 'sandstone')->exists())->toBeTrue();
 
-    $this->get('/projects')->assertNotFound();
+    $this->get('/projects')->assertOk();
 });

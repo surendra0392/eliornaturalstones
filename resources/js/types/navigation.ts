@@ -21,9 +21,9 @@ export const PUBLIC_NAV_ITEMS: NavItem[] = [
         description: 'Geology to architectural installation',
     },
     {
-        label: 'Architect & Designer Services',
-        href: '/architect-designer-services',
-        description: 'Tailored curation and technical specification',
+        label: 'Projects',
+        href: '/projects',
+        description: 'Architectural commissions & stone installations',
     },
     {
         label: 'Contact',

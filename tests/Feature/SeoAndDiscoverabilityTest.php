@@ -22,7 +22,7 @@ beforeEach(function () {
     if (Setting::count() === 0) {
         $this->seed(SettingSeeder::class);
     }
-    if (Page::count() === 0) {
+    if (Page::where('slug', 'our-story')->count() === 0) {
         $this->seed(PageSeeder::class);
     }
 });
@@ -84,17 +84,16 @@ test('03: All 15 canonical public routes return 200 OK and valid Inertia compone
     // 13. From Source to Space
     $this->get('/from-source-to-space')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/FromSourceToSpace'));
 
-    // 14. Architect & Designer Services
-    $this->get('/architect-designer-services')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/ArchitectDesignerServices'));
+    // 14. Projects
+    $this->get('/projects')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Projects'));
 
     // 15. Contact
     $this->get('/contact')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Contact'));
 });
 
 test('04: Strict 404 guardrails are active for prohibited routes', function () {
-    // Projects module must never exist
-    $this->get('/projects')->assertNotFound();
     $this->get('/admin/projects')->assertNotFound();
+    $this->get('/non-existent-page')->assertNotFound();
 });
 
 test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited routes', function () {
@@ -107,7 +106,7 @@ test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited
     expect($content)->toContain('<loc>'.route('collections.index').'</loc>');
     expect($content)->toContain('<loc>'.route('our-story').'</loc>');
     expect($content)->toContain('<loc>'.route('from-source-to-space').'</loc>');
-    expect($content)->toContain('<loc>'.route('architect-designer-services').'</loc>');
+    expect($content)->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
 
     // Canonical collections
@@ -128,7 +127,7 @@ test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited
     }
 
     // Zero prohibited routes
-    expect($content)->not->toContain('/projects');
+    expect($content)->not->toContain('/architect-designer-services');
     expect($content)->not->toContain('/admin');
 });
 
@@ -174,7 +173,7 @@ test('08: Baseline Blade SSR renders rich OpenGraph, Twitter, and canonical tags
         '/collections/sandstone',
         '/our-story',
         '/from-source-to-space',
-        '/architect-designer-services',
+        '/projects',
         '/contact',
     ];
 
