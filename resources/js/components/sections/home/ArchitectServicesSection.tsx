@@ -39,7 +39,7 @@ export function ArchitectServicesSection({ content }: ArchitectServicesSectionPr
             border="top"
             aria-label="Architect & Designer Trade Services"
         >
-            <Container size="wide">
+            <Container>
                 {/* Section Header */}
                 <div
                     ref={headerRevealRef}

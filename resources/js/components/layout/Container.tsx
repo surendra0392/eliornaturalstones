@@ -21,7 +21,7 @@ export function Container({
         reading: 'max-w-[760px]',
         narrow: 'max-w-[960px]',
         default: 'max-w-[1440px]',
-        wide: 'max-w-[1600px]',
+        wide: 'max-w-[1440px]',
         full: 'max-w-full',
     }[size];
 

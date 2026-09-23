@@ -34,7 +34,7 @@ export function BrandPositioningSection({
             border="none"
             aria-label="Brand Positioning & Ethos"
         >
-            <Container size="wide">
+            <Container>
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
                     {/* Left Editorial Narrative */}
                     <div ref={textRevealRef} className="lg:col-span-7">

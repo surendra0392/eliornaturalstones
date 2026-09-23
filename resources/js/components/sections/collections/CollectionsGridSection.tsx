@@ -146,7 +146,7 @@ export function CollectionsGridSection({
             border="top"
             aria-label="The Canonical Material Collections"
         >
-            <Container size="wide">
+            <Container>
                 {/* Section Header */}
                 <div
                     ref={headerRevealRef}

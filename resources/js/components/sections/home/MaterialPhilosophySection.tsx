@@ -27,7 +27,7 @@ export function MaterialPhilosophySection({
             border="none"
             aria-label="Material Philosophy & Stone Study"
         >
-            <Container size="wide">
+            <Container>
                 {/* Asymmetrical Editorial Composition (60 / 40 Split with Overlapping Detail Plate) */}
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
                     {/* Left: Large Architectural Slab Study & Macro Inset */}

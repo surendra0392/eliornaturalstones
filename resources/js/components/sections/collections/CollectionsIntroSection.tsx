@@ -35,7 +35,7 @@ export function CollectionsIntroSection({ content }: CollectionsIntroSectionProp
             border="none"
             aria-label="Collection Curation & Philosophy"
         >
-            <Container size="wide">
+            <Container>
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-20">
                     {/* Left: Magazine-style Asymmetrical Narrative */}
                     <div ref={textRevealRef} className="lg:col-span-7">

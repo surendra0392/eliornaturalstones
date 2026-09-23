@@ -54,7 +54,7 @@ export function CollectionsSection({ collections }: CollectionsSectionProps) {
             border="top"
             aria-label="Natural Stone Collections"
         >
-            <Container size="wide">
+            <Container>
                 {/* Architectural Section Header */}
                 <div
                     ref={headerRevealRef}

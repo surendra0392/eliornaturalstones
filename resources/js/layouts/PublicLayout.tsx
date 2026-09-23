@@ -32,7 +32,7 @@ export function PublicLayout({
 
             {breadcrumbs && breadcrumbs.length > 1 && (
                 <div className="border-border-stone/60 bg-ivory-warm/75 border-b py-2.5 backdrop-blur-xs">
-                    <Container size="wide">
+                    <Container>
                         <Breadcrumbs items={breadcrumbs} />
                     </Container>
                 </div>

@@ -29,6 +29,11 @@ export default defineConfig({
         tailwindcss(),
         wayfinder({
             formVariants: true,
+            command:
+                process.env.SKIP_WAYFINDER ||
+                process.env.npm_lifecycle_event === 'build'
+                    ? 'node -e "process.exit(0)" --'
+                    : undefined,
         }),
     ]),
     server: {

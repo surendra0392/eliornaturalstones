@@ -39,7 +39,7 @@ export function SourceToSpaceSection({ content }: SourceToSpaceSectionProps = {}
             border="none"
             aria-label="From Source to Space Journey"
         >
-            <Container size="wide">
+            <Container>
                 {/* Header */}
                 <div
                     ref={headerRevealRef}

@@ -65,7 +65,7 @@ export function HeritageSection({ content }: HeritageSectionProps = {}) {
             border="top"
             aria-label="Heritage & Lineage"
         >
-            <Container size="wide">
+            <Container>
                 <div
                     ref={headerRevealRef}
                     className="border-border-stone mb-12 flex flex-col justify-between border-b pb-6 md:flex-row md:items-end"
