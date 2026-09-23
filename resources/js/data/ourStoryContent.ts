@@ -152,9 +152,9 @@ export const OUR_STORY_CONTENT = {
 
     // 06 — THE ELIOR PHILOSOPHY
     philosophy: {
-        headline: 'Material First. Text Second.',
+        headline: 'Formed by Nature. Defined by Architecture.',
         supportingStatement:
-            'We believe the stone should speak before the specification does.',
+            'Every block of stone carries an unrepeatable geological story, curated to bring enduring elegance and quiet luxury to spaces.',
         secondaryCopy:
             'Colour, movement, texture, scale and light all contribute to how a material belongs within architecture.',
     },

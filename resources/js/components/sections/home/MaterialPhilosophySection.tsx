@@ -9,16 +9,30 @@ import { useGsapReveal } from '../../../hooks/useGsapReveal';
 export interface MaterialPhilosophyContent {
     headline?: string;
     supportingStatement?: string;
+    paragraph?: string;
 }
 
 export function MaterialPhilosophySection({
     content,
 }: { content?: MaterialPhilosophyContent } = {}) {
     const textRevealRef = useGsapReveal<HTMLDivElement>({ type: 'text' });
-    const headline = content?.headline || 'Material First. Text Second.';
+    
+    // Graceful fallback from deprecated placeholder copy
+    const headline =
+        !content?.headline || content.headline === 'Material First. Text Second.'
+            ? 'Formed by Nature. Defined by Architecture.'
+            : content.headline;
+
     const supportingStatement =
-        content?.supportingStatement ||
-        'We believe the stone should speak before the specification does. Vein, texture, tone and finish shape the character of a space.';
+        !content?.supportingStatement ||
+        content.supportingStatement === 'We believe the stone should speak before the specification does. Vein, texture, tone and finish shape the character of a space.' ||
+        content.supportingStatement === 'We believe the stone should speak before the specification does.'
+            ? 'Every block of stone carries an unrepeatable geological story, curated to bring enduring elegance and quiet luxury to spaces.'
+            : content.supportingStatement;
+
+    const paragraph =
+        content?.paragraph ||
+        'Natural stone is a living medium shaped by deep tectonic pressure and mineral composition. At ELIOR, we honor this organic journey—sourcing quarry blocks with exceptional veining and calibrating each slab with architectural precision, ensuring every installation remains timeless, distinctive, and unrepeatable.';
 
     return (
         <Section
@@ -84,22 +98,17 @@ export function MaterialPhilosophySection({
                         </p>
 
                         <p className="font-body text-graphite-muted mt-4 leading-relaxed">
-                            Natural stone carries millions of years of
-                            subterranean pressure and mineralization. Our role
-                            is to curate these geological expressions with
-                            absolute respect for their organic variations,
-                            ensuring each installation feels unrepeatable and
-                            grounded.
+                            {paragraph}
                         </p>
 
                         {/* Architectural Material Properties */}
                         <div className="border-border-stone mt-8 space-y-4 border-t pt-6">
                             <div className="border-border-subtle flex items-baseline justify-between border-b pb-3">
                                 <span className="font-body-sm text-graphite">
-                                    Tectonic Density
+                                    Geological Density
                                 </span>
                                 <span className="font-caption text-taupe uppercase">
-                                    Monumental Longevity
+                                    Enduring Longevity
                                 </span>
                             </div>
                             <div className="border-border-subtle flex items-baseline justify-between border-b pb-3">
@@ -107,7 +116,7 @@ export function MaterialPhilosophySection({
                                     Natural Veining
                                 </span>
                                 <span className="font-caption text-taupe uppercase">
-                                    Geological Individuality
+                                    Singular Individuality
                                 </span>
                             </div>
                             <div className="flex items-baseline justify-between pb-1">
@@ -115,7 +124,7 @@ export function MaterialPhilosophySection({
                                     Surface Patina
                                 </span>
                                 <span className="font-caption text-taupe uppercase">
-                                    Matures with Time
+                                    Evolves with Time
                                 </span>
                             </div>
                         </div>

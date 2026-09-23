@@ -41,8 +41,8 @@ class PageSeeder extends Seeder
                         'paragraph2' => "At ELIOR, our philosophy is anchored in material reverence. From raw quarry block extraction to millimeter-precise calibrated slabbing, every step preserves the stone's organic soul.",
                     ],
                     'philosophy' => [
-                        'headline' => 'Material First. Text Second.',
-                        'supportingStatement' => 'We believe the stone should speak before the specification does.',
+                        'headline' => 'Formed by Nature. Defined by Architecture.',
+                        'supportingStatement' => 'Every block of stone carries an unrepeatable geological story, curated to bring enduring elegance and quiet luxury to spaces.',
                     ],
                     'closing' => [
                         'headline' => 'Spaces of Permanence.',
@@ -193,8 +193,8 @@ class PageSeeder extends Seeder
                         ],
                     ],
                     'philosophy' => [
-                        'headline' => 'Material First. Text Second.',
-                        'supportingStatement' => 'We believe the stone should speak before the specification does.',
+                        'headline' => 'Formed by Nature. Defined by Architecture.',
+                        'supportingStatement' => 'Every block of stone carries an unrepeatable geological story, curated to bring enduring elegance and quiet luxury to spaces.',
                         'secondaryCopy' => 'Colour, movement, texture, scale and light all contribute to how a material belongs within architecture.',
                     ],
                     'lookingForward' => [

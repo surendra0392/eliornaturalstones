@@ -8,7 +8,7 @@ import {
 } from '../../../animations/gsap';
 
 export interface PhilosophyProps {
-    content?: Partial<typeof OUR_STORY_CONTENT.philosophy>;
+    content?: Partial<Record<keyof typeof OUR_STORY_CONTENT.philosophy, string>>;
 }
 
 export function PhilosophySection({ content }: PhilosophyProps = {}) {
@@ -25,9 +25,25 @@ export function PhilosophySection({ content }: PhilosophyProps = {}) {
         });
     }, []);
 
+    const rawHeadline = content?.headline as string | undefined;
+    const rawStatement = content?.supportingStatement as string | undefined;
+
+    const headline =
+        !rawHeadline || rawHeadline === 'Material First. Text Second.'
+            ? OUR_STORY_CONTENT.philosophy.headline
+            : rawHeadline;
+
+    const supportingStatement =
+        !rawStatement ||
+        rawStatement === 'We believe the stone should speak before the specification does.'
+            ? OUR_STORY_CONTENT.philosophy.supportingStatement
+            : rawStatement;
+
     const philosophy = {
         ...OUR_STORY_CONTENT.philosophy,
         ...content,
+        headline,
+        supportingStatement,
     };
 
     return (

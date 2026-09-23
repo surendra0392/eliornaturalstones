@@ -1365,12 +1365,23 @@ function HomeSectionEditor({
     onChange: (val: Record<string, any>) => void;
 }) {
     const brandPositioning = content.brandPositioning || {};
+    const philosophy = content.philosophy || {};
 
     const handlePosChange = (field: string, val: string) => {
         onChange({
             ...content,
             brandPositioning: {
                 ...brandPositioning,
+                [field]: val,
+            },
+        });
+    };
+
+    const handlePhilChange = (field: string, val: string) => {
+        onChange({
+            ...content,
+            philosophy: {
+                ...philosophy,
                 [field]: val,
             },
         });
@@ -1417,6 +1428,44 @@ function HomeSectionEditor({
                         onChange={(e) =>
                             handlePosChange('paragraph2', e.target.value)
                         }
+                        rows={2}
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
+                    />
+                </div>
+            </div>
+
+            {/* Material Philosophy Section */}
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
+                    Material Philosophy
+                </h4>
+                <div>
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
+                        Headline
+                    </label>
+                    <input
+                        type="text"
+                        value={philosophy.headline || ''}
+                        onChange={(e) =>
+                            handlePhilChange('headline', e.target.value)
+                        }
+                        placeholder="Formed by Nature. Defined by Architecture."
+                        className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
+                    />
+                </div>
+                <div>
+                    <label className="mb-1 block text-[11px] font-medium text-stone-600 dark:text-stone-400">
+                        Supporting Statement
+                    </label>
+                    <textarea
+                        value={philosophy.supportingStatement || ''}
+                        onChange={(e) =>
+                            handlePhilChange(
+                                'supportingStatement',
+                                e.target.value,
+                            )
+                        }
+                        placeholder="Every block of stone carries an unrepeatable geological story..."
                         rows={2}
                         className="w-full border border-stone-300 bg-white px-3 py-1.5 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                     />

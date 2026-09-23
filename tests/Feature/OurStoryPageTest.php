@@ -32,7 +32,7 @@ test('our story page contains verified story content without invented facts', fu
     $response->assertSee('Three Decades. One Material.');
     $response->assertSee('From Tradition to Precision.');
     $response->assertSee('What Experience Taught Us.');
-    $response->assertSee('Material First. Text Second.');
+    $response->assertSee('Formed by Nature. Defined by Architecture.');
     $response->assertSee('Looking Forward.');
 });
 
