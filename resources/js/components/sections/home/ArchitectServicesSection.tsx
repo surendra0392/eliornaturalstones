@@ -66,10 +66,10 @@ export function ArchitectServicesSection({ content }: ArchitectServicesSectionPr
                     </div>
                 </div>
 
-                {/* 6 Service Disciplines - Image-Led Architectural Cards */}
+                {/* 4 Service Disciplines - Strictly 2 Cards Per Row */}
                 <div
                     ref={servicesGridRef}
-                    className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+                    className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 lg:gap-8"
                 >
                     {HOMEPAGE_IMAGES.architectServices.map((service) => (
                         <div

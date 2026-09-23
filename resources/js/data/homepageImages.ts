@@ -145,45 +145,31 @@ export const HOMEPAGE_IMAGES = {
         },
     ],
 
-    // 08 — ARCHITECT & DESIGNER SERVICES: 6 Service Disciplines
+    // 08 — ARCHITECT & DESIGNER SERVICES: 4 Service Disciplines
     architectServices: [
         {
             number: '01',
             title: 'Consultation',
             description:
                 'One-on-one material discovery to align design ambitions with stone performance.',
-            src: '/images/elior/architect-services/services-01-consultation.webp',
+            src: '/images/elior/architect-services/services-01-consultation.jpg',
         },
         {
             number: '02',
-            title: 'Design Support',
-            description:
-                'Digital slab mapping, vein orientation planning, and bookmatch sequencing.',
-            src: '/images/elior/architect-services/services-02-design-support.webp',
-        },
-        {
-            number: '03',
             title: 'Custom Solutions',
             description:
                 'Bespoke cut-to-size stone components, monolithic basins, and sculpted profiles.',
-            src: '/images/elior/architect-services/services-03-custom-solutions.webp',
+            src: '/images/elior/architect-services/services-03-custom-solutions.jpg',
         },
         {
-            number: '04',
-            title: 'Technical Assistance',
-            description:
-                'Compressive ratings, absorption tests, anchoring specs, and substrate advice.',
-            src: '/images/elior/architect-services/services-04-technical-assistance.webp',
-        },
-        {
-            number: '05',
+            number: '03',
             title: 'Project Collaboration',
             description:
                 'Direct coordination with project architects, site engineers, and installation teams.',
-            src: '/images/elior/architect-services/services-05-project-collaboration.webp',
+            src: '/images/elior/architect-services/services-05-project-collaboration.jpg',
         },
         {
-            number: '06',
+            number: '04',
             title: 'Material Guidance',
             description:
                 'Care protocols, finish suitability matrix, and long-term patina management.',
