@@ -84,8 +84,8 @@ export const HOMEPAGE_IMAGES = {
     // 05 — HERITAGE: Industrial/quarry legacy paired with contemporary architecture
     heritage: {
         quarry: {
-            src: '/images/elior/homepage/homepage-heritage-quarry.webp',
-            alt: 'Monumental raw stone block extraction at quarry origin',
+            src: '/images/elior/homepage/homepage-heritage-quarry.jpg',
+            alt: 'Monumental raw stone block extraction at Indian quarry origin',
         },
         modern: {
             src: '/images/elior/homepage/homepage-heritage-modern.webp',
