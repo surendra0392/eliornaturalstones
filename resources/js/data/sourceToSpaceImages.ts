@@ -11,14 +11,14 @@
 export const SOURCE_TO_SPACE_IMAGES = {
     // 01 — HERO
     hero: {
-        src: '/images/elior/source-to-space/source-to-space-hero.webp',
-        alt: 'Monumental contemporary natural stone architecture illuminated by serene natural light',
+        src: '/images/elior/source-to-space/source-to-space-hero.jpg',
+        alt: 'Contemporary Indian luxury villa in Hyderabad featuring monumental bookmatched marble wall and reflection pool',
     },
 
     // 02 — INTRODUCTION
     intro: {
-        src: '/images/elior/source-to-space/source-to-space-intro.webp',
-        alt: 'Monumental raw stone block extraction at source showing ancient geological compression',
+        src: '/images/elior/source-to-space/source-to-space-intro.jpg',
+        alt: 'Monumental Indian stone quarry bedrock stratification and tiered extraction in Rajasthan',
     },
 
     // 03 — THE SIX-STAGE JOURNEY (Thumbnails)
@@ -79,7 +79,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
 
     // 10 — CLOSING STATEMENT
     closing: {
-        src: '/images/elior/source-to-space/source-to-space-closing.webp',
-        alt: 'Enduring architectural residence with natural stone elements standing timeless',
+        src: '/images/elior/source-to-space/source-to-space-closing.jpg',
+        alt: 'Enduring architectural retreat with hand-carved natural Indian stone peristyle overlooking Lake Pichola in Udaipur',
     },
 } as const;

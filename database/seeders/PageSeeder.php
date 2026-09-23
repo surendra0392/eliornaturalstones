@@ -225,8 +225,8 @@ class PageSeeder extends Seeder
                         'marker' => 'MATERIAL JOURNEY',
                         'title' => 'From Source to Space',
                         'supportingLine' => 'Every material has a journey. We follow it from its origin to the spaces it helps define.',
-                        'image' => '/images/elior/source-to-space/source-to-space-hero.webp',
-                        'imageAlt' => 'Monumental quarry wall showing natural stone stratification and extraction origin',
+                        'image' => '/images/elior/source-to-space/source-to-space-hero.jpg',
+                        'imageAlt' => 'Contemporary Indian luxury villa in Hyderabad featuring monumental bookmatched marble wall and reflection pool',
                     ],
                     'intro' => [
                         'headline' => 'From Material to Meaning.',
