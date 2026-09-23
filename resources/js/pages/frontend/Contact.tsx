@@ -3,7 +3,6 @@ import { SeoHead } from '../../components/seo/SeoHead';
 import { generateLocalBusinessSchema } from '../../data/seoData';
 import { PublicLayout } from '../../layouts/PublicLayout';
 import { ContactHeroSection } from '../../components/sections/contact/ContactHeroSection';
-import { ContactIntroSection } from '../../components/sections/contact/ContactIntroSection';
 import { EnquiryFormSection } from '../../components/sections/contact/EnquiryFormSection';
 import { DirectContactSection } from '../../components/sections/contact/DirectContactSection';
 import { HelpWithSection } from '../../components/sections/contact/HelpWithSection';
@@ -99,21 +98,18 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
             {/* 01 — HERO */}
             <ContactHeroSection content={cmsContent?.content?.hero} />
 
-            {/* 02 — INTRODUCTION */}
-            <ContactIntroSection content={cmsContent?.content?.intro} />
-
-            {/* 03 — ENQUIRY FORM */}
+            {/* 02 — ENQUIRY FORM */}
             <EnquiryFormSection content={cmsContent?.content?.form} />
 
-            {/* 04 — DIRECT CONTACT */}
+            {/* 03 — DIRECT CONTACT */}
             <DirectContactSection
                 content={cmsContent?.content?.directContact}
             />
 
-            {/* 05 — HOW WE CAN HELP */}
+            {/* 04 — HOW WE CAN HELP */}
             <HelpWithSection content={cmsContent?.content?.howWeCanHelp} />
 
-            {/* 06 — CLOSING ARCHITECTURAL STATEMENT */}
+            {/* 05 — CLOSING ARCHITECTURAL STATEMENT */}
             <ContactClosingSection content={cmsContent?.content?.closing} />
         </PublicLayout>
     );

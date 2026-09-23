@@ -34,7 +34,6 @@ test('03: page editorial content and headers exist', function () {
 
     $response
         ->assertSee('ELIOR NATURAL STONES')
-        ->assertSee('A Conversation Starts With Material.')
         ->assertSee('Tell Us About Your Project.')
         ->assertSee('Prefer a Direct Conversation?')
         ->assertSee('+91 81259 58071')
