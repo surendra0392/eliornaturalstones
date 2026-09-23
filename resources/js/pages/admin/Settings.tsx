@@ -330,7 +330,7 @@ export default function SettingsAdmin({
                                             e.target.value,
                                         )
                                     }
-                                    placeholder="ELIOR Natural Stones"
+                                    placeholder="ELIOR"
                                     className="min-h-[44px] w-full border border-stone-300 bg-white px-3.5 py-2 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:focus:border-stone-100"
                                 />
                                 {fieldErrors.site_name && (
@@ -358,7 +358,7 @@ export default function SettingsAdmin({
                                             e.target.value,
                                         )
                                     }
-                                    placeholder="Curated Natural Stone Collections..."
+                                    placeholder="Natural Stones"
                                     className="min-h-[44px] w-full border border-stone-300 bg-white px-3.5 py-2 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:focus:border-stone-100"
                                 />
                                 {fieldErrors.brand_descriptor && (

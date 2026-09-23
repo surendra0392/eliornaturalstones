@@ -53,7 +53,7 @@ class Setting extends Model
             'type' => 'text',
             'label' => 'Site Name',
             'description' => 'The brand and corporate name of the website.',
-            'default' => 'ELIOR Natural Stones',
+            'default' => 'ELIOR',
             'is_public' => true,
         ],
         'brand_descriptor' => [
@@ -62,7 +62,7 @@ class Setting extends Model
             'type' => 'text',
             'label' => 'Brand Descriptor',
             'description' => 'Short architectural positioning tagline.',
-            'default' => 'Curated Natural Stone Collections & Architectural Material Consultancy',
+            'default' => 'Natural Stones',
             'is_public' => true,
         ],
         'default_location' => [

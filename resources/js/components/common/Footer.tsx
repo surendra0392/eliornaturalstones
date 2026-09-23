@@ -57,10 +57,10 @@ export function Footer() {
                             className="focus-visible:outline-graphite inline-block focus-visible:outline-2"
                         >
                             <span className="text-graphite font-serif text-2xl font-light tracking-[0.24em] uppercase">
-                                {brandName}
+                                ELIOR
                             </span>
                             <p className="text-taupe mt-1 text-[9px] tracking-[0.36em] uppercase">
-                                {brandDescriptor}
+                                Natural Stones
                             </p>
                         </Link>
                         <p className="text-graphite-muted mt-5 max-w-sm text-xs leading-relaxed">
