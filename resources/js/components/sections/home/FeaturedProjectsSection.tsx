@@ -46,8 +46,8 @@ export function FeaturedProjectsSection({
 
     const displayProjects =
         customProjects && customProjects.length > 0
-            ? customProjects.slice(0, 4)
-            : PROJECTS_DATA.filter((p) => p.featured).slice(0, 4);
+            ? customProjects.slice(0, 3)
+            : PROJECTS_DATA.filter((p) => p.featured).slice(0, 3);
 
     return (
         <Section
@@ -91,10 +91,10 @@ export function FeaturedProjectsSection({
                     </div>
                 </div>
 
-                {/* 4 Featured Projects Grid — Strictly 2 Cards Per Row */}
+                {/* Featured Projects Grid — 3 Cards Per Row */}
                 <div
                     ref={gridRef}
-                    className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 lg:gap-8"
+                    className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
                 >
                     {displayProjects.map((project, idx) => (
                         <div

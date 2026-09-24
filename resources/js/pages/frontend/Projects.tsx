@@ -300,16 +300,16 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                         })}
                     </div>
 
-                    {/* Projects Grid — Strictly 2 Cards Per Row */}
+                    {/* Projects Grid — 3 Cards Per Row */}
                     <div
                         ref={gridRef}
-                        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 lg:gap-10"
+                        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7"
                     >
                         {filteredProjects.map((project, idx) => (
                             <article
                                 key={project.id}
                                 id={project.id}
-                                className="group border-border-subtle bg-ivory hover:border-bronze/60 hover:shadow-[0_20px_45px_-15px_rgba(15,15,15,0.08)] hover:-translate-y-1.5 flex flex-col justify-between border p-6 sm:p-7 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                                className="group border-border-subtle bg-ivory hover:border-bronze/60 hover:shadow-[0_20px_45px_-15px_rgba(15,15,15,0.08)] hover:-translate-y-1.5 flex flex-col justify-between border p-5 sm:p-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                             >
                                 <div>
                                     {/* Image Frame */}
@@ -320,16 +320,16 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                             aspectRatio="16/9"
                                             className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                                         />
-                                        <div className="absolute top-3.5 left-3.5 bg-stone-900/85 px-3 py-1 text-[10px] font-medium tracking-wider text-ivory uppercase backdrop-blur-xs">
+                                        <div className="absolute top-3 left-3 bg-stone-900/85 px-2.5 py-1 text-[10px] font-medium tracking-wider text-ivory uppercase backdrop-blur-xs">
                                             {project.typology}
                                         </div>
-                                        <div className="absolute right-3.5 bottom-3.5 bg-ivory/95 px-3 py-1 text-[11px] font-mono tracking-wider text-graphite backdrop-blur-xs">
+                                        <div className="absolute right-3 bottom-3 bg-ivory/95 px-2.5 py-1 text-[10px] font-mono tracking-wider text-graphite backdrop-blur-xs">
                                             {project.year}
                                         </div>
                                     </div>
 
                                     {/* Project Meta */}
-                                    <div className="mt-6">
+                                    <div className="mt-5">
                                         <div className="flex items-center justify-between">
                                             <span className="font-mono text-xs text-bronze uppercase tracking-wider">
                                                 {String(idx + 1).padStart(2, '0')} — {project.location}
@@ -341,16 +341,16 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                             )}
                                         </div>
 
-                                        <h3 className="text-graphite group-hover:text-bronze mt-2.5 font-serif text-2xl font-light transition-colors lg:text-[26px]">
+                                        <h3 className="text-graphite group-hover:text-bronze mt-2 font-serif text-xl font-light transition-colors lg:text-[22px]">
                                             {project.title}
                                         </h3>
 
-                                        <p className="font-body-sm text-graphite-muted mt-3 line-clamp-3 leading-relaxed">
+                                        <p className="font-body-sm text-graphite-muted mt-2.5 line-clamp-3 leading-relaxed">
                                             {project.description}
                                         </p>
 
                                         {/* Stones Specified */}
-                                        <div className="mt-5">
+                                        <div className="mt-4">
                                             <span className="text-[10px] font-medium tracking-wider text-taupe uppercase block mb-1.5">
                                                 Stones Specified
                                             </span>
@@ -358,7 +358,7 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                                 {project.stones.map((stone) => (
                                                     <span
                                                         key={stone}
-                                                        className="border border-stone-200 bg-stone-50/90 px-2.5 py-1 text-[11px] font-medium text-stone-800 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200"
+                                                        className="border border-stone-200 bg-stone-50/90 px-2 py-0.5 text-[10px] font-medium text-stone-800 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200"
                                                     >
                                                         {stone}
                                                     </span>
@@ -369,13 +369,13 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                 </div>
 
                                 {/* Card Footer Actions */}
-                                <div className="border-border-stone/60 mt-7 flex items-center justify-between border-t pt-5">
+                                <div className="border-border-stone/60 mt-6 flex items-center justify-between border-t pt-4">
                                     <button
                                         type="button"
                                         onClick={() => setSelectedProject(project)}
-                                        className="group/btn text-graphite hover:text-bronze inline-flex items-center gap-2 text-xs font-medium tracking-wider uppercase transition-colors"
+                                        className="group/btn text-graphite hover:text-bronze inline-flex items-center gap-1.5 text-xs font-medium tracking-wider uppercase transition-colors"
                                     >
-                                        <span>View Commission Narrative</span>
+                                        <span>View Commission</span>
                                         <span className="transition-transform duration-300 group-hover/btn:translate-x-1">
                                             &rarr;
                                         </span>
