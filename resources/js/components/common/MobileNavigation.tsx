@@ -140,9 +140,9 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                                 >
                                     <span
                                         className={cn(
-                                            'font-serif text-2xl font-light tracking-tight transition-colors md:text-3xl',
+                                            'font-serif text-2xl font-bold tracking-tight transition-colors md:text-3xl',
                                             isActive
-                                                ? 'text-bronze font-normal'
+                                                ? 'text-bronze'
                                                 : 'text-graphite group-hover:text-bronze',
                                         )}
                                     >
@@ -150,9 +150,9 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                                     </span>
                                     <span
                                         className={cn(
-                                            'text-[10px] tracking-widest uppercase transition-colors',
+                                            'text-xs font-bold tracking-widest uppercase transition-colors',
                                             isActive
-                                                ? 'text-bronze font-medium'
+                                                ? 'text-bronze'
                                                 : 'text-taupe group-hover:text-bronze',
                                         )}
                                     >

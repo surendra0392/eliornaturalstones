@@ -77,16 +77,16 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                     key={item.href}
                                     href={item.href}
                                     className={cn(
-                                        'group focus-visible:outline-graphite relative py-1.5 text-xs tracking-[0.2em] uppercase transition-colors duration-300 focus-visible:outline-2',
+                                        'group focus-visible:outline-graphite relative py-1.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 focus-visible:outline-2',
                                         active
-                                            ? 'text-graphite font-medium'
-                                            : 'text-graphite-light hover:text-bronze',
+                                            ? 'text-graphite font-bold'
+                                            : 'text-graphite hover:text-bronze',
                                     )}
                                 >
                                     <span>{item.label}</span>
                                     <span
                                         className={cn(
-                                            'bg-bronze absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ease-out',
+                                            'bg-bronze absolute bottom-0 left-0 h-[2px] transition-all duration-300 ease-out',
                                             active
                                                 ? 'w-full'
                                                 : 'w-0 group-hover:w-full',
@@ -102,7 +102,7 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                     <div className="hidden items-center space-x-6 lg:flex">
                         <Link
                             href="/contact"
-                            className="border-graphite/60 text-graphite hover:border-bronze hover:bg-bronze focus-visible:outline-graphite active:scale-[0.98] border px-6 py-2.5 text-[11px] font-medium tracking-[0.22em] uppercase transition-all duration-300 hover:text-white hover:shadow-xs focus-visible:outline-2"
+                            className="border-graphite text-graphite hover:border-bronze hover:bg-bronze focus-visible:outline-graphite active:scale-[0.98] border-[1.5px] px-6 py-2.5 text-[11px] font-bold tracking-[0.22em] uppercase transition-all duration-300 hover:text-white hover:shadow-xs focus-visible:outline-2"
                         >
                             Inquire
                         </Link>

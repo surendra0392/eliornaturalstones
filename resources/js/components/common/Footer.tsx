@@ -125,7 +125,7 @@ export function Footer() {
                                 <li key={item.href}>
                                     <Link
                                         href={item.href}
-                                        className="group text-graphite-light hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
+                                        className="group font-medium text-graphite hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
                                     >
                                         <span>{item.label}</span>
                                         <span
