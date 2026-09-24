@@ -47,11 +47,11 @@ export const COLLECTIONS_IMAGES = {
         },
         sandstone: {
             src: '/images/elior/collections/overview/collection-sandstone.webp',
-            alt: 'Natural sedimentary Sand Stone architectural wall cladding on contemporary pavilion facade',
+            alt: 'Monumental architectural elevation of natural sandstone facade wall cladding and columns with reflection pools',
         },
         'sand-stone': {
             src: '/images/elior/collections/overview/collection-sandstone.webp',
-            alt: 'Natural sedimentary Sand Stone architectural wall cladding on contemporary pavilion facade',
+            alt: 'Monumental architectural elevation of natural sandstone facade wall cladding and columns with reflection pools',
         },
         'cobble-stones': {
             src: '/images/elior/collections/overview/collection-cobble-stones.webp',
