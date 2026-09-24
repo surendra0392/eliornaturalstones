@@ -6,14 +6,14 @@ export interface NavItem {
 
 export const PUBLIC_NAV_ITEMS: NavItem[] = [
     {
-        label: 'Collections',
-        href: '/collections',
-        description: 'Curated architectural stone reserves',
-    },
-    {
         label: 'Our Story',
         href: '/our-story',
         description: 'Heritage and quarry provenance',
+    },
+    {
+        label: 'Collections',
+        href: '/collections',
+        description: 'Curated architectural stone reserves',
     },
     {
         label: 'From Source to Space',
