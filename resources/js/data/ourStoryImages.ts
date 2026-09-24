@@ -11,13 +11,13 @@
 export const OUR_STORY_IMAGES = {
     // 01 — STORY HERO: Monumental contemporary Indian luxury villa in Hyderabad
     hero: {
-        src: '/images/elior/story/elior-story-hero.webp?v=20260924',
+        src: '/images/elior/story/elior-story-hero.webp?v=20260924_1630',
         alt: 'Monumental contemporary Indian luxury architectural villa in Hyderabad crafted from fluted Jaisalmer sandstone and granite',
     },
 
     // 02 — OPENING STATEMENT: Raw stone block / Deccan quarry material
     opening: {
-        src: '/images/elior/story/elior-story-opening.webp?v=20260924',
+        src: '/images/elior/story/elior-story-opening.webp?v=20260924_1630',
         alt: 'Monumental raw granite and marble block extraction at Deccan Plateau quarry source in India showing ancient geological strata',
     },
 
