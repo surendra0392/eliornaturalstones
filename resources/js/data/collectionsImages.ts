@@ -43,7 +43,7 @@ export const COLLECTIONS_IMAGES = {
         },
         limestones: {
             src: '/images/elior/collections/overview/collection-limestones.webp',
-            alt: 'Warm honed limestone flooring in light-drenched architectural interior',
+            alt: 'Expansive Tandur natural cleft-honed limestone flooring with warm olive-khaki and golden-sage tonal variation in architectural pavilion',
         },
         sandstone: {
             src: '/images/elior/collections/overview/collection-sandstone.webp',
