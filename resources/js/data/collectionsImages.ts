@@ -59,7 +59,7 @@ export const COLLECTIONS_IMAGES = {
         },
         pebbles: {
             src: '/images/elior/collections/overview/collection-pebbles.webp',
-            alt: 'Tactile arrangement of polished snow-white natural river pebbles with sculptural evergreen topiary in contemporary garden landscape',
+            alt: 'Multi-color natural river pebbles as decorative groundcover in a garden bed with Japanese maple alongside a paved stone walkway',
         },
         quartz: {
             // STRICT REQUIREMENT: Large engineered quartz slab surfaces, NOT small quartz crystals, NO people
