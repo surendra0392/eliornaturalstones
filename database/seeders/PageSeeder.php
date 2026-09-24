@@ -99,7 +99,7 @@ class PageSeeder extends Seeder
                         'title' => 'A Legacy in Natural Stone',
                         'secondaryLine' => 'From material to architecture, our story has always been shaped by stone.',
                         'image' => '/images/elior/story/story-hero.webp',
-                        'imageAlt' => 'Monumental architectural natural stone slab showcasing decades of geological formation',
+                        'imageAlt' => 'Monumental contemporary Indian luxury architectural villa in Hyderabad crafted from fluted Jaisalmer sandstone and granite',
                     ],
                     'opening' => [
                         'statement' => 'Three Decades. One Material.',
