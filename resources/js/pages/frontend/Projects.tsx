@@ -132,10 +132,10 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
 
     const pageTitle =
         cmsContent?.meta_title ||
-        'ELIOR Natural Stones | Architectural Projects & Commissions';
+        'Architectural Stone Projects & Commissions in India | ELIOR';
     const pageDescription =
         cmsContent?.meta_description ||
-        'Discover private residences, luxury hospitality retreats, and cultural pavilions executed with ELIOR natural stone reserves across India.';
+        'Explore prestigious architectural stone projects across India executed with ELIOR reserves: private luxury villas, cultural pavilions & bespoke hospitality retreats.';
 
     const heroImage =
         heroContent?.image || '/images/elior/projects/projects-hero.jpg';
@@ -174,21 +174,30 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
     ];
 
     return (
-        <PublicLayout>
+        <PublicLayout
+            breadcrumbs={[
+                { name: 'Home', path: '/' },
+                { name: 'Projects', path: '/projects' },
+            ]}
+        >
             <SeoHead
                 title={pageTitle}
                 description={pageDescription}
                 canonicalPath="/projects"
                 ogImage={heroImage}
+                breadcrumbs={[
+                    { name: 'Home', path: '/' },
+                    { name: 'Projects', path: '/projects' },
+                ]}
                 keywords={[
-                    'architectural stone projects',
-                    'Indian marble installations',
-                    'luxury villa stone surfaces',
-                    'hospitality natural stone',
+                    'architectural stone projects india',
+                    'luxury villa stone surfaces hyderabad',
+                    'indian marble installations',
+                    'hospitality natural stone projects',
                     'bespoke stone commissions',
-                    'Hyderabad luxury residences',
-                    'Delhi stone pavilion',
-                    'Kota limestone retreat',
+                    'delhi stone pavilion',
+                    'kota limestone flooring projects',
+                    'architectural stone suppliers',
                 ]}
                 schemas={schemaData}
             />

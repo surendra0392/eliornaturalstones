@@ -4,6 +4,7 @@ import {
     generateOrganizationSchema,
     generateWebsiteSchema,
     generateLocalBusinessSchema,
+    HOME_FAQS,
 } from '../../data/seoData';
 import { PublicLayout } from '../../layouts/PublicLayout';
 import { HeroSliderEngine } from '../../components/slider/HeroSliderEngine';
@@ -77,18 +78,22 @@ export default function Home({
                 canonicalPath=""
                 ogImage={heroImage}
                 keywords={[
-                    'natural stones',
-                    'Italian marble',
+                    'natural stones hyderabad',
+                    'natural stone suppliers in india',
+                    'italian marble hyderabad',
+                    'imported marble slabs',
                     'architectural granite',
-                    'slate stone',
-                    'limestones',
-                    'sandstone',
-                    'cobble stones',
-                    'pebbles',
-                    'quartz slabs',
+                    'slate stone cladding',
+                    'limestone flooring',
+                    'sandstone facade slabs',
+                    'cobble stone driveway paving',
+                    'landscape river pebbles',
+                    'architectural quartz countertops',
                     'monolithic stone sculptures',
-                    'luxury architecture surfaces',
+                    'luxury architectural surfaces india',
+                    'statuario marble jubilee hills',
                 ]}
+                faqItems={HOME_FAQS}
                 schemas={schemas}
             />
 

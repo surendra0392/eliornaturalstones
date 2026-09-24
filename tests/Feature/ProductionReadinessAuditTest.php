@@ -30,7 +30,8 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
 
     $content = $response->getContent();
     expect($content)->toContain('<?xml version="1.0" encoding="UTF-8"?>');
-    expect($content)->toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+    expect($content)->toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"');
+    expect($content)->toContain('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
 
     // Static public routes
     expect($content)->toContain('<loc>'.route('home').'</loc>');

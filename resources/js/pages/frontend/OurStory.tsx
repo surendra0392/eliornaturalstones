@@ -30,10 +30,11 @@ export default function OurStory({ cmsContent }: OurStoryProps = {}) {
     const canonicalUrl = `${baseUrl}/our-story`;
 
     const pageTitle =
-        cmsContent?.meta_title || 'ELIOR Natural Stones | Our Story';
+        cmsContent?.meta_title ||
+        'About ELIOR Natural Stones | 35-Year Quarry Legacy & Craftsmanship';
     const pageDescription =
         cmsContent?.meta_description ||
-        'Discover the ELIOR Natural Stones story — a journey from natural stone trading and processing to a contemporary architectural material identity.';
+        'Founded in 1990, ELIOR Natural Stones unites three decades of quarry extraction mastery with contemporary architectural curation across India’s Deccan plateau.';
     const shareImage =
         cmsContent?.content?.hero?.image || OUR_STORY_IMAGES.hero.src;
 
@@ -74,11 +75,12 @@ export default function OurStory({ cmsContent }: OurStoryProps = {}) {
                     { name: 'Our Story', path: '/our-story' },
                 ]}
                 keywords={[
-                    'ELIOR history',
-                    'natural stone legacy',
-                    'stone processing craftsmanship',
-                    'architectural stone supplier',
+                    'ELIOR natural stones history',
+                    'natural stone legacy india',
+                    'stone processing craftsmanship hyderabad',
+                    'architectural stone supplier india',
                     'quarry stone heritage 1990',
+                    'indian stone masters',
                 ]}
                 schemas={[aboutPageSchema]}
             />

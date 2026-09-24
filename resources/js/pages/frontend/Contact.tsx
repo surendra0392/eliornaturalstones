@@ -28,10 +28,11 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
     const canonicalUrl = `${baseUrl}/contact`;
 
     const pageTitle =
-        cmsContent?.meta_title || 'Contact ELIOR Natural Stones | Enquiries';
+        cmsContent?.meta_title ||
+        'Contact ELIOR Natural Stones | Studio & Material Gallery Hyderabad';
     const pageDescription =
         cmsContent?.meta_description ||
-        'Enquire with ELIOR Natural Stones for architectural material consultations, physical stone samples, collection details, and project collaboration.';
+        'Connect with ELIOR Natural Stones in Hyderabad. Reserve rare slabs, request stone sample boxes, or schedule private consultations for architects and interior designers.';
     const ogImage = contactImages.hero.src;
 
     const contactPageSchema = {
@@ -60,7 +61,7 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
         },
         {
             question: 'Where is the ELIOR Natural Stones studio and gallery located?',
-            answer: 'Our flagship showroom and material gallery is situated in Hyderabad, Telangana, India, showcasing full-scale slabs and tactile stone varieties.',
+            answer: 'Our flagship showroom and material gallery is situated in Jubilee Hills, Hyderabad, Telangana, India, showcasing full-scale slabs and tactile stone varieties.',
         },
         {
             question: 'How quickly does the ELIOR consultation desk respond to project specifications?',
@@ -86,11 +87,12 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
                 ]}
                 faqItems={contactFaqs}
                 keywords={[
-                    'contact ELIOR',
-                    'stone enquiry Hyderabad',
-                    'architectural stone showroom',
+                    'contact ELIOR natural stones',
+                    'stone enquiry hyderabad',
+                    'natural stone gallery hyderabad',
+                    'architectural stone showroom jubilee hills',
                     'material consultation booking',
-                    'stone sample box request',
+                    'stone sample box request india',
                 ]}
                 schemas={[contactPageSchema, generateLocalBusinessSchema(baseUrl)]}
             />

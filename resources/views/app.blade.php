@@ -15,6 +15,12 @@
         <meta name="theme-color" content="#0F0F0F">
         <meta name="msapplication-TileColor" content="#0F0F0F">
 
+        <!-- Geographic & Local Search Directives (Hyderabad, Telangana, India) -->
+        <meta name="geo.region" content="IN-TG">
+        <meta name="geo.placename" content="Hyderabad">
+        <meta name="geo.position" content="17.4319;78.4073">
+        <meta name="ICBM" content="17.4319, 78.4073">
+
         @if ($googleVerification = config('services.google.site_verification'))
             <meta name="google-site-verification" content="{{ $googleVerification }}">
         @endif
@@ -31,13 +37,15 @@
                 ?? $cmsContent['meta_title']
                 ?? ($collection ? "{$collection['name']} | ELIOR Natural Stones" : null)
                 ?? ($cmsContent ? "{$cmsContent['title']} | ELIOR Natural Stones" : null)
-                ?? ($siteSettings['default_meta_title'] ?? 'ELIOR Natural Stones — Curated Architectural Stone');
+                ?? ($siteSettings['default_meta_title'] ?? 'Natural Stone Suppliers in Hyderabad & India | ELIOR Natural Stones');
 
             $seoDescription = $collection['meta_description']
                 ?? $cmsContent['meta_description']
                 ?? $collection['description']
                 ?? $cmsContent['excerpt']
-                ?? ($siteSettings['default_meta_description'] ?? 'ELIOR curates nine canonical natural stone collections for discerning architects, interior designers, and luxury private residences.');
+                ?? ($siteSettings['default_meta_description'] ?? 'Leading natural stone suppliers in Hyderabad & India. Curating rare Italian marble, granites, sandstone, limestone, slate & custom architectural stone slabs.');
+
+            $seoKeywords = 'natural stone suppliers in hyderabad, italian marble hyderabad, luxury natural stone india, architectural granite slabs, sandstone slabs, limestone flooring hyderabad, imported marble india, cobble stones, natural stone sculptures, wholesale marble suppliers hyderabad';
 
             $seoImage = $collection['hero_image']
                 ?? ($cmsContent['content']['hero']['image'] ?? null)
@@ -50,6 +58,7 @@
         @endphp
 
         <meta name="description" content="{{ $seoDescription }}">
+        <meta name="keywords" content="{{ $seoKeywords }}">
         <link rel="canonical" href="{{ $currentUrl }}">
 
         <!-- Open Graph Meta Tags -->
@@ -60,7 +69,11 @@
         <meta property="og:description" content="{{ $seoDescription }}">
         <meta property="og:image" content="{{ $seoImage }}">
         <meta property="og:image:alt" content="{{ $seoTitle }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
         <meta property="og:locale" content="en_US">
+        <meta property="og:price:currency" content="INR">
+        <meta property="og:availability" content="instock">
 
         <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">

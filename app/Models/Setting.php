@@ -167,7 +167,7 @@ class Setting extends Model
             'type' => 'text',
             'label' => 'Default Meta Title',
             'description' => 'Fallback browser title when a page has no custom meta title.',
-            'default' => 'ELIOR Natural Stones — Curated Architectural Stone',
+            'default' => 'Natural Stone Suppliers in Hyderabad & India | ELIOR Natural Stones',
             'is_public' => true,
         ],
         'default_meta_description' => [
@@ -176,7 +176,7 @@ class Setting extends Model
             'type' => 'textarea',
             'label' => 'Default Meta Description',
             'description' => 'Fallback search engine description snippet.',
-            'default' => 'ELIOR curates nine canonical natural stone collections for discerning architects, interior designers, and luxury private residences.',
+            'default' => 'Leading natural stone suppliers in Hyderabad & India. Curating rare Italian marble, granites, sandstone, limestone, slate & bespoke cut-to-size stone slabs.',
             'is_public' => true,
         ],
         'default_social_image_id' => [

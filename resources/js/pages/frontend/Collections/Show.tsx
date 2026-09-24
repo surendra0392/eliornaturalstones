@@ -192,6 +192,8 @@ export default function CollectionShow({
                 keywords={[
                     `${collection.name} slabs`,
                     `natural ${collection.name}`,
+                    `${collection.name} in Hyderabad`,
+                    `${collection.name} suppliers in India`,
                     'architectural stone surfaces',
                     `${collection.name} flooring`,
                     `${collection.name} wall cladding`,

@@ -32,10 +32,11 @@ export default function CollectionsIndex({
     const canonicalUrl = `${baseUrl}/collections`;
 
     const pageTitle =
-        cmsContent?.meta_title || 'ELIOR Natural Stones | Collections';
+        cmsContent?.meta_title ||
+        'Natural Stone Collections | Marble, Granite, Sandstone | ELIOR';
     const pageDescription =
         cmsContent?.meta_description ||
-        'Explore ELIOR Natural Stones collections — Italian Marble, Granites, Slate Stone, Limestones, Sand Stone, Cobble Stones, Pebbles, Quartz and Sculptures for considered architecture and interiors.';
+        'Explore 9 curated architectural natural stone collections: Italian Marble, Granites, Slate Stone, Limestones, Sandstone, Cobbles, Pebbles & Quartz in Hyderabad.';
     const heroImage =
         cmsContent?.content?.hero?.image || COLLECTIONS_IMAGES.hero.src;
 
@@ -79,15 +80,16 @@ export default function CollectionsIndex({
                 ]}
                 keywords={[
                     'natural stone collections',
-                    'Italian marble',
+                    'natural stone suppliers in hyderabad',
+                    'italian marble slabs india',
                     'architectural granites',
-                    'slate stone',
-                    'limestones',
-                    'sandstone',
-                    'cobble stones',
-                    'pebbles',
+                    'slate stone cladding',
+                    'limestone flooring slabs',
+                    'sandstone paving',
+                    'cobble stones hyderabad',
+                    'river pebbles india',
                     'quartz surfaces',
-                    'stone sculptures',
+                    'stone sculptures hyderabad',
                 ]}
                 schemas={[collectionPageSchema]}
             />

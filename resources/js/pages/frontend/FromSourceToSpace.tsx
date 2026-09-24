@@ -34,10 +34,11 @@ export default function FromSourceToSpace({
     const canonicalUrl = `${baseUrl}/from-source-to-space`;
 
     const pageTitle =
-        cmsContent?.meta_title || 'ELIOR Natural Stones | From Source to Space';
+        cmsContent?.meta_title ||
+        'Quarry to Space: 6-Stage Natural Stone Journey | ELIOR Stones';
     const pageDescription =
         cmsContent?.meta_description ||
-        'Discover the journey of natural stone from source and processing to careful selection, protection and architectural application with ELIOR Natural Stones.';
+        'Explore our precision 6-stage natural stone process: quarry extraction, gangsaw processing, dry-lay inspection, fumigated packing, transit & architectural installation.';
     const shareImage =
         cmsContent?.content?.hero?.image || SOURCE_TO_SPACE_IMAGES.hero.src;
 
@@ -103,11 +104,12 @@ export default function FromSourceToSpace({
                     { name: 'From Source to Space', path: '/from-source-to-space' },
                 ]}
                 keywords={[
-                    'stone journey',
-                    'quarry block extraction',
-                    'natural stone processing',
-                    'dry-lay stone curation',
-                    'architectural stone delivery',
+                    'natural stone journey',
+                    'quarry block extraction india',
+                    'natural stone processing gangsaw',
+                    'dry-lay stone inspection hyderabad',
+                    'architectural stone delivery india',
+                    'stone installation guidelines',
                 ]}
                 schemas={[journeyProcessSchema]}
             />
