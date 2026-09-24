@@ -77,7 +77,7 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                     key={item.href}
                                     href={item.href}
                                     className={cn(
-                                        'group focus-visible:outline-graphite relative py-1.5 text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 focus-visible:outline-2',
+                                        'group focus-visible:outline-graphite relative py-1.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 focus-visible:outline-2',
                                         active
                                             ? 'text-graphite'
                                             : 'text-graphite hover:text-bronze',
@@ -102,7 +102,7 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                     <div className="hidden items-center space-x-6 lg:flex">
                         <Link
                             href="/contact"
-                            className="border-graphite text-graphite hover:border-bronze hover:bg-bronze focus-visible:outline-graphite active:scale-[0.98] border-[1.5px] px-6 py-2.5 text-[11px] font-bold tracking-[0.22em] uppercase transition-all duration-300 hover:text-white hover:shadow-xs focus-visible:outline-2"
+                            className="border-graphite text-graphite hover:border-bronze hover:bg-bronze focus-visible:outline-graphite active:scale-[0.98] border-[1.5px] px-6 py-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase transition-all duration-300 hover:text-white hover:shadow-xs focus-visible:outline-2"
                         >
                             Inquire
                         </Link>
