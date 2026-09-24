@@ -13,7 +13,7 @@ export const COLLECTIONS_IMAGES = {
     // 01 — HERO: Monumental stone architecture, controlled light, reflecting stillness
     hero: {
         src: '/images/elior/collections/overview/collections-hero.webp',
-        alt: 'Monumental contemporary stone residence with serene architectural geometry',
+        alt: 'Monumental architectural stone gallery featuring double-height bookmatched marble feature wall, honed dark granite portal, and reflection pool',
         focalPoint: { x: 50, y: 50 },
     },
 
