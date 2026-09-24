@@ -95,10 +95,10 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                         onClick={onClose}
                         className="group focus-visible:outline-graphite flex flex-col focus-visible:outline-2"
                     >
-                        <span className="text-graphite font-serif text-2xl font-light tracking-[0.24em] uppercase">
+                        <span className="text-graphite font-serif text-[28px] font-medium tracking-[0.22em] uppercase leading-tight">
                             ELIOR
                         </span>
-                        <span className="text-taupe text-[9px] tracking-[0.38em] uppercase">
+                        <span className="text-taupe text-[10px] font-semibold tracking-[0.38em] uppercase md:text-[11px]">
                             Natural Stones
                         </span>
                     </Link>

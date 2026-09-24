@@ -57,10 +57,10 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                         aria-label="ELIOR Natural Stones Home"
                         className="group focus-visible:outline-graphite flex flex-col tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4"
                     >
-                        <span className="text-graphite font-serif text-2xl font-light tracking-[0.24em] uppercase transition-opacity duration-300 group-hover:opacity-75 md:text-[25px]">
+                        <span className="text-graphite font-serif text-[28px] font-medium tracking-[0.22em] uppercase transition-opacity duration-300 group-hover:opacity-75 md:text-[32px] leading-tight">
                             ELIOR
                         </span>
-                        <span className="text-taupe text-[8.5px] font-medium tracking-[0.36em] uppercase">
+                        <span className="text-taupe text-[10px] font-semibold tracking-[0.38em] uppercase md:text-[11px]">
                             Natural Stones
                         </span>
                     </Link>

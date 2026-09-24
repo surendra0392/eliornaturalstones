@@ -56,10 +56,10 @@ export function Footer() {
                             aria-label="ELIOR Natural Stones Home"
                             className="focus-visible:outline-graphite inline-block focus-visible:outline-2"
                         >
-                            <span className="text-graphite font-serif text-2xl font-normal tracking-[0.24em] uppercase">
+                            <span className="text-graphite font-serif text-[28px] font-medium tracking-[0.22em] uppercase leading-tight md:text-[32px]">
                                 ELIOR
                             </span>
-                            <p className="text-graphite font-semibold mt-1 text-[10px] tracking-[0.36em] uppercase">
+                            <p className="text-graphite font-semibold mt-1 text-[11px] tracking-[0.38em] uppercase">
                                 Natural Stones
                             </p>
                         </Link>
