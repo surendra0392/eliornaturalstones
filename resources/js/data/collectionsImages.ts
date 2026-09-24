@@ -39,7 +39,7 @@ export const COLLECTIONS_IMAGES = {
         },
         'slate-stone': {
             src: '/images/elior/collections/overview/collection-slate-stone.webp',
-            alt: 'Layered natural cleft slate stone surface with dark charcoal organic texture',
+            alt: 'Monumental architectural feature wall clad in multi-color copper, golden amber, and silver-grey natural cleft slate stone panels',
         },
         limestones: {
             src: '/images/elior/collections/overview/collection-limestones.webp',
