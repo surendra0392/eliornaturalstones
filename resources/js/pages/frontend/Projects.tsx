@@ -355,7 +355,12 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                                 Stones Specified
                                             </span>
                                             <div className="flex flex-wrap gap-1.5">
-                                                {project.stones.map((stone) => (
+                                                {(Array.isArray(project.stones)
+                                                    ? project.stones
+                                                    : typeof project.stones === 'string'
+                                                      ? (project.stones as string).split(',').map((s) => s.trim()).filter(Boolean)
+                                                      : []
+                                                ).map((stone) => (
                                                     <span
                                                         key={stone}
                                                         className="border border-stone-200 bg-stone-50/90 px-2 py-0.5 text-[10px] font-medium text-stone-800 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200"
@@ -534,7 +539,12 @@ export default function Projects({ cmsContent }: ProjectsPageProps) {
                                     Materials Applied
                                 </h4>
                                 <div className="flex flex-wrap gap-2">
-                                    {selectedProject.stones.map((s) => (
+                                    {(Array.isArray(selectedProject.stones)
+                                        ? selectedProject.stones
+                                        : typeof selectedProject.stones === 'string'
+                                          ? (selectedProject.stones as string).split(',').map((s) => s.trim()).filter(Boolean)
+                                          : []
+                                    ).map((s) => (
                                         <span
                                             key={s}
                                             className="border border-stone-300 bg-stone-100 px-3 py-1 font-mono text-xs font-medium text-stone-800 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200"

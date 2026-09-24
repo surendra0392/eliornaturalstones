@@ -1200,13 +1200,25 @@ function ProjectsSectionEditor({
     onChange: (val: Record<string, any>) => void;
 }) {
     const intro = content.intro || {};
+    const cta = content.cta || {};
     const projects = Array.isArray(content.projects) ? content.projects : [];
+    const [mediaPickerIndex, setMediaPickerIndex] = useState<number | null>(null);
 
     const handleIntroChange = (field: string, val: string) => {
         onChange({
             ...content,
             intro: {
                 ...intro,
+                [field]: val,
+            },
+        });
+    };
+
+    const handleCtaChange = (field: string, val: string) => {
+        onChange({
+            ...content,
+            cta: {
+                ...cta,
                 [field]: val,
             },
         });
@@ -1228,12 +1240,69 @@ function ProjectsSectionEditor({
         });
     };
 
+    const handleAddProject = () => {
+        const timestamp = Date.now().toString(36);
+        const newProject = {
+            id: `commission-${timestamp}`,
+            title: 'New Architectural Commission',
+            typology: 'Private Residence',
+            category: 'residential',
+            location: 'Hyderabad, Telangana',
+            year: String(new Date().getFullYear()),
+            area: '12,000 sq.ft.',
+            stones: ['Italian Marble', 'Black Granite'],
+            description:
+                'Brief architectural commission overview describing the project and application.',
+            longDescription:
+                'Detailed architectural study outlining spatial intent, quarry block selection, and bespoke cut-to-size specifications.',
+            image: '/images/elior/projects/projects-hero.jpg',
+            imageAlt: 'Architectural natural stone commission',
+            featured: false,
+        };
+
+        onChange({
+            ...content,
+            projects: [newProject, ...projects],
+        });
+    };
+
+    const handleDeleteProject = (index: number) => {
+        const proj = projects[index];
+        if (
+            !window.confirm(
+                `Are you sure you want to remove commission "${proj.title || 'Untitled'}"?`,
+            )
+        ) {
+            return;
+        }
+
+        const newProjects = projects.filter((_, i) => i !== index);
+        onChange({
+            ...content,
+            projects: newProjects,
+        });
+    };
+
+    const handleMoveProject = (index: number, direction: 'up' | 'down') => {
+        const targetIndex = direction === 'up' ? index - 1 : index + 1;
+        if (targetIndex < 0 || targetIndex >= projects.length) return;
+
+        const newProjects = [...projects];
+        const [moved] = newProjects.splice(index, 1);
+        newProjects.splice(targetIndex, 0, moved);
+
+        onChange({
+            ...content,
+            projects: newProjects,
+        });
+    };
+
     return (
         <div className="space-y-6">
             {/* Intro Editorial */}
             <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
                 <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
-                    Introductory Philosophy
+                    Introductory Philosophy & Statement
                 </h4>
                 <div>
                     <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
@@ -1257,107 +1326,391 @@ function ProjectsSectionEditor({
                         className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
                     />
                 </div>
+                <div>
+                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                        Supporting Paragraph
+                    </label>
+                    <textarea
+                        value={intro.paragraph2 || ''}
+                        onChange={(e) => handleIntroChange('paragraph2', e.target.value)}
+                        rows={2}
+                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                    />
+                </div>
             </div>
 
-            {/* Architectural Projects */}
+            {/* Architectural Projects Header & Actions */}
             <div className="space-y-4 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
-                <div className="flex items-center justify-between">
-                    <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
-                        Architectural Projects ({projects.length})
-                    </h4>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
+                            Architectural Projects & Commissions ({projects.length})
+                        </h4>
+                        <p className="mt-0.5 text-[11px] text-stone-500 dark:text-stone-400">
+                            Manage portfolio cards displayed on the /projects directory and the homepage featured section.
+                        </p>
+                    </div>
+                    <button
+                        type="button"
+                        onClick={handleAddProject}
+                        className="inline-flex items-center gap-1 border border-stone-900 bg-stone-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-stone-800 dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-stone-200"
+                    >
+                        <span>+</span>
+                        <span>Add Project Commission</span>
+                    </button>
                 </div>
+
                 <div className="space-y-4">
-                    {projects.map((proj: any, idx: number) => (
-                        <div
-                            key={idx}
-                            className="space-y-3 border border-stone-200 bg-white p-4 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
-                        >
-                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                                <div>
-                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                        Project Title
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={proj.title || ''}
-                                        onChange={(e) =>
-                                            handleProjectChange(idx, 'title', e.target.value)
-                                        }
-                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
-                                    />
+                    {projects.map((proj: any, idx: number) => {
+                        const stonesText = Array.isArray(proj.stones)
+                            ? proj.stones.join(', ')
+                            : (proj.stones || '');
+
+                        return (
+                            <div
+                                key={proj.id || idx}
+                                className="space-y-3.5 border border-stone-200 bg-white p-4 shadow-2xs dark:border-stone-800 dark:bg-stone-900/90"
+                            >
+                                {/* Card Header / Controls */}
+                                <div className="flex flex-wrap items-center justify-between border-b border-stone-200 pb-2.5 dark:border-stone-800">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-mono text-xs font-semibold text-stone-900 dark:text-stone-100">
+                                            #{idx + 1}
+                                        </span>
+                                        <span className="text-xs font-medium text-stone-700 dark:text-stone-300">
+                                            {proj.title || 'Untitled Commission'}
+                                        </span>
+                                        {proj.featured && (
+                                            <span className="border border-amber-300 bg-amber-50 px-1.5 py-0.5 font-mono text-[9px] font-semibold text-amber-800 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+                                                Featured on Homepage
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <div className="flex items-center gap-1.5">
+                                        <button
+                                            type="button"
+                                            disabled={idx === 0}
+                                            onClick={() => handleMoveProject(idx, 'up')}
+                                            title="Move Up"
+                                            className="border border-stone-200 px-2 py-0.5 text-xs text-stone-600 transition-colors hover:bg-stone-100 disabled:opacity-30 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-800"
+                                        >
+                                            &uarr;
+                                        </button>
+                                        <button
+                                            type="button"
+                                            disabled={idx === projects.length - 1}
+                                            onClick={() => handleMoveProject(idx, 'down')}
+                                            title="Move Down"
+                                            className="border border-stone-200 px-2 py-0.5 text-xs text-stone-600 transition-colors hover:bg-stone-100 disabled:opacity-30 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-800"
+                                        >
+                                            &darr;
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleDeleteProject(idx)}
+                                            className="border border-red-200 px-2 py-0.5 text-xs text-red-600 transition-colors hover:bg-red-50 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                        Typology
-                                    </label>
+
+                                {/* Primary Details Grid */}
+                                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                                    <div className="sm:col-span-2">
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Project Title
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.title || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'title', e.target.value)
+                                            }
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Anchor ID / Hash (e.g. #the-villa)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.id || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(
+                                                    idx,
+                                                    'id',
+                                                    e.target.value
+                                                        .toLowerCase()
+                                                        .replace(/[^a-z0-9-]/g, '-'),
+                                                )
+                                            }
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 font-mono text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-4">
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Typology
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.typology || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'typology', e.target.value)
+                                            }
+                                            placeholder="Private Residence"
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Category Filter
+                                        </label>
+                                        <select
+                                            value={proj.category || 'residential'}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'category', e.target.value)
+                                            }
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        >
+                                            <option value="residential">Private Residences</option>
+                                            <option value="hospitality">Hospitality & Retreats</option>
+                                            <option value="commercial">Commercial & Pavilions</option>
+                                            <option value="landscape">Landscape & Courtyards</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Location
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.location || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'location', e.target.value)
+                                            }
+                                            placeholder="Jubilee Hills, Hyderabad"
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Completion Year
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.year || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'year', e.target.value)
+                                            }
+                                            placeholder="2025"
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Total Area
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={proj.area || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'area', e.target.value)
+                                            }
+                                            placeholder="14,000 sq.ft."
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                    <div className="sm:col-span-2">
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Stones Specified (comma-separated)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={stonesText}
+                                            onChange={(e) => {
+                                                const raw = e.target.value;
+                                                const list = raw
+                                                    .split(',')
+                                                    .map((s) => s.trim())
+                                                    .filter(Boolean);
+                                                handleProjectChange(idx, 'stones', list);
+                                            }}
+                                            placeholder="Italian Marble (Statuario), Black Galaxy Granite, Teakwood Sandstone"
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Homepage Featured Toggle */}
+                                <div className="flex items-center gap-2 pt-1">
                                     <input
-                                        type="text"
-                                        value={proj.typology || ''}
+                                        type="checkbox"
+                                        id={`proj-featured-${idx}`}
+                                        checked={Boolean(proj.featured)}
                                         onChange={(e) =>
-                                            handleProjectChange(idx, 'typology', e.target.value)
+                                            handleProjectChange(idx, 'featured', e.target.checked)
                                         }
-                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        className="h-3.5 w-3.5 border-stone-300 text-stone-900 focus:ring-0 dark:border-stone-700 dark:bg-stone-950"
                                     />
+                                    <label
+                                        htmlFor={`proj-featured-${idx}`}
+                                        className="text-xs font-medium text-stone-700 dark:text-stone-300"
+                                    >
+                                        Feature on Homepage (showcase in 3-column architectural commissions grid)
+                                    </label>
+                                </div>
+
+                                {/* Imagery Section with Media Picker */}
+                                <div className="space-y-2 border-t border-stone-100 pt-2 dark:border-stone-800">
+                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                        Project Photography & Alt Text
+                                    </label>
+                                    <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
+                                        {proj.image && (
+                                            <img
+                                                src={proj.image}
+                                                alt={proj.imageAlt || proj.title || 'Commission preview'}
+                                                className="h-16 w-24 border border-stone-300 object-cover dark:border-stone-700"
+                                                onError={(e) => {
+                                                    (e.target as HTMLElement).style.display = 'none';
+                                                }}
+                                            />
+                                        )}
+                                        <div className="flex-1 space-y-1.5">
+                                            <div className="flex items-center gap-1.5">
+                                                <input
+                                                    type="text"
+                                                    value={proj.image || ''}
+                                                    onChange={(e) =>
+                                                        handleProjectChange(idx, 'image', e.target.value)
+                                                    }
+                                                    placeholder="/images/elior/projects/project-01.jpg"
+                                                    className="w-full border border-stone-300 bg-white px-2 py-1 font-mono text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setMediaPickerIndex(idx)}
+                                                    className="shrink-0 border border-stone-300 bg-stone-100 px-2.5 py-1 text-xs font-medium text-stone-800 transition-colors hover:bg-stone-200 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-700"
+                                                >
+                                                    Media Library
+                                                </button>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                value={proj.imageAlt || ''}
+                                                onChange={(e) =>
+                                                    handleProjectChange(idx, 'imageAlt', e.target.value)
+                                                }
+                                                placeholder="Descriptive alt text for accessibility & SEO"
+                                                className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Descriptions */}
+                                <div className="space-y-2 border-t border-stone-100 pt-2 dark:border-stone-800">
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Card Description (shown on portfolio grid)
+                                        </label>
+                                        <textarea
+                                            value={proj.description || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'description', e.target.value)
+                                            }
+                                            rows={2}
+                                            placeholder="A minimalist double-height villa centered around a reflecting water court..."
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                                            Architectural Narrative / Case Study (shown in detail modal)
+                                        </label>
+                                        <textarea
+                                            value={proj.longDescription || ''}
+                                            onChange={(e) =>
+                                                handleProjectChange(idx, 'longDescription', e.target.value)
+                                            }
+                                            rows={3}
+                                            placeholder="Conceived as a sanctuary of light and water in Hyderabad’s Jubilee Hills..."
+                                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                                <div>
-                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                        Location
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={proj.location || ''}
-                                        onChange={(e) =>
-                                            handleProjectChange(idx, 'location', e.target.value)
-                                        }
-                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                        Year
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={proj.year || ''}
-                                        onChange={(e) =>
-                                            handleProjectChange(idx, 'year', e.target.value)
-                                        }
-                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                        Image URL
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={proj.image || ''}
-                                        onChange={(e) =>
-                                            handleProjectChange(idx, 'image', e.target.value)
-                                        }
-                                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
-                                    Project Description
-                                </label>
-                                <textarea
-                                    value={proj.description || ''}
-                                    onChange={(e) =>
-                                        handleProjectChange(idx, 'description', e.target.value)
-                                    }
-                                    rows={2}
-                                    className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
-                                />
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
+
+            {/* CTA Section Configuration */}
+            <div className="space-y-3 border border-stone-200 bg-stone-50/60 p-4 dark:border-stone-800 dark:bg-stone-950/60">
+                <h4 className="font-serif text-sm font-normal text-stone-900 dark:text-stone-100">
+                    Trade & Architectural Consultation Desk (Bottom CTA)
+                </h4>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <div>
+                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                            CTA Headline
+                        </label>
+                        <input
+                            type="text"
+                            value={cta.headline || ''}
+                            onChange={(e) => handleCtaChange('headline', e.target.value)}
+                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                            CTA Button Text
+                        </label>
+                        <input
+                            type="text"
+                            value={cta.buttonText || ''}
+                            onChange={(e) => handleCtaChange('buttonText', e.target.value)}
+                            className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                        />
+                    </div>
+                </div>
+                <div>
+                    <label className="block text-[10px] font-medium text-stone-600 dark:text-stone-400">
+                        CTA Subline
+                    </label>
+                    <textarea
+                        value={cta.subline || ''}
+                        onChange={(e) => handleCtaChange('subline', e.target.value)}
+                        rows={2}
+                        className="w-full border border-stone-300 bg-white px-2 py-1 text-xs text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100"
+                    />
+                </div>
+            </div>
+
+            {/* Modal for Project Image Selection */}
+            {mediaPickerIndex !== null && (
+                <AdminMediaPickerModal
+                    isOpen={true}
+                    onClose={() => setMediaPickerIndex(null)}
+                    currentUrl={projects[mediaPickerIndex]?.image || ''}
+                    onSelect={({ url, alt }) => {
+                        handleProjectChange(mediaPickerIndex, 'image', url);
+                        if (alt && !projects[mediaPickerIndex]?.imageAlt) {
+                            handleProjectChange(mediaPickerIndex, 'imageAlt', alt);
+                        }
+                        setMediaPickerIndex(null);
+                    }}
+                />
+            )}
         </div>
     );
 }

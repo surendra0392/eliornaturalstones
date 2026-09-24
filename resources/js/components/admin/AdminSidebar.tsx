@@ -20,6 +20,7 @@ export const ADMIN_NAVIGATION: AdminNavGroup[] = [
             { name: 'Sliders', href: '/admin/sliders' },
             { name: 'Collections', href: '/admin/collections' },
             { name: 'Varieties', href: '/admin/varieties' },
+            { name: 'Projects', href: '/admin/pages?edit=projects' },
             { name: 'Media', href: '/admin/media' },
             { name: 'Pages', href: '/admin/pages' },
         ],
@@ -66,10 +67,12 @@ export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
                             </p>
                             <div className="mt-2 space-y-1">
                                 {section.items.map((item) => {
-                                    const isActive =
-                                        url === item.href ||
-                                        (item.href !== '/admin/dashboard' &&
-                                            url.startsWith(item.href));
+                                    const isActive = item.href.includes('?')
+                                        ? url === item.href
+                                        : url === item.href ||
+                                          (item.href !== '/admin/dashboard' &&
+                                              !url.includes('?') &&
+                                              url.startsWith(item.href + '/'));
 
                                     return (
                                         <Link

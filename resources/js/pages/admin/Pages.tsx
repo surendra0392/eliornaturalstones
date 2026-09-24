@@ -85,6 +85,20 @@ export default function PagesAdmin({
         return () => clearTimeout(timer);
     }, [search, statusFilter]);
 
+    // Handle deep linking into a page editor via query param (e.g. /admin/pages?edit=projects)
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        const editSlug = params.get('edit');
+        if (editSlug && pages.length > 0) {
+            const target = pages.find((p) => p.slug === editSlug);
+            if (target && editingPage?.id !== target.id) {
+                setEditingPage(target);
+                setIsEditorOpen(true);
+            }
+        }
+    }, [pages]);
+
     // Quick Publish / Unpublish Toggle
     const handleTogglePublish = async (page: Page) => {
         const nextStatus = !page.is_published;
