@@ -35,13 +35,13 @@ export function Footer() {
             <Container>
                 {/* Brand Statement Banner */}
                 <div className="border-border-stone border-b pb-12 lg:pb-14">
-                    <p className="text-bronze text-[11px] font-semibold tracking-[0.24em] uppercase">
+                    <p className="text-bronze text-[10px] font-medium tracking-[0.24em] uppercase">
                         Brand Statement
                     </p>
                     <h3 className="text-graphite mt-3 font-serif text-3xl font-light tracking-tight md:text-4xl lg:text-[42px] leading-tight">
                         Inspired by Nature.
                         <br />
-                        <span className="text-graphite/80 font-serif italic">
+                        <span className="text-taupe font-serif italic">
                             Made for Generations.
                         </span>
                     </h3>
