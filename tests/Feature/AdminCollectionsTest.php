@@ -88,7 +88,7 @@ test('05: Collection detail endpoint /api/v1/admin/collections/{id} works', func
     $response->assertOk()
         ->assertJsonPath('data.id', $collection->id)
         ->assertJsonPath('data.slug', 'italian-marble')
-        ->assertJsonPath('data.name', 'Italian Marble');
+        ->assertJsonPath('data.name', 'Marble');
 });
 
 test('06: Search works by collection name and slug', function () {

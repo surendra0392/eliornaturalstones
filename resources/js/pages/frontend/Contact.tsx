@@ -64,8 +64,8 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
             answer: 'Our flagship showroom and material gallery is situated in Jubilee Hills, Hyderabad, Telangana, India, showcasing full-scale slabs and tactile stone varieties.',
         },
         {
-            question: 'How quickly does the ELIOR consultation desk respond to project specifications?',
-            answer: 'Our architectural material specialists review all trade inquiries, drawings, and sample requests within 24 business hours.',
+            question: 'Can you deliver stone consignments directly to site locations in Andhra Pradesh and Telangana?',
+            answer: 'Yes, we provide end-to-end insured logistics delivering custom-crated marble, Markapuram slate, granites, and Tandur limestone directly to project job sites across Hyderabad, Secunderabad, Markapuram, Vijayawada, Visakhapatnam, Guntur, and all districts of Telangana and Andhra Pradesh.',
         },
     ];
 
@@ -88,11 +88,14 @@ export default function Contact({ cmsContent }: ContactPageProps = {}) {
                 faqItems={contactFaqs}
                 keywords={[
                     'contact ELIOR natural stones',
-                    'stone enquiry hyderabad',
-                    'natural stone gallery hyderabad',
-                    'architectural stone showroom jubilee hills',
-                    'material consultation booking',
+                    'natural stone suppliers hyderabad',
+                    'marble showroom jubilee hills hyderabad',
+                    'markapuram slate stone suppliers',
+                    'andhra pradesh natural stone enquiries',
+                    'telangana architectural stone consultation',
+                    'banjara hills stone showroom',
                     'stone sample box request india',
+                    'tandur limestone dealers hyderabad',
                 ]}
                 schemas={[contactPageSchema, generateLocalBusinessSchema(baseUrl)]}
             />

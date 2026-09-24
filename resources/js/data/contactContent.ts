@@ -91,7 +91,7 @@ export const ENQUIRY_TYPE_OPTIONS: EnquiryTypeOption[] = [
 ];
 
 export const CANONICAL_COLLECTION_OPTIONS: CanonicalCollectionOption[] = [
-    { value: 'Italian Marble', label: 'Italian Marble' },
+    { value: 'Marble', label: 'Marble' },
     { value: 'Granites', label: 'Granites' },
     { value: 'Slate Stone', label: 'Slate Stone' },
     { value: 'Limestones', label: 'Limestones' },

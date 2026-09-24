@@ -12,6 +12,7 @@ class StoreEnquiryRequest extends FormRequest
      * The canonical ELIOR collections permitted for enquiry.
      */
     public const CANONICAL_COLLECTIONS = [
+        'Marble',
         'Italian Marble',
         'Granites',
         'Slate Stone',

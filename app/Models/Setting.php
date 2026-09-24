@@ -167,7 +167,7 @@ class Setting extends Model
             'type' => 'text',
             'label' => 'Default Meta Title',
             'description' => 'Fallback browser title when a page has no custom meta title.',
-            'default' => 'Natural Stone Suppliers in Hyderabad & India | ELIOR Natural Stones',
+            'default' => 'Natural Stone Suppliers in Hyderabad, Telangana & India | ELIOR Stones',
             'is_public' => true,
         ],
         'default_meta_description' => [
@@ -176,7 +176,7 @@ class Setting extends Model
             'type' => 'textarea',
             'label' => 'Default Meta Description',
             'description' => 'Fallback search engine description snippet.',
-            'default' => 'Leading natural stone suppliers in Hyderabad & India. Curating rare Italian marble, granites, sandstone, limestone, slate & bespoke cut-to-size stone slabs.',
+            'default' => 'Leading natural stone suppliers in Hyderabad, Telangana & Andhra Pradesh. Curating rare marble, granites, Markapuram slate, Tandur limestone & bespoke stone slabs.',
             'is_public' => true,
         ],
         'default_social_image_id' => [

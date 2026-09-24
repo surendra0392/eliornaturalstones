@@ -104,6 +104,10 @@ class PublicPageController extends Controller
                     $q->orWhere('slug', 'sandstone');
                 } elseif ($slug === 'sandstone') {
                     $q->orWhere('slug', 'sand-stone');
+                } elseif ($slug === 'marble') {
+                    $q->orWhere('slug', 'italian-marble');
+                } elseif ($slug === 'italian-marble') {
+                    $q->orWhere('slug', 'marble');
                 }
             })
             ->where('is_active', true)

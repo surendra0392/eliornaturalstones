@@ -30,7 +30,7 @@ test('all 8 canonical collection detail pages return 200 and render frontend/Col
             ->where('relatedCollections.2.slug', fn ($val) => $val !== $slug)
         );
 })->with([
-    ['italian-marble', 'Italian Marble'],
+    ['italian-marble', 'Marble'],
     ['granites', 'Granites'],
     ['slate-stone', 'Slate Stone'],
     ['limestones', 'Limestones'],

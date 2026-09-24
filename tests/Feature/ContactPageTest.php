@@ -83,6 +83,7 @@ test('05: exactly six approved enquiry types exist in configuration', function (
 
 test('06: canonical collections exist in form configuration', function () {
     $expectedCollections = [
+        'Marble',
         'Italian Marble',
         'Granites',
         'Slate Stone',
@@ -100,7 +101,7 @@ test('06: canonical collections exist in form configuration', function () {
     $response = $this->get('/contact');
     $response->assertOk();
 
-    foreach (['Italian Marble', 'Granites', 'Slate Stone', 'Limestones', 'Sand Stone', 'Cobble Stones', 'Pebbles', 'Quartz', 'Sculptures'] as $collection) {
+    foreach (['Marble', 'Granites', 'Slate Stone', 'Limestones', 'Sand Stone', 'Cobble Stones', 'Pebbles', 'Quartz', 'Sculptures'] as $collection) {
         $response->assertSee($collection);
     }
 });

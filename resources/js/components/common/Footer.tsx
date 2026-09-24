@@ -89,7 +89,7 @@ export function Footer() {
                         </h4>
                         <ul className="mt-5 grid grid-cols-1 gap-y-2.5 sm:grid-cols-2 sm:gap-x-4">
                             {[
-                                { name: 'Italian Marble', href: '/collections/italian-marble' },
+                                { name: 'Marble', href: '/collections/italian-marble' },
                                 { name: 'Granites', href: '/collections/granites' },
                                 { name: 'Slate Stone', href: '/collections/slate-stone' },
                                 { name: 'Limestones', href: '/collections/limestones' },

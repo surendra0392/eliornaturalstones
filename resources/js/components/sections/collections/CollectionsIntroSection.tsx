@@ -23,7 +23,7 @@ export function CollectionsIntroSection({ content }: CollectionsIntroSectionProp
     const headline = content?.headline || 'Stone, Selected With Intention.';
     const paragraph1 =
         content?.paragraph1 ||
-        'From the expressive veining of Italian marble to the quiet permanence of limestone, each material is selected for its character, performance and ability to belong naturally within architecture.';
+        'From the expressive veining of marble to the quiet permanence of limestone, each material is selected for its character, performance and ability to belong naturally within architecture.';
     const paragraph2 =
         content?.paragraph2 ||
         'Our reserve represents over three decades of geological relationships, pairing raw block extraction with meticulous calibrating to offer architects and spatial designers materials of authentic provenance and lasting presence.';

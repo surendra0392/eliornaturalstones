@@ -25,7 +25,7 @@ class SitemapController extends Controller
                 'changefreq' => 'weekly',
                 'image' => $appUrl.'/images/elior/homepage/homepage-hero.webp',
                 'image_title' => 'ELIOR Natural Stones — Architectural Natural Stone Gallery Hyderabad',
-                'image_caption' => 'Curated Italian Marble, Granite, and Architectural Stone Surfaces in Hyderabad & India',
+                'image_caption' => 'Curated Marble, Granite, Slate, and Architectural Stone Surfaces in Hyderabad, Andhra Pradesh & Telangana',
             ],
             [
                 'url' => route('collections.index'),

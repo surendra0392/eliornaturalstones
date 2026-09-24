@@ -15,9 +15,9 @@
         <meta name="theme-color" content="#0F0F0F">
         <meta name="msapplication-TileColor" content="#0F0F0F">
 
-        <!-- Geographic & Local Search Directives (Hyderabad, Telangana, India) -->
-        <meta name="geo.region" content="IN-TG">
-        <meta name="geo.placename" content="Hyderabad">
+        <!-- Geographic & Local Search Directives (Hyderabad, Telangana & Markapuram, Andhra Pradesh, India) -->
+        <meta name="geo.region" content="IN-TG, IN-AP">
+        <meta name="geo.placename" content="Hyderabad, Telangana, Markapuram, Andhra Pradesh, India">
         <meta name="geo.position" content="17.4319;78.4073">
         <meta name="ICBM" content="17.4319, 78.4073">
 
@@ -37,15 +37,15 @@
                 ?? $cmsContent['meta_title']
                 ?? ($collection ? "{$collection['name']} | ELIOR Natural Stones" : null)
                 ?? ($cmsContent ? "{$cmsContent['title']} | ELIOR Natural Stones" : null)
-                ?? ($siteSettings['default_meta_title'] ?? 'Natural Stone Suppliers in Hyderabad & India | ELIOR Natural Stones');
+                ?? ($siteSettings['default_meta_title'] ?? 'Natural Stone Suppliers in Hyderabad, Telangana & India | ELIOR Stones');
 
             $seoDescription = $collection['meta_description']
                 ?? $cmsContent['meta_description']
                 ?? $collection['description']
                 ?? $cmsContent['excerpt']
-                ?? ($siteSettings['default_meta_description'] ?? 'Leading natural stone suppliers in Hyderabad & India. Curating rare Italian marble, granites, sandstone, limestone, slate & custom architectural stone slabs.');
+                ?? ($siteSettings['default_meta_description'] ?? 'Leading natural stone suppliers in Hyderabad, Telangana & Andhra Pradesh. Curating rare marble, granites, Markapuram slate, Tandur limestone & bespoke cut-to-size stone slabs.');
 
-            $seoKeywords = 'natural stone suppliers in hyderabad, italian marble hyderabad, luxury natural stone india, architectural granite slabs, sandstone slabs, limestone flooring hyderabad, imported marble india, cobble stones, natural stone sculptures, wholesale marble suppliers hyderabad';
+            $seoKeywords = 'natural stone suppliers in hyderabad, marble slabs hyderabad, markapuram slate stone andhra pradesh, markapur black slate tiles, chimakurthy black galaxy granite, tandur blue limestone flooring, tandur yellow stone slabs, prakasam district stone suppliers, jubilee hills marble gallery, banjara hills luxury stone flooring, gachibowli kokapet stone suppliers, telangana natural stone suppliers, andhra pradesh slate and granite, architectural stone surfaces india, imported marble hyderabad';
 
             $seoImage = $collection['hero_image']
                 ?? ($cmsContent['content']['hero']['image'] ?? null)

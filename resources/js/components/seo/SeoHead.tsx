@@ -87,6 +87,14 @@ export function SeoHead({
             {keywordsContent && (
                 <meta name="keywords" content={keywordsContent} />
             )}
+            {/* Geographic & Local Search Directives (Hyderabad, Telangana & Markapuram, Andhra Pradesh, India) */}
+            <meta name="geo.region" content="IN-TG, IN-AP" />
+            <meta
+                name="geo.placename"
+                content="Hyderabad, Telangana, Markapuram, Andhra Pradesh, India"
+            />
+            <meta name="geo.position" content="17.4319;78.4073" />
+            <meta name="ICBM" content="17.4319, 78.4073" />
 
             {/* Open Graph Meta Tags */}
             <meta property="og:site_name" content={siteName} />

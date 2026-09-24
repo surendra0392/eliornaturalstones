@@ -29,7 +29,7 @@ beforeEach(function () {
 
 test('01: Canonical 9 collections are locked and active in exact order with zero Projects', function () {
     $expectedCollections = [
-        ['slug' => 'italian-marble', 'name' => 'Italian Marble', 'order' => 1],
+        ['slug' => 'italian-marble', 'name' => 'Marble', 'order' => 1],
         ['slug' => 'granites', 'name' => 'Granites', 'order' => 2],
         ['slug' => 'slate-stone', 'name' => 'Slate Stone', 'order' => 3],
         ['slug' => 'limestones', 'name' => 'Limestones', 'order' => 4],
