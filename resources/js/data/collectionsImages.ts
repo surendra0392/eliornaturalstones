@@ -68,7 +68,7 @@ export const COLLECTIONS_IMAGES = {
         },
         sculptures: {
             src: '/images/elior/collections/overview/collection-sculptures.webp',
-            alt: 'Classical carved marble sculpture figures in architectural gallery setting',
+            alt: 'Hand-carved natural stone Buddha sculpture seated in meditation on ornamental plinth within architectural reflection pool courtyard',
         },
     } as Record<string, { src: string; alt: string }>,
 
