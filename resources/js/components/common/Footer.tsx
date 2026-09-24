@@ -35,10 +35,10 @@ export function Footer() {
             <Container>
                 {/* Brand Statement Banner */}
                 <div className="border-border-stone border-b pb-12 lg:pb-14">
-                    <p className="text-bronze text-[11px] font-bold tracking-[0.24em] uppercase">
+                    <p className="text-bronze text-[11px] font-semibold tracking-[0.24em] uppercase">
                         Brand Statement
                     </p>
-                    <h3 className="text-graphite mt-3 font-serif text-3xl font-normal tracking-tight md:text-4xl lg:text-[42px] leading-tight">
+                    <h3 className="text-graphite mt-3 font-serif text-3xl font-light tracking-tight md:text-4xl lg:text-[42px] leading-tight">
                         Inspired by Nature.
                         <br />
                         <span className="text-graphite/80 font-serif italic">
@@ -56,27 +56,27 @@ export function Footer() {
                             aria-label="ELIOR Natural Stones Home"
                             className="focus-visible:outline-graphite inline-block focus-visible:outline-2"
                         >
-                            <span className="text-graphite font-serif text-2xl font-bold tracking-[0.24em] uppercase">
+                            <span className="text-graphite font-serif text-2xl font-normal tracking-[0.24em] uppercase">
                                 ELIOR
                             </span>
-                            <p className="text-graphite font-bold mt-1 text-[10px] tracking-[0.36em] uppercase">
+                            <p className="text-graphite font-semibold mt-1 text-[10px] tracking-[0.36em] uppercase">
                                 Natural Stones
                             </p>
                         </Link>
-                        <p className="text-graphite font-medium mt-5 max-w-sm text-xs leading-relaxed">
+                        <p className="text-graphite/90 font-normal mt-5 max-w-sm text-xs leading-relaxed">
                             Purveyors of noble natural stones, monumental quarry
                             selections, and architectural surfaces for
                             discerning architects, builders, and spatial
                             designers.
                         </p>
                         <div className="border-border-stone mt-6 border-t pt-4 text-xs">
-                            <span className="text-graphite font-bold block text-[10px] tracking-[0.2em] uppercase">
+                            <span className="text-graphite font-semibold block text-[10px] tracking-[0.2em] uppercase">
                                 Gallery Studio
                             </span>
-                            <p className="text-graphite font-serif mt-1 text-sm font-bold">
+                            <p className="text-graphite font-serif mt-1 text-sm font-semibold">
                                 {locationCity}
                             </p>
-                            <p className="text-graphite font-semibold text-xs">
+                            <p className="text-graphite font-medium text-xs">
                                 {locationRegion}
                             </p>
                         </div>
@@ -84,7 +84,7 @@ export function Footer() {
 
                     {/* Column 2: The 9 Curated Stone Collections */}
                     <div className="lg:col-span-4">
-                        <h4 className="text-graphite text-xs font-bold tracking-[0.25em] uppercase">
+                        <h4 className="text-graphite text-xs font-semibold tracking-[0.25em] uppercase">
                             Material Collections
                         </h4>
                         <ul className="mt-5 grid grid-cols-1 gap-y-2.5 sm:grid-cols-2 sm:gap-x-4">
@@ -102,11 +102,11 @@ export function Footer() {
                                 <li key={col.href}>
                                     <Link
                                         href={col.href}
-                                        className="group font-bold text-graphite hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
+                                        className="group font-semibold text-graphite hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
                                     >
                                         <span>{col.name}</span>
                                         <span
-                                            className="bg-bronze absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full"
+                                            className="bg-bronze absolute bottom-0 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
                                             aria-hidden="true"
                                         />
                                     </Link>
@@ -117,7 +117,7 @@ export function Footer() {
 
                     {/* Column 3: Architectural Navigation */}
                     <div className="lg:col-span-2">
-                        <h4 className="text-graphite text-xs font-bold tracking-[0.25em] uppercase">
+                        <h4 className="text-graphite text-xs font-semibold tracking-[0.25em] uppercase">
                             Studio & Process
                         </h4>
                         <ul className="mt-5 space-y-2.5">
@@ -125,11 +125,11 @@ export function Footer() {
                                 <li key={item.href}>
                                     <Link
                                         href={item.href}
-                                        className="group font-bold text-graphite hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
+                                        className="group font-semibold text-graphite hover:text-bronze focus-visible:outline-graphite relative inline-block text-xs tracking-wider transition-colors focus-visible:outline-2"
                                     >
                                         <span>{item.label}</span>
                                         <span
-                                            className="bg-bronze absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full"
+                                            className="bg-bronze absolute bottom-0 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
                                             aria-hidden="true"
                                         />
                                     </Link>
@@ -140,43 +140,43 @@ export function Footer() {
 
                     {/* Column 4: Contact Details & Specification Desk */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-graphite text-xs font-bold tracking-[0.25em] uppercase">
+                        <h4 className="text-graphite text-xs font-semibold tracking-[0.25em] uppercase">
                             Specification Desk
                         </h4>
                         <div className="mt-5 space-y-3.5 text-xs leading-relaxed">
                             <div>
-                                <span className="text-graphite font-bold mb-0.5 block text-[10px] tracking-[0.2em] uppercase">
+                                <span className="text-graphite font-semibold mb-0.5 block text-[10px] tracking-[0.2em] uppercase">
                                     Direct Telephone
                                 </span>
                                 <a
                                     href={`tel:${phone.replace(/\s+/g, '')}`}
-                                    className="text-graphite hover:text-bronze focus-visible:outline-graphite font-serif text-sm font-bold tracking-wide transition-colors focus-visible:outline-2"
+                                    className="text-graphite hover:text-bronze focus-visible:outline-graphite font-serif text-sm font-semibold tracking-wide transition-colors focus-visible:outline-2"
                                 >
                                     {phone}
                                 </a>
                             </div>
 
                             <div>
-                                <span className="text-graphite font-bold mb-0.5 block text-[10px] tracking-[0.2em] uppercase">
+                                <span className="text-graphite font-semibold mb-0.5 block text-[10px] tracking-[0.2em] uppercase">
                                     Material Inquiries
                                 </span>
                                 <a
                                     href={`mailto:${email}`}
-                                    className="text-graphite hover:text-bronze focus-visible:outline-graphite font-bold transition-colors focus-visible:outline-2"
+                                    className="text-graphite hover:text-bronze focus-visible:outline-graphite font-semibold transition-colors focus-visible:outline-2"
                                 >
                                     {email}
                                 </a>
                             </div>
 
                             <div className="border-border-stone border-t pt-3">
-                                <p className="text-graphite font-bold text-[10px] tracking-widest uppercase">
+                                <p className="text-graphite font-semibold text-[10px] tracking-widest uppercase">
                                     {availabilityText}
                                 </p>
                             </div>
 
                             {hasSocial && (
                                 <div className="border-border-stone border-t pt-3">
-                                    <span className="text-graphite font-bold mb-1.5 block text-[10px] tracking-[0.2em] uppercase">
+                                    <span className="text-graphite font-semibold mb-1.5 block text-[10px] tracking-[0.2em] uppercase">
                                         Architectural Channels
                                     </span>
                                     <div className="flex items-center gap-3.5 text-xs">
@@ -185,7 +185,7 @@ export function Footer() {
                                                 href={instagramUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="font-bold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
+                                                className="font-semibold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
                                                 aria-label="Instagram"
                                             >
                                                 Instagram
@@ -196,7 +196,7 @@ export function Footer() {
                                                 href={linkedinUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="font-bold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
+                                                className="font-semibold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
                                                 aria-label="LinkedIn"
                                             >
                                                 LinkedIn
@@ -207,7 +207,7 @@ export function Footer() {
                                                 href={pinterestUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="font-bold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
+                                                className="font-semibold text-graphite hover:text-bronze focus-visible:outline-graphite transition-colors focus-visible:outline-1"
                                                 aria-label="Pinterest"
                                             >
                                                 Pinterest
@@ -226,7 +226,7 @@ export function Footer() {
                         © {new Date().getFullYear()} ELIOR Natural Stones. All
                         rights reserved.
                     </p>
-                    <p className="text-graphite font-bold">
+                    <p className="text-graphite font-semibold">
                         A brand of Stone X
                     </p>
                 </div>
