@@ -77,9 +77,9 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                     key={item.href}
                                     href={item.href}
                                     className={cn(
-                                        'group focus-visible:outline-graphite relative py-1.5 text-xs font-semibold tracking-[0.18em] uppercase transition-colors duration-300 focus-visible:outline-2',
+                                        'group focus-visible:outline-graphite relative py-1.5 text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 focus-visible:outline-2',
                                         active
-                                            ? 'text-graphite font-bold'
+                                            ? 'text-graphite'
                                             : 'text-graphite hover:text-bronze',
                                     )}
                                 >

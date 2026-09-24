@@ -169,31 +169,31 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                     ref={(el) => {
                         itemRefs.current[PUBLIC_NAV_ITEMS.length] = el;
                     }}
-                    className="border-border-stone text-graphite-muted grid grid-cols-1 gap-6 border-t pt-8 text-xs md:grid-cols-3"
+                    className="border-border-stone grid grid-cols-1 gap-6 border-t pt-8 text-xs md:grid-cols-3"
                 >
                     <div>
-                        <span className="text-taupe mb-1 block text-[9px] font-medium tracking-[0.24em] uppercase">
+                        <span className="text-graphite font-bold mb-1 block text-[10px] tracking-[0.24em] uppercase">
                             Direct Inquiries
                         </span>
                         <a
                             href={`tel:${phone.replace(/\s+/g, '')}`}
-                            className="text-graphite hover:text-bronze block font-serif text-sm tracking-wide transition-colors"
+                            className="text-graphite hover:text-bronze block font-serif text-sm font-bold tracking-wide transition-colors"
                         >
                             {phone}
                         </a>
                         <a
                             href={`mailto:${email}`}
-                            className="text-graphite-muted hover:text-bronze mt-0.5 block transition-colors"
+                            className="text-graphite font-semibold hover:text-bronze mt-0.5 block transition-colors"
                         >
                             {email}
                         </a>
                     </div>
 
                     <div>
-                        <span className="text-taupe mb-1 block text-[9px] font-medium tracking-[0.24em] uppercase">
+                        <span className="text-graphite font-bold mb-1 block text-[10px] tracking-[0.24em] uppercase">
                             Gallery & Studio
                         </span>
-                        <p className="text-graphite font-serif text-sm">
+                        <p className="text-graphite font-serif text-sm font-bold">
                             {location}
                         </p>
                     </div>
