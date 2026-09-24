@@ -28,11 +28,15 @@ export const HOMEPAGE_IMAGES = {
     collections: {
         'italian-marble': {
             src: '/images/elior/collections/overview/collection-italian-marble.webp',
-            alt: 'Luminous Italian marble architectural wall with refined veining',
+            alt: 'Monumental bookmatched white marble architectural feature wall with expressive charcoal veining',
+        },
+        marble: {
+            src: '/images/elior/collections/overview/collection-italian-marble.webp',
+            alt: 'Monumental bookmatched white marble architectural feature wall with expressive charcoal veining',
         },
         granites: {
             src: '/images/elior/collections/overview/collection-granites.webp',
-            alt: 'Honed architectural granite monolith in contemporary setting',
+            alt: 'Monumental waterfall kitchen island and backsplash crafted from exotic black and terracotta veined granite',
         },
         'slate-stone': {
             src: '/images/elior/collections/overview/collection-slate-stone.webp',
