@@ -60,7 +60,7 @@ export const HOMEPAGE_IMAGES = {
         },
         pebbles: {
             src: '/images/elior/collections/overview/collection-pebbles.webp',
-            alt: 'Selected water-smoothed river pebbles in contemplative landscape installation',
+            alt: 'Tactile arrangement of polished snow-white natural river pebbles with sculptural evergreen topiary in contemporary garden landscape',
         },
         quartz: {
             // STRICT REQUIREMENT: Large engineered quartz slab surfaces, NOT small quartz crystals, NO people
