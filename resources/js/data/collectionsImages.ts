@@ -43,11 +43,11 @@ export const COLLECTIONS_IMAGES = {
         },
         sandstone: {
             src: '/images/elior/collections/overview/collection-sandstone.webp',
-            alt: 'Warm sedimentary Sand Stone architectural pavilion terrace and walls',
+            alt: 'Natural sedimentary Sand Stone architectural wall cladding on contemporary pavilion facade',
         },
         'sand-stone': {
             src: '/images/elior/collections/overview/collection-sandstone.webp',
-            alt: 'Warm sedimentary Sand Stone architectural pavilion terrace and walls',
+            alt: 'Natural sedimentary Sand Stone architectural wall cladding on contemporary pavilion facade',
         },
         'cobble-stones': {
             src: '/images/elior/collections/overview/collection-cobble-stones.webp',
