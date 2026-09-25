@@ -41,7 +41,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         worldwide: {
             src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
-            alt: 'Architectural stone material in transit toward destinations across India',
+            alt: 'Commercial flatbed transport of timber-crated natural stone slabs along Indian highway corridor',
         },
         spaces: {
             src: '/images/elior/source-to-space/source-to-space-06-spaces.jpg',
@@ -69,7 +69,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         movement: {
             src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
-            alt: 'Architectural stone material transitioning toward project destinations across India',
+            alt: 'Indian commercial flatbed carrier transporting secured timber A-frame stone slab crates across Indian national highway',
         },
         architecture: {
             src: '/images/elior/source-to-space/source-to-space-06-spaces.jpg',
