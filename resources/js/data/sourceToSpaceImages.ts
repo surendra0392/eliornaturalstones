@@ -37,7 +37,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         packaging: {
             src: '/images/elior/source-to-space/source-to-space-04-packaging.jpg',
-            alt: 'Protected stone slabs securely prepared for movement',
+            alt: 'Custom timber A-frame crating and protective foam interleaving for natural stone slabs',
         },
         worldwide: {
             src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
@@ -65,7 +65,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         packaging: {
             src: '/images/elior/source-to-space/source-to-space-04-packaging.jpg',
-            alt: 'Protected natural stone surfaces carefully arranged for architectural delivery',
+            alt: 'Export-grade timber A-frame crating and edge protection for natural stone slabs in Indian dispatch facility',
         },
         movement: {
             src: '/images/elior/source-to-space/source-to-space-05-pan-india.jpg',
