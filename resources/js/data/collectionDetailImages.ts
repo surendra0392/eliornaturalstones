@@ -1183,21 +1183,29 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
-            'snow-white-river-pebbles': {
-                src: '/images/elior/collections/pebbles/variety-snow-white-river-pebbles.webp',
-                alt: 'Snow White River Pebbles with smooth crystalline contours',
+            'white-marble-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-white-marble-pebbles.webp',
+                alt: 'White Marble Pebbles with crystalline pure white tumbled surface',
             },
-            'black-polished-pebbles': {
-                src: '/images/elior/collections/pebbles/variety-black-polished-pebbles.webp',
-                alt: 'Black Polished Pebbles with obsidian satin sheen',
+            'black-plain-unpolished-stone-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-black-plain-unpolished-stone-pebbles.webp',
+                alt: 'Black Plain Unpolished Stone Pebbles with velvety matte charcoal basalt texture',
             },
-            'mixed-natural-river-pebbles': {
-                src: '/images/elior/collections/pebbles/variety-mixed-natural-river-pebbles.webp',
-                alt: 'Mixed Natural River Pebbles with variegated earth tones',
+            'brown-lining-rainbow-unpolished-stone-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-brown-lining-rainbow-unpolished-stone-pebbles.webp',
+                alt: 'Brown Lining Rainbow Unpolished Stone Pebbles with concentric earth striations',
             },
-            'onyx-amber-pebbles': {
-                src: '/images/elior/collections/pebbles/variety-onyx-amber-pebbles.webp',
-                alt: 'Onyx Amber Pebbles with warm translucent honey glow',
+            'desert-brown-stone-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-desert-brown-stone-pebbles.webp',
+                alt: 'Desert Brown Stone Pebbles with warm desert tan and amber mineral tones',
+            },
+            'red-unpolished-stone-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-red-unpolished-stone-pebbles.webp',
+                alt: 'Red Unpolished Stone Pebbles with rich iron-oxide terracotta earth tones',
+            },
+            'forest-green-unpolished-stone-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-forest-green-unpolished-stone-pebbles.webp',
+                alt: 'Forest Green Unpolished Stone Pebbles with deep serpentine moss and olive tones',
             },
         },
     },
