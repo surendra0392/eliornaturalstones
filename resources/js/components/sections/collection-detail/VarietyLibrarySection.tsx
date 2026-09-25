@@ -58,7 +58,7 @@ export function VarietyLibrarySection({
                 {varieties.length > 0 ? (
                     <div
                         ref={gridRef}
-                        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+                        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
                     >
                         {varieties.map((variety, idx) => {
                             const fallback =

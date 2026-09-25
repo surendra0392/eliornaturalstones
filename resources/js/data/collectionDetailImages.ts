@@ -165,25 +165,57 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'sugar-beige': {
+                src: '/images/elior/collections/italian-marble/variety-sugar-beige.webp',
+                alt: 'Sugar Beige marble slab with fine spiderweb calcite veins',
+            },
+            'ottoman-beige': {
+                src: '/images/elior/collections/italian-marble/variety-ottoman-beige.webp',
+                alt: 'Ottoman Beige marble slab with parallel linear sedimentary strata',
+            },
+            'ottaman-beige': {
+                src: '/images/elior/collections/italian-marble/variety-ottoman-beige.webp',
+                alt: 'Ottoman Beige marble slab with parallel linear sedimentary strata',
+            },
             'dyna-beige': {
                 src: '/images/elior/collections/italian-marble/variety-dyna-beige.webp',
                 alt: 'Dyna Beige marble slab with creamy foundation and delicate crystalline clouds',
             },
-            'travertino-romano': {
-                src: '/images/elior/collections/italian-marble/variety-travertino-romano.webp',
-                alt: 'Travertino Romano marble slab with rhythmic horizontal sedimentary strata',
+            'crema-nuova': {
+                src: '/images/elior/collections/italian-marble/variety-crema-nuova.webp',
+                alt: 'Crema Nuova marble slab with warm cream tone and organic brecciated texture',
             },
-            'armani-grey': {
-                src: '/images/elior/collections/italian-marble/variety-armani-grey.webp',
-                alt: 'Armani Grey marble slab with ash-grey ground and spiderweb white calcite veins',
+            'satuario': {
+                src: '/images/elior/collections/italian-marble/variety-satuario.webp',
+                alt: 'Satuario white marble slab with bold dramatic grey veining',
             },
-            'brescia-aurora': {
-                src: '/images/elior/collections/italian-marble/variety-brescia-aurora.webp',
-                alt: 'Brescia Aurora marble slab with warm greige tone and cloudy brecciated matrix',
+            'statuario': {
+                src: '/images/elior/collections/italian-marble/variety-satuario.webp',
+                alt: 'Satuario white marble slab with bold dramatic grey veining',
             },
             'statuario-extra': {
-                src: '/images/elior/collections/italian-marble/variety-statuario-extra.webp',
-                alt: 'Statuario Extra white marble slab with bold diagonal charcoal veining',
+                src: '/images/elior/collections/italian-marble/variety-satuario.webp',
+                alt: 'Satuario white marble slab with bold dramatic grey veining',
+            },
+            'platino-grey': {
+                src: '/images/elior/collections/italian-marble/variety-platino-grey.webp',
+                alt: 'Platino Grey architectural marble with silver-grey ground and delicate graphite veining',
+            },
+            'mocha-crema-leather': {
+                src: '/images/elior/collections/italian-marble/variety-mocha-crema-leather.webp',
+                alt: 'Mocha Crema Leather marble with rich mocha tones and tactile leathered patina',
+            },
+            'vietnam-white': {
+                src: '/images/elior/collections/italian-marble/variety-vietnam-white.webp',
+                alt: 'Vietnam White crystalline marble with luminous monolithic purity',
+            },
+            'botochino': {
+                src: '/images/elior/collections/italian-marble/variety-botochino.webp',
+                alt: 'Botochino compact marble with warm ivory ground and golden-hazel micro-veining',
+            },
+            'botticino': {
+                src: '/images/elior/collections/italian-marble/variety-botochino.webp',
+                alt: 'Botochino compact marble with warm ivory ground and golden-hazel micro-veining',
             },
         },
     },
@@ -291,6 +323,10 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'black-galaxy-granite': {
+                src: '/images/elior/collections/granites/variety-black-galaxy.webp',
+                alt: 'Black Galaxy granite surface with bronzite specks',
+            },
             'black-galaxy': {
                 src: '/images/elior/collections/granites/variety-black-galaxy.webp',
                 alt: 'Black Galaxy granite surface with bronzite specks',
@@ -303,9 +339,57 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 src: '/images/elior/collections/granites/variety-tan-brown.webp',
                 alt: 'Tan Brown granite slab with chocolate and amber crystals',
             },
+            'absolute-black': {
+                src: '/images/elior/collections/granites/variety-absolute-black.webp',
+                alt: 'Absolute Black monolithic dense granite slab',
+            },
+            'chima-pink-granite': {
+                src: '/images/elior/collections/granites/variety-chima-pink-granite.webp',
+                alt: 'Chima Pink granite slab with rosy-pink feldspar crystals',
+            },
+            'colonial-white': {
+                src: '/images/elior/collections/granites/variety-colonial-white.webp',
+                alt: 'Colonial White granite slab with garnet specks',
+            },
+            'burgundy-white': {
+                src: '/images/elior/collections/granites/variety-burgundy-white.webp',
+                alt: 'Burgundy White granite slab with deep burgundy mineral currents',
+            },
+            'apple-green': {
+                src: '/images/elior/collections/granites/variety-apple-green.webp',
+                alt: 'Apple Green granite slab with sage-green mineral tones',
+            },
+            'parda-gold': {
+                src: '/images/elior/collections/granites/variety-parda-gold.webp',
+                alt: 'Parda Gold granite slab with golden-ochre undulating waves',
+            },
+            'river-white': {
+                src: '/images/elior/collections/granites/variety-river-white.webp',
+                alt: 'River White granite slab with linear silver-grey currents',
+            },
+            'nadol-grey': {
+                src: '/images/elior/collections/granites/variety-nadol-grey.webp',
+                alt: 'Nadol Grey granite slab with balanced uniform salt-and-pepper grain',
+            },
             'viscon-white': {
                 src: '/images/elior/collections/granites/variety-viscon-white.webp',
                 alt: 'Viscon White granite with flowing silver and charcoal waves',
+            },
+            'silk-brown': {
+                src: '/images/elior/collections/granites/variety-silk-brown.webp',
+                alt: 'Silk Brown granite slab with soft mocha and bronze tones',
+            },
+            'alaska-white': {
+                src: '/images/elior/collections/granites/variety-alaska-white.webp',
+                alt: 'Alaska White granite slab with frosty feldspar and onyx patches',
+            },
+            'white-granite': {
+                src: '/images/elior/collections/granites/variety-white-granite.webp',
+                alt: 'White Granite architectural slab with refined crystalline flecks',
+            },
+            'foreign-black': {
+                src: '/images/elior/collections/granites/variety-foreign-black.webp',
+                alt: 'Foreign Black exotic deep-black granite with metallic crystalline flecks',
             },
         },
     },
