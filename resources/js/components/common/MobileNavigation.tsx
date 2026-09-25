@@ -1,6 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { PUBLIC_NAV_ITEMS } from '../../types/navigation';
+import {
+    PUBLIC_NAV_ITEMS,
+    DEFAULT_COLLECTIONS_NAV,
+    type NavCollection,
+} from '../../types/navigation';
 import type { PublicSiteSettings } from '../../types/setting';
 import {
     mobileNavTransition,
@@ -18,8 +22,17 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
     const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
-    const { siteSettings } = usePage<{ siteSettings?: PublicSiteSettings }>()
-        .props;
+    const [collectionsExpanded, setCollectionsExpanded] = useState(false);
+
+    const { siteSettings, navCollections } = usePage<{
+        siteSettings?: PublicSiteSettings;
+        navCollections?: NavCollection[];
+    }>().props;
+
+    const collectionsList =
+        navCollections && navCollections.length > 0
+            ? navCollections
+            : DEFAULT_COLLECTIONS_NAV;
     const phone =
         siteSettings?.enquiry_phone ||
         siteSettings?.primary_phone ||
@@ -125,6 +138,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                             item.href === '/'
                                 ? url === '/' || url === ''
                                 : url.startsWith(item.href);
+                        const isCollections = item.href === '/collections';
 
                         return (
                             <div
@@ -133,32 +147,113 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                                     itemRefs.current[idx] = el;
                                 }}
                             >
-                                <Link
-                                    href={item.href}
-                                    onClick={onClose}
-                                    className="group focus-visible:outline-graphite flex items-baseline justify-between py-2 transition-colors focus-visible:outline-2"
-                                >
-                                    <span
-                                        className={cn(
-                                            'font-serif text-2xl font-bold tracking-tight transition-colors md:text-3xl',
-                                            isActive
-                                                ? 'text-bronze'
-                                                : 'text-graphite group-hover:text-bronze',
+                                {isCollections ? (
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center justify-between py-2">
+                                            <Link
+                                                href={item.href}
+                                                onClick={onClose}
+                                                className="group focus-visible:outline-graphite flex-1 transition-colors focus-visible:outline-2"
+                                            >
+                                                <span
+                                                    className={cn(
+                                                        'font-serif text-2xl font-bold tracking-tight transition-colors md:text-3xl',
+                                                        isActive
+                                                            ? 'text-bronze'
+                                                            : 'text-graphite group-hover:text-bronze',
+                                                    )}
+                                                >
+                                                    {item.label}
+                                                </span>
+                                            </Link>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setCollectionsExpanded(
+                                                        (prev) => !prev,
+                                                    )
+                                                }
+                                                aria-expanded={collectionsExpanded}
+                                                aria-label="Toggle collections sub-menu"
+                                                className="border-border-stone text-graphite hover:text-bronze hover:border-bronze flex h-10 w-10 items-center justify-center border text-xs transition-colors cursor-pointer"
+                                            >
+                                                <svg
+                                                    className={cn(
+                                                        'h-4 w-4 transition-transform duration-300',
+                                                        collectionsExpanded
+                                                            ? 'rotate-180 text-bronze'
+                                                            : '',
+                                                    )}
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    stroke="currentColor"
+                                                    strokeWidth={2}
+                                                    aria-hidden="true"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M19 9l-7 7-7-7"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        {/* Collapsible Mobile Collections Sub-menu */}
+                                        {collectionsExpanded && (
+                                            <div className="border-l-2 border-bronze/40 pl-4 my-2 flex flex-col space-y-2">
+                                                {collectionsList.map((col, cIdx) => (
+                                                    <Link
+                                                        key={col.slug}
+                                                        href={`/collections/${col.slug}`}
+                                                        onClick={onClose}
+                                                        className="flex items-center justify-between py-1.5 text-base font-serif text-graphite hover:text-bronze transition-colors"
+                                                    >
+                                                        <span>{col.name}</span>
+                                                        <span className="text-[10px] font-mono text-taupe">
+                                                            {String(cIdx + 1).padStart(2, '0')}
+                                                        </span>
+                                                    </Link>
+                                                ))}
+                                                <Link
+                                                    href="/collections"
+                                                    onClick={onClose}
+                                                    className="text-xs font-semibold text-bronze uppercase tracking-widest pt-2 hover:text-graphite transition-colors inline-flex items-center gap-1.5"
+                                                >
+                                                    <span>View All Collections</span>
+                                                    <span>→</span>
+                                                </Link>
+                                            </div>
                                         )}
+                                    </div>
+                                ) : (
+                                    <Link
+                                        href={item.href}
+                                        onClick={onClose}
+                                        className="group focus-visible:outline-graphite flex items-baseline justify-between py-2 transition-colors focus-visible:outline-2"
                                     >
-                                        {item.label}
-                                    </span>
-                                    <span
-                                        className={cn(
-                                            'text-xs font-bold tracking-widest uppercase transition-colors',
-                                            isActive
-                                                ? 'text-bronze'
-                                                : 'text-taupe group-hover:text-bronze',
-                                        )}
-                                    >
-                                        0{idx + 1}
-                                    </span>
-                                </Link>
+                                        <span
+                                            className={cn(
+                                                'font-serif text-2xl font-bold tracking-tight transition-colors md:text-3xl',
+                                                isActive
+                                                    ? 'text-bronze'
+                                                    : 'text-graphite group-hover:text-bronze',
+                                            )}
+                                        >
+                                            {item.label}
+                                        </span>
+                                        <span
+                                            className={cn(
+                                                'text-xs font-bold tracking-widest uppercase transition-colors',
+                                                isActive
+                                                    ? 'text-bronze'
+                                                    : 'text-taupe group-hover:text-bronze',
+                                            )}
+                                        >
+                                            0{idx + 1}
+                                        </span>
+                                    </Link>
+                                )}
                             </div>
                         );
                     })}

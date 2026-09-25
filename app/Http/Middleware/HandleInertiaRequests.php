@@ -44,6 +44,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'siteSettings' => fn () => Setting::getPublicSettings(),
+            'navCollections' => fn () => \App\Models\Collection::where('is_active', true)
+                ->orderBy('sort_order')
+                ->select(['id', 'name', 'slug'])
+                ->get(),
         ];
     }
 }
