@@ -29,7 +29,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         processing: {
             src: '/images/elior/source-to-space/source-to-space-02-processing.jpg',
-            alt: 'Calibrated diamond saw precision cutting and slab thickness calibration',
+            alt: 'Precision diamond bridge saw calibrating and cutting monumental Indian marble slab',
         },
         selection: {
             src: '/images/elior/source-to-space/source-to-space-03-selection.jpg',
@@ -57,7 +57,7 @@ export const SOURCE_TO_SPACE_IMAGES = {
         },
         processing: {
             src: '/images/elior/source-to-space/source-to-space-02-processing.jpg',
-            alt: 'Honed edge detail and precision surface calibration',
+            alt: 'Precision diamond bridge saw edge profiling and slab calibration in modern stone facility',
         },
         selection: {
             src: '/images/elior/source-to-space/source-to-space-03-selection.jpg',
