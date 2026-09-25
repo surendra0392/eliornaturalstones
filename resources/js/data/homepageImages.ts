@@ -13,7 +13,7 @@ export const HOMEPAGE_IMAGES = {
     // 01 — HERO: Monumental stone architecture, controlled light, reflecting stillness
     hero: {
         src: '/images/elior/homepage/homepage-hero.webp',
-        alt: 'Monumental architectural stone pavilion with refined natural lighting',
+        alt: 'Monumental contemporary Indian luxury villa featuring bookmatched marble wall, Tandur limestone terrace, and reflection pool',
         focalPoint: { x: 50, y: 50 },
     },
 
