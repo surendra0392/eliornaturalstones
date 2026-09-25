@@ -10,6 +10,7 @@ import { SelectionSection } from '../../components/sections/source-to-space/Sele
 import { PackagingSection } from '../../components/sections/source-to-space/PackagingSection';
 import { MovementSection } from '../../components/sections/source-to-space/MovementSection';
 import { ArchitectureSection } from '../../components/sections/source-to-space/ArchitectureSection';
+import { JourneySummarySection } from '../../components/sections/source-to-space/JourneySummarySection';
 import { SourceToSpaceClosingSection } from '../../components/sections/source-to-space/SourceToSpaceClosingSection';
 import { SOURCE_TO_SPACE_IMAGES } from '../../data/sourceToSpaceImages';
 
@@ -140,6 +141,9 @@ export default function FromSourceToSpace({
 
             {/* 09. SPACE / ARCHITECTURE */}
             <ArchitectureSection content={cmsContent?.content?.architecture} />
+
+            {/* 09b. JOURNEY SUMMARY / ARCHITECTURAL SYNTHESIS (Breathing Space & Highlights) */}
+            <JourneySummarySection />
 
             {/* 10. CLOSING STATEMENT */}
             <SourceToSpaceClosingSection
