@@ -17,10 +17,10 @@ export const COLLECTIONS_IMAGES = {
         focalPoint: { x: 50, y: 50 },
     },
 
-    // 02 — INTRO: Close material/slab veining detail plate
+    // 02 — INTRO: Curated material library flat-lay displaying the nine canonical stone expressions
     intro: {
         src: '/images/elior/collections/overview/collections-intro.webp',
-        alt: 'Tactile study of bookmatched natural stone veining and honed crystalline surface',
+        alt: "Curated architectural material palette showcasing ELIOR's nine canonical natural stone expressions in an atelier studio study",
     },
 
     // 03 — THE 8 CANONICAL COLLECTIONS

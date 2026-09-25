@@ -90,7 +90,7 @@ export function CollectionsIntroSection({ content }: CollectionsIntroSectionProp
                             src={COLLECTIONS_IMAGES.intro.src}
                             alt={COLLECTIONS_IMAGES.intro.alt}
                             aspectRatio="4/5"
-                            caption="Expressive natural veining and honed crystalline finish"
+                            caption="Tactile architectural study of ELIOR's nine canonical natural stone expressions"
                             containerClassName="shadow-[0_12px_40px_-15px_rgba(15,15,15,0.07)]"
                         />
                     </div>
