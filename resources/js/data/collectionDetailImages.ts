@@ -165,21 +165,25 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'dyna-beige': {
+                src: '/images/elior/collections/italian-marble/variety-dyna-beige.webp',
+                alt: 'Dyna Beige marble slab with creamy foundation and delicate crystalline clouds',
+            },
+            'travertino-romano': {
+                src: '/images/elior/collections/italian-marble/variety-travertino-romano.webp',
+                alt: 'Travertino Romano marble slab with rhythmic horizontal sedimentary strata',
+            },
+            'armani-grey': {
+                src: '/images/elior/collections/italian-marble/variety-armani-grey.webp',
+                alt: 'Armani Grey marble slab with ash-grey ground and spiderweb white calcite veins',
+            },
+            'brescia-aurora': {
+                src: '/images/elior/collections/italian-marble/variety-brescia-aurora.webp',
+                alt: 'Brescia Aurora marble slab with warm greige tone and cloudy brecciated matrix',
+            },
             'statuario-extra': {
                 src: '/images/elior/collections/italian-marble/variety-statuario-extra.webp',
-                alt: 'Statuario Extra white marble slab with bold grey veining',
-            },
-            'calacatta-gold': {
-                src: '/images/elior/collections/italian-marble/variety-calacatta-gold.webp',
-                alt: 'Calacatta Gold marble slab with honey and taupe ribbons',
-            },
-            'carrara-bianco': {
-                src: '/images/elior/collections/italian-marble/variety-carrara-bianco.webp',
-                alt: 'Carrara Bianco marble with gentle feathered graphite veining',
-            },
-            'arabescato-vagli': {
-                src: '/images/elior/collections/italian-marble/variety-arabescato-vagli.webp',
-                alt: 'Arabescato Vagli marble with dark brecciated veining patterns',
+                alt: 'Statuario Extra white marble slab with bold diagonal charcoal veining',
             },
         },
     },
