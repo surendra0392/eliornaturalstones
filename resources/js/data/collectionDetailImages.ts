@@ -667,21 +667,53 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
-            'kota-blue-limestone': {
-                src: '/images/elior/collections/limestones/variety-kota-blue-limestone.webp',
-                alt: 'Kota Blue Limestone with tranquil steel blue-grey tone',
+            'kadapa-black-polish': {
+                src: '/images/elior/collections/limestones/variety-kadapa-black-polish.webp',
+                alt: 'Kadapa Black Polish limestone with deep obsidian mirror finish',
             },
-            'tandur-yellow-limestone': {
-                src: '/images/elior/collections/limestones/variety-tandur-yellow-limestone.webp',
-                alt: 'Tandur Yellow Limestone with warm honey-gold ambiance',
+            'kadapa-black-honed-finish': {
+                src: '/images/elior/collections/limestones/variety-kadapa-black-honed-finish.webp',
+                alt: 'Kadapa Black Honed Finish limestone with smooth matte velvet texture',
             },
-            'crema-bello': {
-                src: '/images/elior/collections/limestones/variety-crema-bello.webp',
-                alt: 'Crema Bello limestone with soft neutral cream surface',
+            'kadapa-black-rough': {
+                src: '/images/elior/collections/limestones/variety-kadapa-black-rough.webp',
+                alt: 'Kadapa Black Rough limestone with natural cleft split-face profile',
             },
-            'jura-beige': {
-                src: '/images/elior/collections/limestones/variety-jura-beige.webp',
-                alt: 'Jura Beige limestone with prehistoric fossil inclusions',
+            'kadapa-black-flaming': {
+                src: '/images/elior/collections/limestones/variety-kadapa-black-flaming.webp',
+                alt: 'Kadapa Black Flaming limestone with thermal-treated micro-textured surface',
+            },
+            'tandur-blue-rough': {
+                src: '/images/elior/collections/limestones/variety-tandur-blue-rough.webp',
+                alt: 'Tandur Blue Rough limestone with natural riven steel blue-grey texture',
+            },
+            'tandur-blue-polish': {
+                src: '/images/elior/collections/limestones/variety-tandur-blue-polish.webp',
+                alt: 'Tandur Blue Polish limestone with oceanic slate-blue sheen',
+            },
+            'tandur-blue-leather': {
+                src: '/images/elior/collections/limestones/variety-tandur-blue-leather.webp',
+                alt: 'Tandur Blue Leather limestone with silky undulating antique finish',
+            },
+            'tandur-blue-satin-finish': {
+                src: '/images/elior/collections/limestones/variety-tandur-blue-satin-finish.webp',
+                alt: 'Tandur Blue Satin Finish limestone with non-glare velvet reflection',
+            },
+            'tandur-yellow-rough': {
+                src: '/images/elior/collections/limestones/variety-tandur-yellow-rough.webp',
+                alt: 'Tandur Yellow Rough limestone with warm golden-ochre cleft face',
+            },
+            'tandur-yellow-leather': {
+                src: '/images/elior/collections/limestones/variety-tandur-yellow-leather.webp',
+                alt: 'Tandur Yellow Leather limestone with antique honey-gold tactile patina',
+            },
+            'kurnool-grey-polish': {
+                src: '/images/elior/collections/limestones/variety-kurnool-grey-polish.webp',
+                alt: 'Kurnool Grey Polish limestone with luminous silver-grey crystalline clarity',
+            },
+            'kurnool-grey-satin-finish': {
+                src: '/images/elior/collections/limestones/variety-kurnool-grey-satin-finish.webp',
+                alt: 'Kurnool Grey Satin Finish limestone with soft diffused smoke-grey surface',
             },
         },
     },
