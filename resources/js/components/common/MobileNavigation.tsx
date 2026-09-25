@@ -201,16 +201,16 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
 
                                         {/* Collapsible Mobile Collections Sub-menu */}
                                         {collectionsExpanded && (
-                                            <div className="border-l-2 border-bronze/40 pl-4 my-2 flex flex-col space-y-2">
+                                            <div className="border-l-2 border-bronze/50 pl-5 my-3 flex flex-col space-y-2.5">
                                                 {collectionsList.map((col, cIdx) => (
                                                     <Link
                                                         key={col.slug}
                                                         href={`/collections/${col.slug}`}
                                                         onClick={onClose}
-                                                        className="flex items-center justify-between py-1.5 text-base font-serif text-graphite hover:text-bronze transition-colors"
+                                                        className="flex items-center justify-between py-2 text-base font-semibold text-graphite hover:text-bronze transition-colors"
                                                     >
                                                         <span>{col.name}</span>
-                                                        <span className="text-[10px] font-mono text-taupe">
+                                                        <span className="text-xs font-semibold text-taupe">
                                                             {String(cIdx + 1).padStart(2, '0')}
                                                         </span>
                                                     </Link>
@@ -218,7 +218,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                                                 <Link
                                                     href="/collections"
                                                     onClick={onClose}
-                                                    className="text-xs font-semibold text-bronze uppercase tracking-widest pt-2 hover:text-graphite transition-colors inline-flex items-center gap-1.5"
+                                                    className="text-xs font-semibold text-bronze uppercase tracking-widest pt-2.5 hover:text-graphite transition-colors inline-flex items-center gap-2"
                                                 >
                                                     <span>View All Collections</span>
                                                     <span>→</span>

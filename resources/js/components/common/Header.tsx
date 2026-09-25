@@ -189,25 +189,25 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                             role="menu"
                                             aria-label="Collections Submenu"
                                             className={cn(
-                                                'absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[460px] z-50 transition-all duration-300 ease-out',
+                                                'absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[560px] z-50 transition-all duration-300 ease-out',
                                                 collectionsDropdownOpen
                                                     ? 'opacity-100 translate-y-0 pointer-events-auto visible'
                                                     : 'opacity-0 -translate-y-2 pointer-events-none invisible',
                                             )}
                                         >
-                                            <div className="bg-ivory border border-border-stone p-6 shadow-[0_24px_48px_-12px_rgba(15,15,15,0.14)] backdrop-blur-xl">
+                                            <div className="bg-ivory border border-border-stone p-7 md:p-8 shadow-[0_24px_50px_-10px_rgba(15,15,15,0.16)] backdrop-blur-xl">
                                                 {/* Header */}
-                                                <div className="flex items-center justify-between border-b border-border-stone/60 pb-3 mb-4">
-                                                    <span className="text-[10px] font-semibold tracking-[0.28em] uppercase text-bronze">
+                                                <div className="flex items-center justify-between border-b border-border-stone/70 pb-3.5 mb-5">
+                                                    <span className="text-xs font-semibold tracking-[0.24em] uppercase text-bronze">
                                                         Architectural Reserves
                                                     </span>
-                                                    <span className="text-[10px] tracking-wider text-taupe font-mono">
+                                                    <span className="text-xs font-semibold tracking-wider text-taupe">
                                                         {collectionsList.length} Collections
                                                     </span>
                                                 </div>
 
                                                 {/* 2-Column Collection Grid */}
-                                                <div className="grid grid-cols-2 gap-x-5 gap-y-1.5">
+                                                <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                                                     {collectionsList.map((col, cIdx) => {
                                                         const isColActive = url.startsWith(
                                                             `/collections/${col.slug}`,
@@ -223,22 +223,27 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                                                 }
                                                                 role="menuitem"
                                                                 className={cn(
-                                                                    'group/item flex items-center justify-between py-2 px-2.5 transition-all duration-200 border border-transparent hover:border-border-stone/60 hover:bg-ivory-warm/60',
+                                                                    'group/item flex items-center justify-between py-3 px-3.5 transition-all duration-200 border border-transparent hover:border-border-stone/60 hover:bg-ivory-warm/70',
                                                                     isColActive &&
-                                                                        'bg-ivory-warm/50 border-bronze/40 font-medium',
+                                                                        'bg-ivory-warm/60 border-bronze/40',
                                                                 )}
                                                             >
                                                                 <span
                                                                     className={cn(
-                                                                        'font-serif text-[13px] tracking-wide transition-colors duration-200',
+                                                                        'text-sm font-semibold tracking-wide transition-colors duration-200',
                                                                         isColActive
-                                                                            ? 'text-bronze font-medium'
+                                                                            ? 'text-bronze'
                                                                             : 'text-graphite group-hover/item:text-bronze',
                                                                     )}
                                                                 >
                                                                     {col.name}
                                                                 </span>
-                                                                <span className="text-[10px] font-mono text-taupe/70 group-hover/item:text-bronze transition-colors">
+                                                                <span className={cn(
+                                                                    'text-xs font-semibold tracking-wider transition-colors',
+                                                                    isColActive
+                                                                        ? 'text-bronze'
+                                                                        : 'text-taupe/80 group-hover/item:text-bronze'
+                                                                )}>
                                                                     {String(
                                                                         cIdx + 1,
                                                                     ).padStart(
@@ -252,8 +257,8 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                                 </div>
 
                                                 {/* Footer Link: View All Collections */}
-                                                <div className="mt-4 pt-3.5 border-t border-border-stone/60 flex items-center justify-between">
-                                                    <span className="text-[10px] text-graphite-muted tracking-wider">
+                                                <div className="mt-5 pt-4 border-t border-border-stone/70 flex items-center justify-between">
+                                                    <span className="text-xs font-medium text-graphite-muted tracking-wider">
                                                         Natural Stone Masterworks
                                                     </span>
                                                     <Link
@@ -263,7 +268,7 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                                                                 false,
                                                             )
                                                         }
-                                                        className="group/all text-[11px] font-semibold text-bronze hover:text-graphite uppercase tracking-[0.16em] inline-flex items-center gap-1.5 transition-colors"
+                                                        className="group/all text-xs font-semibold text-bronze hover:text-graphite uppercase tracking-[0.2em] inline-flex items-center gap-2 transition-colors"
                                                     >
                                                         <span>View All Collections</span>
                                                         <span className="transition-transform duration-300 group-hover/all:translate-x-1">
