@@ -1029,21 +1029,53 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
-            'grey-granite-cobbles': {
-                src: '/images/elior/collections/cobble-stones/variety-grey-granite-cobbles.webp',
-                alt: 'Grey Granite Cobbles with hand-split masonry block face',
+            'white-granite-cobble-handcut': {
+                src: '/images/elior/collections/cobble-stones/variety-white-granite-cobble-handcut.webp',
+                alt: 'White Granite Cobble Handcut with natural split cleft texture',
             },
-            'black-basalt-cobbles': {
-                src: '/images/elior/collections/cobble-stones/variety-black-basalt-cobbles.webp',
-                alt: 'Black Basalt Cobbles with dense volcanic charcoal tone',
+            'black-granite-cobble-handcut': {
+                src: '/images/elior/collections/cobble-stones/variety-black-granite-cobble-handcut.webp',
+                alt: 'Black Granite Cobble Handcut with deep charcoal natural cleft face',
             },
-            'porphyry-cobbles': {
-                src: '/images/elior/collections/cobble-stones/variety-porphyry-cobbles.webp',
-                alt: 'Porphyry Cobbles with variegated earth tones',
+            'yellow-granite-cobble-handcut': {
+                src: '/images/elior/collections/cobble-stones/variety-yellow-granite-cobble-handcut.webp',
+                alt: 'Yellow Granite Cobble Handcut with warm honey-amber mineral tones',
             },
-            'sandstone-cobbles': {
-                src: '/images/elior/collections/cobble-stones/variety-sandstone-cobbles.webp',
-                alt: 'Sandstone Cobbles with hand-cut tumbled edges',
+            'pink-granite-cobble-handcut': {
+                src: '/images/elior/collections/cobble-stones/variety-pink-granite-cobble-handcut.webp',
+                alt: 'Pink Granite Cobble Handcut with crystalline rose feldspar matrix',
+            },
+            'white-granite-cobble-1inch-machine-cut': {
+                src: '/images/elior/collections/cobble-stones/variety-white-granite-cobble-1inch-machine-cut.webp',
+                alt: 'White Granite Cobble 1inch Machine Cut with precision calibrated edges',
+            },
+            'black-granite-cobbles-1inch-machine-cut': {
+                src: '/images/elior/collections/cobble-stones/variety-black-granite-cobbles-1inch-machine-cut.webp',
+                alt: 'Black Granite Cobbles 1inch Machine Cut with sharp linear profiles',
+            },
+            'black-granite-1inch-machine-cut-flaming': {
+                src: '/images/elior/collections/cobble-stones/variety-black-granite-1inch-machine-cut-flaming.webp',
+                alt: 'Black Granite 1inch Machine Cut Flaming with thermal-treated slip-resistant surface',
+            },
+            'white-1inch-machine-cut-flaming': {
+                src: '/images/elior/collections/cobble-stones/variety-white-1inch-machine-cut-flaming.webp',
+                alt: 'White 1inch Machine Cut Flaming with textured non-slip frost white face',
+            },
+            'black-granite-full-box-cut-flaming': {
+                src: '/images/elior/collections/cobble-stones/variety-black-granite-full-box-cut-flaming.webp',
+                alt: 'Black Granite Full Box Cut Flaming with 6-sided precision sawn geometry',
+            },
+            'white-granite-full-box-cut-flaming': {
+                src: '/images/elior/collections/cobble-stones/variety-white-granite-full-box-cut-flaming.webp',
+                alt: 'White Granite Full Box Cut Flaming with engineered dimensional accuracy',
+            },
+            'black-granite-1inch-machine-cut-bush-hammered': {
+                src: '/images/elior/collections/cobble-stones/variety-black-granite-1inch-machine-cut-bush-hammered.webp',
+                alt: 'Black Granite 1inch Machine Cut Bush Hammered with uniform stippled grip texture',
+            },
+            'lime-black-cobbles-handcut': {
+                src: '/images/elior/collections/cobble-stones/variety-lime-black-cobbles-handcut.webp',
+                alt: 'Lime Black Cobbles Handcut with authentic limestone cleft relief',
             },
         },
     },
