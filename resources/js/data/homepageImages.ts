@@ -184,6 +184,6 @@ export const HOMEPAGE_IMAGES = {
     // 09 — FINAL BRAND STATEMENT: Full-width closing visual moment
     finalStatement: {
         src: '/images/elior/homepage/homepage-final-statement.webp',
-        alt: 'Architectural stone residence at twilight harmonizing with nature',
+        alt: 'Monumental natural stone architectural retreat in Udaipur overlooking tranquil waters and the Aravali hills at dusk',
     },
 };
