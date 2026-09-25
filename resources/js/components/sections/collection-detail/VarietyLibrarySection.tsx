@@ -58,7 +58,7 @@ export function VarietyLibrarySection({
                 {varieties.length > 0 ? (
                     <div
                         ref={gridRef}
-                        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+                        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
                     >
                         {varieties.map((variety, idx) => {
                             const fallback =
@@ -92,7 +92,7 @@ export function VarietyLibrarySection({
                                             />
                                             {/* Subtle Index Tag */}
                                             <span className="bg-graphite/85 text-ivory absolute top-3 left-3 px-2 py-0.5 text-[10px] font-medium tracking-widest uppercase backdrop-blur-xs">
-                                                0{idx + 1}
+                                                {String(idx + 1).padStart(2, '0')}
                                             </span>
                                             {/* Hover Inspection Badge */}
                                             <div className="bg-graphite/30 opacity-0 group-hover/img:opacity-100 absolute inset-0 flex items-center justify-center transition-opacity duration-300">
@@ -117,19 +117,19 @@ export function VarietyLibrarySection({
                                         </button>
 
                                         {/* Variety Meta */}
-                                        <div className="p-6">
+                                        <div className="p-5 sm:p-5 lg:p-5 xl:p-6">
                                             {variety.color_family && (
                                                 <span className="text-taupe block text-[10px] tracking-[0.24em] uppercase">
                                                     {variety.color_family}
                                                 </span>
                                             )}
 
-                                            <h3 className="text-graphite mt-1.5 font-serif text-xl font-normal tracking-wide group-hover:text-bronze transition-colors duration-300">
+                                            <h3 className="text-graphite mt-1.5 font-serif text-lg xl:text-xl font-normal tracking-wide group-hover:text-bronze transition-colors duration-300">
                                                 {variety.name}
                                             </h3>
 
                                             {variety.description && (
-                                                <p className="text-graphite-muted mt-3 line-clamp-3 text-xs leading-relaxed font-light">
+                                                <p className="text-graphite-muted mt-2.5 line-clamp-3 text-xs leading-relaxed font-light">
                                                     {variety.description}
                                                 </p>
                                             )}
@@ -137,7 +137,7 @@ export function VarietyLibrarySection({
                                             {/* Finish Tags */}
                                             {variety.finishes &&
                                                 variety.finishes.length > 0 && (
-                                                    <div className="mt-4 flex flex-wrap gap-1.5">
+                                                    <div className="mt-3.5 flex flex-wrap gap-1.5">
                                                         {variety.finishes.map(
                                                             (finish) => (
                                                                 <span
@@ -154,7 +154,7 @@ export function VarietyLibrarySection({
                                     </div>
 
                                     {/* Actions: Inspect & Enquire */}
-                                    <div className="border-border-stone flex items-center justify-between border-t p-6 pt-4">
+                                    <div className="border-border-stone flex items-center justify-between border-t p-5 pt-3.5 sm:p-5 sm:pt-3.5 lg:p-5 lg:pt-3.5 xl:p-6 xl:pt-4">
                                         <button
                                             type="button"
                                             onClick={() => setActiveModalVariety(variety)}
