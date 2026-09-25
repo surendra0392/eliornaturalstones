@@ -497,21 +497,69 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
-            'charcoal-cleft-slate': {
-                src: '/images/elior/collections/slate-stone/variety-charcoal-cleft-slate.webp',
-                alt: 'Charcoal Cleft Slate with rich tactile relief',
+            'black-slate': {
+                src: '/images/elior/collections/slate-stone/variety-black-slate.webp',
+                alt: 'Black Slate natural cleft surface with authentic riven texture',
             },
-            'kund-multi-slate': {
-                src: '/images/elior/collections/slate-stone/variety-kund-multi-slate.webp',
-                alt: 'Kund Multi Slate with natural earth tones',
+            'black-rustic': {
+                src: '/images/elior/collections/slate-stone/variety-black-rustic.webp',
+                alt: 'Black Rustic slate slab with organic iron-oxide rust markings',
             },
-            'copper-quartzite-slate': {
-                src: '/images/elior/collections/slate-stone/variety-copper-quartzite-slate.webp',
-                alt: 'Copper Quartzite Slate with subtle bronze sheen',
+            'indian-autumn': {
+                src: '/images/elior/collections/slate-stone/variety-indian-autumn.webp',
+                alt: 'Indian Autumn slate slab with warm autumnal earthy tones',
             },
-            'silver-grey-slate': {
-                src: '/images/elior/collections/slate-stone/variety-silver-grey-slate.webp',
-                alt: 'Silver Grey Slate with calm linear foliation',
+            'gold-rustic': {
+                src: '/images/elior/collections/slate-stone/variety-gold-rustic.webp',
+                alt: 'Gold Rustic slate slab with golden ochre and weathered markings',
+            },
+            'california-gold': {
+                src: '/images/elior/collections/slate-stone/variety-california-gold.webp',
+                alt: 'California Gold exotic multi-tonal slate slab with bronze accents',
+            },
+            'sp-autumn': {
+                src: '/images/elior/collections/slate-stone/variety-sp-autumn.webp',
+                alt: 'SP Autumn slate with intense warm amber and terracotta waves',
+            },
+            'multi-colour': {
+                src: '/images/elior/collections/slate-stone/variety-multi-colour.webp',
+                alt: 'Multi Colour natural slate slab with polychromatic earthy mosaic',
+            },
+            'grey-slate': {
+                src: '/images/elior/collections/slate-stone/variety-grey-slate.webp',
+                alt: 'Grey Slate slab with fine laminar foliation and neutral grey tone',
+            },
+            'chocolate': {
+                src: '/images/elior/collections/slate-stone/variety-chocolate.webp',
+                alt: 'Chocolate slate slab with uniform rich cocoa and mocha tones',
+            },
+            'm-green': {
+                src: '/images/elior/collections/slate-stone/variety-m-green.webp',
+                alt: 'M Green slate slab with deep olive and forest green layers',
+            },
+            'n-green': {
+                src: '/images/elior/collections/slate-stone/variety-n-green.webp',
+                alt: 'N Green slate slab with tranquil sage and jade green minerals',
+            },
+            's-white': {
+                src: '/images/elior/collections/slate-stone/variety-s-white.webp',
+                alt: 'S White luminous silver-white micaceous quartzite slate slab',
+            },
+            'black-buching': {
+                src: '/images/elior/collections/slate-stone/variety-black-buching.webp',
+                alt: 'Black Buching architectural split-face chiseled wall cladding slate',
+            },
+            'n-green-buching': {
+                src: '/images/elior/collections/slate-stone/variety-n-green-buching.webp',
+                alt: 'N Green Buching hand-chiseled textured split face cladding slate',
+            },
+            'lime-green-buching': {
+                src: '/images/elior/collections/slate-stone/variety-lime-green-buching.webp',
+                alt: 'Lime Green Buching radiant pale lime chiseled split slate',
+            },
+            'lime-pink-buching': {
+                src: '/images/elior/collections/slate-stone/variety-lime-pink-buching.webp',
+                alt: 'Lime Pink Buching artistic blush-pink and lime chiseled split slate',
             },
         },
     },
