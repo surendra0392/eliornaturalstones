@@ -1085,7 +1085,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
         index: '07',
         heroImage: {
             src: '/images/elior/collections/pebbles/hero.webp',
-            alt: 'Selected water-smoothed natural river pebbles in contemplative landscape installation',
+            alt: 'Minimalist architectural estate featuring sculpted white and black natural stone pebble beds, reflection pool, and stepping slabs',
         },
         intro: {
             statement:
@@ -1097,7 +1097,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             ],
             image: {
                 src: '/images/elior/collections/pebbles/intro.webp',
-                alt: 'Detailed view of water-smoothed colorful river pebbles',
+                alt: 'Tactile macro study of smooth white marble, matte black basalt, and desert tan pebbles beside a hand-chiseled granite curb',
             },
         },
         characteristics: [
