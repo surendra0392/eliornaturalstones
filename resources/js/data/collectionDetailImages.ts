@@ -1137,7 +1137,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Submerged dark pebble floors that amplify surface reflections and create liquid stillness.',
                 image: {
                     src: '/images/elior/collections/pebbles/app-water-basins.webp',
-                    alt: 'Water feature with smooth stone pebble bed',
+                    alt: 'Submerged dark pebble bed in a luxury architectural reflection pool',
                 },
             },
             {
@@ -1146,7 +1146,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Draped pebble beds beneath interior bamboo planters and architectural open staircases.',
                 image: {
                     src: '/images/elior/collections/pebbles/app-zen-gardens.webp',
-                    alt: 'Architectural interior garden with natural stone pebbles',
+                    alt: 'Interior lightwell atrium featuring white pebble groundcover and bamboo planter',
                 },
             },
             {
@@ -1155,7 +1155,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Contemplative raked gravel and pebble zones framing solitary architectural monoliths.',
                 image: {
                     src: '/images/elior/collections/pebbles/app-planters.webp',
-                    alt: 'Minimalist landscape courtyard with river pebbles',
+                    alt: 'Serene Japanese zen courtyard with raked sand, river pebbles, and weathered monolith',
                 },
             },
             {
@@ -1164,7 +1164,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Permeable, elegant inorganic groundcover conserving soil moisture while maintaining clean borders.',
                 image: {
                     src: '/images/elior/collections/pebbles/app-groundcover.webp',
-                    alt: 'Landscape tree basin dressed in river pebbles',
+                    alt: 'Recessed circular tree basin with amber river pebble mulch and flush metal edging',
                 },
             },
         ],
