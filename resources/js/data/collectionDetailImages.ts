@@ -549,6 +549,10 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 src: '/images/elior/collections/slate-stone/variety-black-buching.webp',
                 alt: 'Black Buching architectural split-face chiseled wall cladding slate',
             },
+            'black-chipout': {
+                src: '/images/elior/collections/slate-stone/variety-black-chipout.webp',
+                alt: 'Black Chipout architectural hand-dressed edge-chipped black slate',
+            },
             'n-green-buching': {
                 src: '/images/elior/collections/slate-stone/variety-n-green-buching.webp',
                 alt: 'N Green Buching hand-chiseled textured split face cladding slate',
@@ -556,6 +560,10 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             'lime-green-buching': {
                 src: '/images/elior/collections/slate-stone/variety-lime-green-buching.webp',
                 alt: 'Lime Green Buching radiant pale lime chiseled split slate',
+            },
+            'pink-buching': {
+                src: '/images/elior/collections/slate-stone/variety-pink-buching.webp',
+                alt: 'Pink Buching hammer-dressed buching textured pink slate',
             },
             'lime-pink-buching': {
                 src: '/images/elior/collections/slate-stone/variety-lime-pink-buching.webp',
@@ -1183,6 +1191,67 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'natural-river-white-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-river-white-unpolished-pebbles.webp',
+                alt: 'Natural River White Unpolished Pebbles with soft off-white tonality',
+            },
+            'white-unpolished-pebbles-marble-40-60mm': {
+                src: '/images/elior/collections/pebbles/variety-white-unpolished-pebbles-marble-40-60mm.webp',
+                alt: 'White Unpolished Pebbles (Marble) 40-60 mm with crystalline pure white tumbled surface',
+            },
+            'white-unpolished-pebbles-marble-10-20mm': {
+                src: '/images/elior/collections/pebbles/variety-white-unpolished-pebbles-marble-10-20mm.webp',
+                alt: 'White Unpolished Pebbles (Marble) 10-20 mm with delicate crystalline fine white texture',
+            },
+            'white-polished-pebbles-40-60mm': {
+                src: '/images/elior/collections/pebbles/variety-white-polished-pebbles-40-60mm.webp',
+                alt: 'White Polished Pebbles (Grade A+) 40-60 mm with high-gloss pure white specular luster',
+            },
+            'natural-river-black-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-river-black-unpolished-pebbles.webp',
+                alt: 'Natural River Black Unpolished Pebbles with velvety matte charcoal basalt texture',
+            },
+            'natural-black-granite-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-black-granite-unpolished-pebbles.webp',
+                alt: 'Natural Black Granite Unpolished Pebbles with dotted obsidian granite matrix',
+            },
+            'black-polished-pebbles-20-30mm': {
+                src: '/images/elior/collections/pebbles/variety-black-polished-pebbles-20-30mm.webp',
+                alt: 'Black Polished Pebbles (Grade A+) 20-30 mm with high-gloss mirror jet black finish',
+            },
+            'z-black-pebbles-20-30mm': {
+                src: '/images/elior/collections/pebbles/variety-z-black-pebbles-20-30mm.webp',
+                alt: 'Z-Black Pebbles 20-30 mm with monolithic deep obsidian Z-black character',
+            },
+            'natural-rainbow-7-strips-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-rainbow-7-strips-unpolished-pebbles.webp',
+                alt: 'Natural Rainbow (7-Strips) Unpolished Pebbles with concentric earth striations',
+            },
+            'natural-river-brown-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-river-brown-unpolished-pebbles.webp',
+                alt: 'Natural River Brown Unpolished Pebbles with sun-warmed desert amber-brown tonality',
+            },
+            'natural-teak-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-teak-unpolished-pebbles.webp',
+                alt: 'Natural Teak Unpolished Pebbles with woodgrain teak striations and biscuit ochre warmth',
+            },
+            'natural-red-blood-red-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-red-blood-red-unpolished-pebbles.webp',
+                alt: 'Natural Red (Blood-Red) Unpolished Pebbles with deep iron-rich blood red tones',
+            },
+            'natural-bidasar-multicolour-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-bidasar-multicolour-unpolished-pebbles.webp',
+                alt: 'Natural Bidasar Multicolour Unpolished Pebbles with antique dendritic veining',
+            },
+            'natural-grey-zebra-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-grey-zebra-unpolished-pebbles.webp',
+                alt: 'Natural Grey (Zebra-Grey) Unpolished Pebbles with linear quartz mineral bands',
+            },
+            'natural-river-mix-unpolished-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-river-mix-unpolished-pebbles.webp',
+                alt: 'Natural River Mix Unpolished Pebbles with harmonious riverbed earth spectrum',
+            },
+            // Backward-compatible aliases
             'white-marble-pebbles': {
                 src: '/images/elior/collections/pebbles/variety-white-marble-pebbles.webp',
                 alt: 'White Marble Pebbles with crystalline pure white tumbled surface',

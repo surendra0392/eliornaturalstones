@@ -401,12 +401,12 @@ class VarietySeeder extends Seeder
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'N Green Buching',
-                    'slug' => 'n-green-buching',
-                    'color_family' => 'Textured Sage & Forest Green',
-                    'finishes' => ['Buching (Chiseled Split Face)', 'Natural Cleft'],
-                    'description' => 'Hand-chiseled buching finish applied to North Green slate, combining tactile rocky projections with calm, refreshing natural green mineral tones.',
-                    'features' => ['Hand-chiseled textured face', 'Earthy green stone relief', 'Dynamic dimensional wall cladding'],
+                    'name' => 'Black Chipout',
+                    'slug' => 'black-chipout',
+                    'color_family' => 'Charcoal & Textured Slate',
+                    'finishes' => ['Chipout Split Face', 'Natural Cleft'],
+                    'description' => 'Architectural hand-dressed chipout black slate with distinct edge-chipped relief that adds striking shadows and textural drama to exterior and interior statement walls.',
+                    'features' => ['Hand-chipped tactile margins', 'Deep non-reflective charcoal depth', 'Dramatic shadow relief under directional lighting'],
                     'sort_order' => 14,
                     'is_featured' => true,
                 ],
@@ -421,12 +421,12 @@ class VarietySeeder extends Seeder
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Lime Pink Buching',
+                    'name' => 'Pink Buching',
                     'slug' => 'lime-pink-buching',
-                    'color_family' => 'Blush Pink & Pale Lime-Gold',
+                    'color_family' => 'Blush Pink & Natural Slate',
                     'finishes' => ['Buching (Chiseled Split Face)', 'Natural Cleft'],
-                    'description' => 'A rare and artistic stone displaying an alluring interplay of soft blush-pink and pale lime-ochre hues across a heavily chiseled buching split surface.',
-                    'features' => ['Artistic blush-pink and lime duality', 'Sculptural hammer-dressed texture', 'Stunning ambient raking light interplay'],
+                    'description' => 'Artisanal hammer-dressed buching split face on natural pink slate, combining delicate blush and terracotta undertones with rugged dimensional stone relief.',
+                    'features' => ['Hand-chiseled textured face', 'Subtle blush and rose mineral tones', 'Sculptural feature wall character'],
                     'sort_order' => 16,
                     'is_featured' => true,
                 ],
@@ -719,63 +719,153 @@ class VarietySeeder extends Seeder
             ],
             'pebbles' => [
                 [
-                    'name' => 'White Marble Pebbles',
-                    'slug' => 'white-marble-pebbles',
-                    'color_family' => 'Crystalline Pure White',
-                    'finishes' => ['Tumbled', 'Natural Matte'],
-                    'description' => 'Pure crystalline Makrana white marble stones gently tumbled into smooth organic forms, reflecting ambient light with luminous purity across zen courtyards, planters, and dry garden scapes.',
-                    'features' => ['Crystalline white mineral clarity', 'Smooth tumbled ergonomic contours', 'Bright reflective garden contrast'],
+                    'name' => 'Natural River White Unpolished Pebbles',
+                    'slug' => 'natural-river-white-unpolished-pebbles',
+                    'color_family' => 'Off-White & Soft Ivory',
+                    'finishes' => ['Unpolished', 'Natural River-Tumbled'],
+                    'description' => 'Naturally tumbled unpolished river stones with soft off-white and pale cream tones, bringing calming organic brightness to zen courtyards, planters, and water features.',
+                    'features' => ['Natural river-smoothed form', 'Gentle off-white tonality', 'Weatherproof mineral durability'],
                     'sort_order' => 1,
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Black Plain Unpolished Stone Pebbles',
-                    'slug' => 'black-plain-unpolished-stone-pebbles',
-                    'color_family' => 'Natural Matte Charcoal & Basalt',
-                    'finishes' => ['Unpolished', 'Natural Tumbled'],
-                    'description' => 'Naturally tumbled unpolished black basalt stones offering soft velvety charcoal tones that deepen to dramatic jet obsidian when touched by morning dew or water sprays.',
-                    'features' => ['Soft matte non-glare surface', 'Deepens to obsidian when wet', 'Minimalist architectural grounding'],
+                    'name' => 'White Unpolished Pebbles (Marble) 40-60 mm',
+                    'slug' => 'white-unpolished-pebbles-marble-40-60mm',
+                    'color_family' => 'Crystalline Pure White',
+                    'finishes' => ['Unpolished', 'Tumbled Marble'],
+                    'description' => 'Premium 40-60mm crystalline white marble pebbles softly rounded by tumbling, creating luminous architectural groundcover and courtyard highlights.',
+                    'features' => ['Bold 40-60mm stone grading', 'Crystalline white reflectivity', 'Architectural groundcover clarity'],
                     'sort_order' => 2,
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Brown Lining Rainbow Unpolished Stone Pebbles',
-                    'slug' => 'brown-lining-rainbow-unpolished-stone-pebbles',
-                    'color_family' => 'Variegated Earth & Rainbow Striations',
-                    'finishes' => ['Unpolished', 'Natural Sedimentary'],
-                    'description' => 'Fascinating unpolished sedimentary pebbles displaying concentric warm brown linings, ochre rings, and earthy rainbow bands sculpted by ancient geological deposition.',
-                    'features' => ['Natural concentric mineral rings', 'Rich variegated earth palette', 'Distinct tactile accent character'],
+                    'name' => 'White Unpolished Pebbles (Marble) 10-20 mm',
+                    'slug' => 'white-unpolished-pebbles-marble-10-20mm',
+                    'color_family' => 'Crystalline Fine White',
+                    'finishes' => ['Unpolished', 'Fine Tumbled Marble'],
+                    'description' => 'Fine 10-20mm tumbled white marble stones offering delicate texture and immaculate white groundcover around planters, pathways, and water basins.',
+                    'features' => ['Delicate 10-20mm fine grading', 'Uniform crystalline white tone', 'Refined planter and path topping'],
                     'sort_order' => 3,
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Desert Brown Stone Pebbles',
-                    'slug' => 'desert-brown-stone-pebbles',
-                    'color_family' => 'Warm Desert Tan & Amber',
-                    'finishes' => ['Unpolished', 'Water-Worn'],
-                    'description' => 'Earthy golden-brown river pebbles evoking sun-drenched desert terrains, providing natural warmth and seamless transitions around succulent beds and stone walkways.',
-                    'features' => ['Sun-warmed desert buff tonality', 'Water-softened organic edges', 'Natural thermal insulation for soils'],
+                    'name' => 'White Polished Pebbles (Grade A+) 40-60 mm',
+                    'slug' => 'white-polished-pebbles-40-60mm',
+                    'color_family' => 'High-Gloss Pure White',
+                    'finishes' => ['Polished (Grade A+)', 'Water-Resistant Luster'],
+                    'description' => 'Grade A+ mirror-polished 40-60mm white pebbles exhibiting brilliant specular highlights and silky smooth contours for luxury indoor atriums and spa displays.',
+                    'features' => ['Grade A+ specular polish', 'Silky tactile contouring', 'Luxury indoor atrium permanence'],
                     'sort_order' => 4,
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Red Unpolished Stone Pebbles',
-                    'slug' => 'red-unpolished-stone-pebbles',
-                    'color_family' => 'Terracotta & Jasper Red',
-                    'finishes' => ['Unpolished', 'Natural Cleft Tumbled'],
-                    'description' => 'Rich iron-oxide red and terracotta unpolished pebbles introducing bold chromatic warmth and rustic earth permanence to courtyard water features and landscape borders.',
-                    'features' => ['Deep iron-rich terracotta hues', 'Organic non-reflective matte face', 'High weather & freeze resilience'],
+                    'name' => 'Natural River Black Unpolished Pebbles',
+                    'slug' => 'natural-river-black-unpolished-pebbles',
+                    'color_family' => 'Matte Charcoal & Basalt Black',
+                    'finishes' => ['Unpolished', 'Natural Tumbled'],
+                    'description' => 'Naturally tumbled unpolished black basalt river stones presenting velvety charcoal tones that intensify to deep obsidian when wet.',
+                    'features' => ['Matte non-glare surface', 'Deepens to obsidian when wet', 'Minimalist architectural grounding'],
                     'sort_order' => 5,
                     'is_featured' => true,
                 ],
                 [
-                    'name' => 'Forest Green Unpolished Stone Pebbles',
-                    'slug' => 'forest-green-unpolished-stone-pebbles',
-                    'color_family' => 'Deep Moss & Serpentine Green',
-                    'finishes' => ['Unpolished', 'Natural Tumbled'],
-                    'description' => 'Serpentine-rich unpolished pebbles in organic forest and olive green tones, harmonizing seamlessly with foliage, moss gardens, and tranquil water reflection basins.',
-                    'features' => ['Earthy moss and jade undertones', 'Tactile unpolished natural texture', 'Harmonious botanical integration'],
+                    'name' => 'Natural Black Granite Unpolished Pebbles',
+                    'slug' => 'natural-black-granite-unpolished-pebbles',
+                    'color_family' => 'Dotted Granite Obsidian',
+                    'finishes' => ['Unpolished', 'Tumbled Granite'],
+                    'description' => 'Dense unpolished black granite pebbles characterized by subtle white crystalline micro-dots that provide textural depth and enduring strength.',
+                    'features' => ['Dotted igneous granite texture', 'High compressive strength', 'Rich earthy basalt tone'],
                     'sort_order' => 6,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Black Polished Pebbles (Grade A+) 20-30 mm',
+                    'slug' => 'black-polished-pebbles-20-30mm',
+                    'color_family' => 'High-Gloss Jet Black',
+                    'finishes' => ['Polished (Grade A+)', 'Ultra-Smooth'],
+                    'description' => 'Premium Grade A+ mirror-polished 20-30mm jet black pebbles featuring deep mirror reflectivity and sleek tactile curves for contemporary architectural accents.',
+                    'features' => ['Grade A+ deep mirror gloss', 'Uniform 20-30mm pebble module', 'Striking contrast in light stone beds'],
+                    'sort_order' => 7,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Z-Black Pebbles 20-30 mm',
+                    'slug' => 'z-black-pebbles-20-30mm',
+                    'color_family' => 'Intense Obsidian Z-Black',
+                    'finishes' => ['Semi-Polished / Tumbled', 'Smooth Matte'],
+                    'description' => 'Hand-selected 20-30mm Z-Black pebbles presenting an intense monolithic obsidian presence with refined contouring and exceptional weather permanence.',
+                    'features' => ['Monolithic deep Z-black tone', 'Selected 20-30mm grading', 'Centuries-durable volcanic stone'],
+                    'sort_order' => 8,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural Rainbow (7-Strips) Unpolished Pebbles',
+                    'slug' => 'natural-rainbow-7-strips-unpolished-pebbles',
+                    'color_family' => 'Variegated Earth & Rainbow Striations',
+                    'finishes' => ['Unpolished', 'Natural Sedimentary'],
+                    'description' => 'Fascinating unpolished sedimentary pebbles displaying multi-layered concentric rainbow bands, ochre rings, and earthy striations formed over geological epochs.',
+                    'features' => ['7-strips concentric sedimentary banding', 'Warm variegated earth palette', 'Distinct botanical bed accent'],
+                    'sort_order' => 9,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural River Brown Unpolished Pebbles',
+                    'slug' => 'natural-river-brown-unpolished-pebbles',
+                    'color_family' => 'Sun-Warmed Amber & Desert Brown',
+                    'finishes' => ['Unpolished', 'Water-Worn River Stone'],
+                    'description' => 'Earthy golden-brown river pebbles evoking sun-drenched desert terrains and warm honey hues that create harmonious transitions around succulent gardens and walkways.',
+                    'features' => ['Warm desert amber-brown tonality', 'Water-softened organic contours', 'Natural thermal protection for landscape soil'],
+                    'sort_order' => 10,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural Teak Unpolished Pebbles',
+                    'slug' => 'natural-teak-unpolished-pebbles',
+                    'color_family' => 'Teak Wood & Biscuit Ochre',
+                    'finishes' => ['Unpolished', 'Natural Grain Tumbled'],
+                    'description' => 'Unique sandstone-derived unpolished pebbles featuring undulating woodgrain-like teak bands and warm yellow-biscuit tones that soften stone hardscapes.',
+                    'features' => ['Natural woodgrain teak striations', 'Warm yellow-biscuit warmth', 'Tactile non-slip surface'],
+                    'sort_order' => 11,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural Red (Blood-Red) Unpolished Pebbles',
+                    'slug' => 'natural-red-blood-red-unpolished-pebbles',
+                    'color_family' => 'Iron Terracotta & Blood Red',
+                    'finishes' => ['Unpolished', 'Natural Cleft Tumbled'],
+                    'description' => 'Rich iron-oxide red and terracotta unpolished pebbles introducing bold chromatic warmth and rustic permanence to courtyards and water feature borders.',
+                    'features' => ['Deep iron-rich blood red tones', 'Organic non-reflective matte face', 'High weather & freeze resilience'],
+                    'sort_order' => 12,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural Bidasar Multicolour Unpolished Pebbles',
+                    'slug' => 'natural-bidasar-multicolour-unpolished-pebbles',
+                    'color_family' => 'Antique Ochre, Forest & Rust',
+                    'finishes' => ['Unpolished', 'Natural Mineral Matrix'],
+                    'description' => 'Exotic unpolished Bidasar pebbles displaying intricate dendritic veining and an antique polychromatic blend of moss green, rust, and golden ochre.',
+                    'features' => ['Antique multicolour mineral tapestry', 'Dendritic fossilized veining', 'Exotic focal accent in architectural beds'],
+                    'sort_order' => 13,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural Grey (Zebra-Grey) Unpolished Pebbles',
+                    'slug' => 'natural-grey-zebra-unpolished-pebbles',
+                    'color_family' => 'Pewter & Zebra Striped Charcoal',
+                    'finishes' => ['Unpolished', 'Natural Riven Tumbled'],
+                    'description' => 'Distinctive architectural grey river stones marked with striking linear zebra-like quartz bands that contrast with modern monolithic concrete and stone pavers.',
+                    'features' => ['Zebra-striped quartz mineral bands', 'Neutral pewter and charcoal tone', 'Understated modern aesthetic'],
+                    'sort_order' => 14,
+                    'is_featured' => true,
+                ],
+                [
+                    'name' => 'Natural River Mix Unpolished Pebbles',
+                    'slug' => 'natural-river-mix-unpolished-pebbles',
+                    'color_family' => 'Multi-Tonal Organic Earth Mix',
+                    'finishes' => ['Unpolished', 'Natural River Blended'],
+                    'description' => 'A harmonious natural blend of river-smoothed stones spanning ivories, greys, warm ambers, and charcoal, creating authentic riverbed compositions.',
+                    'features' => ['Harmonious riverbed spectrum', 'Smooth natural water-carved forms', 'Universal exterior landscaping adaptability'],
+                    'sort_order' => 15,
                     'is_featured' => true,
                 ],
             ],
@@ -879,7 +969,7 @@ class VarietySeeder extends Seeder
                 ->delete();
 
             foreach ($varieties as $varietyData) {
-                Variety::updateOrCreate(
+                $variety = Variety::updateOrCreate(
                     [
                         'collection_id' => $collection->id,
                         'slug' => $varietyData['slug'],
@@ -896,6 +986,53 @@ class VarietySeeder extends Seeder
                         'sort_order' => $varietyData['sort_order'],
                     ]
                 );
+
+                // Attach authentic swatch image to 'slab' media collection if available on disk
+                $candidatePaths = [
+                    public_path("images/elior/collections/{$collectionSlug}/variety-{$varietyData['slug']}.webp"),
+                    public_path("images/elior/collections/{$collectionSlug}/variety-{$varietyData['slug']}.jpg"),
+                    public_path("images/elior/collections/{$collectionSlug}/variety-{$varietyData['slug']}.png"),
+                ];
+
+                // Known aliases / fallbacks
+                if ($varietyData['slug'] === 'black-galaxy-granite') {
+                    $candidatePaths[] = public_path('images/elior/collections/granites/variety-black-galaxy.webp');
+                } elseif ($varietyData['slug'] === 'steel-grey') {
+                    $candidatePaths[] = public_path('images/elior/collections/granites/variety-steel-grey-granite.webp');
+                } elseif ($varietyData['slug'] === 'chima-pink-granite') {
+                    $candidatePaths[] = public_path('images/elior/collections/granites/variety-chima-pink.webp');
+                } elseif ($varietyData['slug'] === 'lime-pink-buching') {
+                    $candidatePaths[] = public_path('images/elior/collections/slate-stone/variety-pink-buching.webp');
+                } elseif ($varietyData['slug'] === 'lime-black-cobbles-handcut') {
+                    $candidatePaths[] = public_path('images/elior/collections/cobble-stones/variety-lime-black-cobbles.webp');
+                } elseif ($varietyData['slug'] === 'white-unpolished-pebbles-marble-40-60mm') {
+                    $candidatePaths[] = public_path('images/elior/collections/pebbles/variety-white-marble-pebbles.webp');
+                } elseif ($varietyData['slug'] === 'natural-river-black-unpolished-pebbles') {
+                    $candidatePaths[] = public_path('images/elior/collections/pebbles/variety-black-plain-unpolished-stone-pebbles.webp');
+                } elseif ($varietyData['slug'] === 'natural-rainbow-7-strips-unpolished-pebbles') {
+                    $candidatePaths[] = public_path('images/elior/collections/pebbles/variety-brown-lining-rainbow-unpolished-stone-pebbles.webp');
+                } elseif ($varietyData['slug'] === 'natural-river-brown-unpolished-pebbles') {
+                    $candidatePaths[] = public_path('images/elior/collections/pebbles/variety-desert-brown-stone-pebbles.webp');
+                } elseif ($varietyData['slug'] === 'natural-red-blood-red-unpolished-pebbles') {
+                    $candidatePaths[] = public_path('images/elior/collections/pebbles/variety-red-unpolished-stone-pebbles.webp');
+                }
+
+                $resolvedPath = null;
+                foreach ($candidatePaths as $candidate) {
+                    if (file_exists($candidate)) {
+                        $resolvedPath = $candidate;
+                        break;
+                    }
+                }
+
+                if (! app()->runningUnitTests() && $resolvedPath && ! $variety->hasMedia('slab')) {
+                    $variety->addMedia($resolvedPath)
+                        ->preservingOriginal()
+                        ->withCustomProperties([
+                            'alt_text' => $variety->name,
+                        ])
+                        ->toMediaCollection('slab');
+                }
             }
         }
     }
