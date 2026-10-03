@@ -983,7 +983,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Load-bearing avenues paved with granite or basalt cobbles that endure generations of vehicular traffic.',
                 image: {
                     src: '/images/elior/collections/cobble-stones/app-courtyards.webp',
-                    alt: 'Cobblestone driveway paving with authentic stone blocks',
+                    alt: 'Grand private estate driveway paved with natural hand-cut granite cobbles in segmental fan arches',
                 },
             },
             {
