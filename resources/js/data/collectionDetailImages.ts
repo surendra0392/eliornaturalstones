@@ -269,7 +269,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Resilient worktops and island surrounds impervious to hot pans and acidic exposure.',
                 image: {
                     src: '/images/elior/collections/granites/app-worksurfaces.webp',
-                    alt: 'Architectural kitchen with dark honed stone worktops',
+                    alt: 'Architectural kitchen island and worktops in honed charcoal granite with waterfall edges',
                 },
             },
             {
@@ -278,7 +278,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Ventilated rainscreens and rusticated base plinths grounding buildings in geological permanence.',
                 image: {
                     src: '/images/elior/collections/granites/app-facades.webp',
-                    alt: 'Contemporary residence with stone-clad facade',
+                    alt: 'Monolithic architectural facade clad in large-format flamed granite panels with rusticated stone base',
                 },
             },
             {
@@ -287,7 +287,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'High-compressive stone slabs designed for airports, corporate headquarters, and civic halls.',
                 image: {
                     src: '/images/elior/collections/granites/app-demanding-floors.webp',
-                    alt: 'Spacious architectural atrium with honed stone floor',
+                    alt: 'Corporate headquarters atrium featuring high-traffic large-format honed granite floor slabs',
                 },
             },
             {
@@ -296,7 +296,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Solid carved steps, retaining plinths, and outdoor seating blocks connecting architecture to site.',
                 image: {
                     src: '/images/elior/collections/granites/app-monolithic-furniture.webp',
-                    alt: 'Outdoor architectural stone terrace and landscaping',
+                    alt: 'Modernist terrace featuring solid carved granite steps, retaining plinths, and bench seating',
                 },
             },
         ],
