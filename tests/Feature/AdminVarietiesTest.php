@@ -6,7 +6,9 @@ use App\Models\Variety;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\CollectionSeeder;
 use Database\Seeders\VarietySeeder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -86,32 +88,35 @@ test('04: Variety list endpoint /api/v1/admin/varieties works and returns valid 
 
 test('05: Variety detail endpoint /api/v1/admin/varieties/{id} works', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     $response = $this->actingAs($admin)
         ->getJson("/api/v1/admin/varieties/{$variety->id}");
 
     $response->assertOk()
         ->assertJsonPath('data.id', $variety->id)
-        ->assertJsonPath('data.slug', 'calacatta-gold')
-        ->assertJsonPath('data.name', 'Calacatta Gold');
+        ->assertJsonPath('data.slug', $variety->slug)
+        ->assertJsonPath('data.name', $variety->name);
 });
 
 test('06: Search works by variety name, slug, and collection name', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     // Search by variety name
+    $searchTerm = explode(' ', $variety->name)[0];
     $resName = $this->actingAs($admin)
-        ->getJson('/api/v1/admin/varieties?search=Statuario');
+        ->getJson('/api/v1/admin/varieties?search=' . urlencode($searchTerm));
     $resName->assertOk();
     $names = collect($resName->json('data'))->pluck('name');
-    expect($names)->toContain('Statuario Extra');
+    expect($names)->toContain($variety->name);
 
     // Search by variety slug
     $resSlug = $this->actingAs($admin)
-        ->getJson('/api/v1/admin/varieties?search=carrara-bianco');
-    $resSlug->assertOk()
-        ->assertJsonPath('data.0.slug', 'carrara-bianco');
+        ->getJson('/api/v1/admin/varieties?search=' . urlencode($variety->slug));
+    $resSlug->assertOk();
+    $slugs = collect($resSlug->json('data'))->pluck('slug');
+    expect($slugs)->toContain($variety->slug);
 
     // Search by parent collection name
     $resCol = $this->actingAs($admin)
@@ -144,7 +149,7 @@ test('07: Collection filtering works correctly by slug or id', function () {
 test('08: Status filtering works correctly (all, active, inactive)', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
 
-    $variety = Variety::where('slug', 'arabescato-vagli')->firstOrFail();
+    $variety = Variety::firstOrFail();
     $variety->update(['is_active' => false]);
 
     // Active filter
@@ -152,14 +157,14 @@ test('08: Status filtering works correctly (all, active, inactive)', function ()
         ->getJson('/api/v1/admin/varieties?status=active');
     $activeRes->assertOk();
     $activeSlugs = collect($activeRes->json('data'))->pluck('slug');
-    expect($activeSlugs)->not->toContain('arabescato-vagli');
+    expect($activeSlugs)->not->toContain($variety->slug);
 
     // Inactive filter
     $inactiveRes = $this->actingAs($admin)
         ->getJson('/api/v1/admin/varieties?status=inactive');
     $inactiveRes->assertOk();
     $inactiveSlugs = collect($inactiveRes->json('data'))->pluck('slug');
-    expect($inactiveSlugs)->toContain('arabescato-vagli');
+    expect($inactiveSlugs)->toContain($variety->slug);
 
     // Restore
     $variety->update(['is_active' => true]);
@@ -223,13 +228,13 @@ test('11: Valid variety creation works and stores record in database', function 
 
 test('12: Duplicate slug is rejected with 422 validation error', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $collection = Collection::where('slug', 'italian-marble')->firstOrFail();
+    $existing = Variety::firstOrFail();
 
     $response = $this->actingAs($admin)
         ->postJson('/api/v1/admin/varieties', [
-            'collection_id' => $collection->id,
-            'name' => 'Another Calacatta',
-            'slug' => 'calacatta-gold', // Duplicate
+            'collection_id' => $existing->collection_id,
+            'name' => 'Another Variety Test',
+            'slug' => $existing->slug, // Duplicate
         ]);
 
     $response->assertStatus(422)
@@ -252,7 +257,7 @@ test('13: Invalid collection ID is rejected with 422 validation error', function
 
 test('14: Edit validation works when updating with invalid data', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     $response = $this->actingAs($admin)
         ->putJson("/api/v1/admin/varieties/{$variety->id}", [
@@ -266,7 +271,7 @@ test('14: Edit validation works when updating with invalid data', function () {
 
 test('15: Valid variety update persists changes to database', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     $originalDesc = $variety->description;
 
@@ -289,20 +294,20 @@ test('15: Valid variety update persists changes to database', function () {
 
 test('16: Collection reassignment works properly', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $variety = Variety::firstOrFail();
     $originalCollectionId = $variety->collection_id;
 
-    $limestones = Collection::where('slug', 'limestones')->firstOrFail();
+    $targetCollection = Collection::where('id', '!=', $originalCollectionId)->firstOrFail();
 
     $response = $this->actingAs($admin)
         ->putJson("/api/v1/admin/varieties/{$variety->id}", [
-            'collection_id' => $limestones->id,
+            'collection_id' => $targetCollection->id,
         ]);
 
     $response->assertOk()
-        ->assertJsonPath('data.collection_id', $limestones->id);
+        ->assertJsonPath('data.collection_id', $targetCollection->id);
 
-    expect($variety->fresh()->collection_id)->toBe($limestones->id);
+    expect($variety->fresh()->collection_id)->toBe($targetCollection->id);
 
     // Restore original collection
     $variety->update(['collection_id' => $originalCollectionId]);
@@ -310,7 +315,7 @@ test('16: Collection reassignment works properly', function () {
 
 test('17: Status update endpoint toggles is_active', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'statuario-extra')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     // Deactivate
     $deactivateRes = $this->actingAs($admin)
@@ -337,7 +342,7 @@ test('17: Status update endpoint toggles is_active', function () {
 
 test('18: Display order update endpoint modifies sort_order in database', function () {
     $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
-    $variety = Variety::where('slug', 'carrara-bianco')->firstOrFail();
+    $variety = Variety::firstOrFail();
     $originalOrder = $variety->sort_order;
 
     $response = $this->actingAs($admin)
@@ -378,7 +383,7 @@ test('19: Safe deletion removes variety without deleting parent collection', fun
 });
 
 test('20: Unauthorized mutation is rejected for unauthenticated and non-admin requests', function () {
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
     // Unauthenticated
     $this->postJson('/api/v1/admin/varieties', ['name' => 'Test'])->assertUnauthorized();
@@ -414,7 +419,8 @@ test('21: Sandstone variety can be created under sandstone collection, reserved 
 });
 
 test('22: Public collection detail page reflects variety updates', function () {
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $marble = Collection::where('slug', 'italian-marble')->firstOrFail();
+    $variety = Variety::where('collection_id', $marble->id)->firstOrFail();
     $originalName = $variety->name;
 
     $variety->update(['name' => 'Calacatta Oro Sovereign']);
@@ -431,14 +437,15 @@ test('22: Public collection detail page reflects variety updates', function () {
 });
 
 test('23: Inactive variety is excluded from public collection detail output', function () {
-    $variety = Variety::where('slug', 'calacatta-gold')->firstOrFail();
+    $marble = Collection::where('slug', 'italian-marble')->firstOrFail();
+    $variety = Variety::where('collection_id', $marble->id)->firstOrFail();
 
     // 1. When active, it is present
     $resActive = $this->get('/collections/italian-marble');
     $resActive->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('frontend/Collections/Show')
-            ->where('collection.varieties', fn ($vars) => collect($vars)->contains('slug', 'calacatta-gold'))
+            ->where('collection.varieties', fn ($vars) => collect($vars)->contains('slug', $variety->slug))
         );
 
     // 2. When deactivated, it is excluded
@@ -448,7 +455,7 @@ test('23: Inactive variety is excluded from public collection detail output', fu
     $resInactive->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('frontend/Collections/Show')
-            ->where('collection.varieties', fn ($vars) => ! collect($vars)->contains('slug', 'calacatta-gold'))
+            ->where('collection.varieties', fn ($vars) => ! collect($vars)->contains('slug', $variety->slug))
         );
 
     // Restore
@@ -496,3 +503,30 @@ test('27: Existing public routes remain functional with HTTP 200', function (str
     '/projects',
     '/contact',
 ]);
+
+test('28: Variety image upload and remove endpoints work correctly', function () {
+    Storage::fake('public');
+    $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
+    $variety = Variety::firstOrFail();
+
+    $file = UploadedFile::fake()->image('slab_test.jpg', 800, 600);
+
+    // Upload
+    $uploadRes = $this->actingAs($admin)
+        ->postJson("/api/v1/admin/varieties/{$variety->id}/image", [
+            'image' => $file,
+            'alt_text' => 'Custom slab photo',
+        ]);
+
+    $uploadRes->assertOk()
+        ->assertJsonPath('data.id', $variety->id);
+    expect($uploadRes->json('data.slab_image'))->not->toBeNull();
+
+    // Remove
+    $deleteRes = $this->actingAs($admin)
+        ->deleteJson("/api/v1/admin/varieties/{$variety->id}/image");
+
+    $deleteRes->assertOk();
+    expect($deleteRes->json('data.slab_image'))->toBeNull();
+});
+

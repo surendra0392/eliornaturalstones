@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreVarietyRequest;
+use App\Http\Requests\Admin\UpdateVarietyImageRequest;
 use App\Http\Requests\Admin\UpdateVarietyRequest;
 use App\Http\Resources\V1\VarietyResource;
 use App\Models\Variety;
@@ -165,6 +166,45 @@ class AdminVarietyController extends Controller
 
         return response()->json([
             'message' => 'Variety deleted successfully.',
+        ]);
+    }
+
+    /**
+     * Replace the variety's primary (slab) image shown on the public collection page.
+     */
+    public function updateImage(UpdateVarietyImageRequest $request, Variety $variety): JsonResponse
+    {
+        $file = $request->file('image');
+        $dimensions = @getimagesize($file->getRealPath());
+
+        // 'slab' is a singleFile collection, so the previous image is removed automatically.
+        $variety->addMedia($file)
+            ->withCustomProperties([
+                'alt_text' => $request->input('alt_text') ?: $variety->name,
+                'width' => is_array($dimensions) ? $dimensions[0] : null,
+                'height' => is_array($dimensions) ? $dimensions[1] : null,
+            ])
+            ->toMediaCollection('slab');
+
+        $variety->refresh()->load(['collection', 'applications']);
+
+        return response()->json([
+            'data' => new VarietyResource($variety),
+            'message' => "Image updated for {$variety->name}.",
+        ]);
+    }
+
+    /**
+     * Remove the uploaded slab image so the variety reverts to its default image.
+     */
+    public function destroyImage(Variety $variety): JsonResponse
+    {
+        $variety->clearMediaCollection('slab');
+        $variety->refresh()->load(['collection', 'applications']);
+
+        return response()->json([
+            'data' => new VarietyResource($variety),
+            'message' => "Custom image removed. {$variety->name} now uses its default image.",
         ]);
     }
 }

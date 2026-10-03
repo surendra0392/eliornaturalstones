@@ -389,9 +389,9 @@ test('22: Public collection image output reflects assigned hero media', function
 
 test('23: Public variety image output reflects assigned slab image', function () {
     Storage::fake('public');
-    $variety = Variety::where('slug', 'statuario-extra')->firstOrFail();
+    $variety = Variety::firstOrFail();
 
-    $file = UploadedFile::fake()->image('statuario_slab.jpg', 1000, 1000);
+    $file = UploadedFile::fake()->image('slab_sample.jpg', 1000, 1000);
     $variety->addMedia($file)->toMediaCollection('slab');
 
     $apiResponse = $this->getJson("/api/v1/varieties/{$variety->slug}");

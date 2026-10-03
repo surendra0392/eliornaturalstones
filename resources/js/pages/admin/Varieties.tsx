@@ -17,6 +17,8 @@ import { AdminSelect } from '../../components/admin/ui/AdminSelect';
 import { AdminTextarea } from '../../components/admin/ui/AdminTextarea';
 import { AdminModal } from '../../components/admin/ui/AdminModal';
 import { AdminEmptyState } from '../../components/admin/ui/AdminEmptyState';
+import { AdminVarietyImageModal } from '../../components/admin/varieties/AdminVarietyImageModal';
+import { COLLECTION_DETAIL_REGISTRY } from '../../data/collectionDetailImages';
 import { apiClient, ApiError } from '../../api/client';
 import type { PaginatedMeta } from '../../types/api';
 
@@ -52,6 +54,29 @@ export interface CanonicalCollectionRef {
     id: number;
     name: string;
     slug: string;
+}
+
+export function getVarietyDisplayImage(
+    variety: AdminVarietyItem,
+    collectionsList?: CanonicalCollectionRef[],
+): string | null {
+    if (variety.slab_image) {
+        return variety.slab_image;
+    }
+    const collectionSlug =
+        variety.collection?.slug ||
+        collectionsList?.find((c) => c.id === variety.collection_id)?.slug ||
+        variety.collection_name?.toLowerCase().replace(/\s+/g, '-');
+
+    if (collectionSlug && COLLECTION_DETAIL_REGISTRY[collectionSlug]) {
+        const entry = COLLECTION_DETAIL_REGISTRY[collectionSlug];
+        const fallback = entry.varietyFallbacks?.[variety.slug];
+        if (fallback?.src) {
+            return fallback.src;
+        }
+        return entry.heroImage?.src || null;
+    }
+    return null;
 }
 
 interface VarietiesAdminProps {
@@ -136,6 +161,11 @@ export default function VarietiesAdmin({
         variety: null,
         isProcessing: false,
     });
+
+    // Variety Image Modal State
+    const [imageModalVariety, setImageModalVariety] =
+        useState<AdminVarietyItem | null>(null);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     // Auto-dismiss notification
     useEffect(() => {
@@ -274,6 +304,24 @@ export default function VarietiesAdmin({
         });
         setFormErrors({});
         setIsFormModalOpen(true);
+    };
+
+    const handleOpenImageModal = (variety: AdminVarietyItem) => {
+        setImageModalVariety(variety);
+        setIsImageModalOpen(true);
+    };
+
+    const handleVarietyImageUpdated = (updatedVariety: AdminVarietyItem) => {
+        setVarieties((prev) =>
+            prev.map((v) => (v.id === updatedVariety.id ? updatedVariety : v)),
+        );
+        if (editingVariety && editingVariety.id === updatedVariety.id) {
+            setEditingVariety(updatedVariety);
+        }
+        setNotification({
+            type: 'success',
+            message: `Image for "${updatedVariety.name}" updated successfully.`,
+        });
     };
 
     const handleNameChange = (val: string) => {
@@ -709,8 +757,11 @@ export default function VarietiesAdmin({
                         <AdminTable>
                             <AdminTableHeader>
                                 <AdminTableRow>
-                                    <AdminTableHead className="w-20">
+                                    <AdminTableHead className="w-16">
                                         Order
+                                    </AdminTableHead>
+                                    <AdminTableHead className="w-16">
+                                        Image
                                     </AdminTableHead>
                                     <AdminTableHead>Variety</AdminTableHead>
                                     <AdminTableHead>Collection</AdminTableHead>
@@ -723,8 +774,13 @@ export default function VarietiesAdmin({
                                 </AdminTableRow>
                             </AdminTableHeader>
                             <AdminTableBody>
-                                {varieties.map((variety) => (
-                                    <AdminTableRow key={variety.id}>
+                                {varieties.map((variety) => {
+                                    const displayImage = getVarietyDisplayImage(
+                                        variety,
+                                        collectionsList,
+                                    );
+                                    return (
+                                        <AdminTableRow key={variety.id}>
                                         {/* Order with controls */}
                                         <AdminTableCell className="font-mono">
                                             <div className="flex items-center gap-1.5">
@@ -762,6 +818,68 @@ export default function VarietiesAdmin({
                                                     </button>
                                                 </div>
                                             </div>
+                                        </AdminTableCell>
+
+                                        {/* Image Thumbnail with quick modal launch */}
+                                        <AdminTableCell>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    handleOpenImageModal(
+                                                        variety,
+                                                    )
+                                                }
+                                                className="group relative flex h-12 w-12 flex-shrink-0 cursor-pointer overflow-hidden border border-stone-200 bg-stone-100 transition-all hover:border-stone-900 focus:outline-none dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-100"
+                                                title={`Click to change image for ${variety.name}`}
+                                                aria-label={`Change image for ${variety.name}`}
+                                            >
+                                                {displayImage ? (
+                                                    <img
+                                                        src={displayImage}
+                                                        alt={variety.name}
+                                                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    />
+                                                ) : (
+                                                    <div className="flex h-full w-full items-center justify-center text-stone-400">
+                                                        <svg
+                                                            className="h-5 w-5"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={
+                                                                    1.5
+                                                                }
+                                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                )}
+                                                <div className="absolute inset-0 flex items-center justify-center bg-stone-950/60 opacity-0 transition-opacity group-hover:opacity-100">
+                                                    <svg
+                                                        className="h-4 w-4 text-white"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                                        />
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                            </button>
                                         </AdminTableCell>
 
                                         {/* Variety Name & Color Family */}
@@ -849,6 +967,18 @@ export default function VarietiesAdmin({
                                                     variant="outline"
                                                     size="sm"
                                                     onClick={() =>
+                                                        handleOpenImageModal(
+                                                            variety,
+                                                        )
+                                                    }
+                                                    title={`Change image for ${variety.name}`}
+                                                >
+                                                    Image
+                                                </AdminButton>
+                                                <AdminButton
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() =>
                                                         handleOpenEdit(variety)
                                                     }
                                                 >
@@ -868,7 +998,8 @@ export default function VarietiesAdmin({
                                             </div>
                                         </AdminTableCell>
                                     </AdminTableRow>
-                                ))}
+                                );
+                            })}
                             </AdminTableBody>
                         </AdminTable>
                     </div>
@@ -946,6 +1077,77 @@ export default function VarietiesAdmin({
                     className="space-y-4"
                     noValidate
                 >
+                    {/* Primary Image Preview & Quick Action (Edit Mode) */}
+                    {editingVariety && (
+                        <div className="flex items-center justify-between rounded border border-stone-200 bg-stone-50/70 p-3 dark:border-stone-800 dark:bg-stone-950/50">
+                            <div className="flex items-center gap-3">
+                                <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-900">
+                                    {getVarietyDisplayImage(
+                                        editingVariety,
+                                        collectionsList,
+                                    ) ? (
+                                        <img
+                                            src={
+                                                getVarietyDisplayImage(
+                                                    editingVariety,
+                                                    collectionsList,
+                                                )!
+                                            }
+                                            alt={editingVariety.name}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="flex h-full w-full items-center justify-center text-stone-400">
+                                            <svg
+                                                className="h-6 w-6"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    )}
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-xs font-medium text-stone-900 dark:text-stone-100">
+                                            Primary Slab Texture
+                                        </span>
+                                        {editingVariety.slab_image ? (
+                                            <AdminBadge variant="success">
+                                                Custom Upload
+                                            </AdminBadge>
+                                        ) : (
+                                            <AdminBadge variant="neutral">
+                                                Default Texture
+                                            </AdminBadge>
+                                        )}
+                                    </div>
+                                    <p className="mt-0.5 text-[11px] text-stone-500 dark:text-stone-400">
+                                        Shown on public collection showcases &
+                                        materials grid
+                                    </p>
+                                </div>
+                            </div>
+                            <AdminButton
+                                variant="outline"
+                                size="sm"
+                                type="button"
+                                onClick={() =>
+                                    handleOpenImageModal(editingVariety)
+                                }
+                            >
+                                Change Image
+                            </AdminButton>
+                        </div>
+                    )}
+
                     {/* Collection Selector */}
                     <AdminSelect
                         label="Parent Stone Collection"
@@ -1167,6 +1369,25 @@ export default function VarietiesAdmin({
                     </p>
                 </div>
             </AdminModal>
+
+            {/* Variety Image Management Modal */}
+            <AdminVarietyImageModal
+                isOpen={isImageModalOpen}
+                onClose={() => setIsImageModalOpen(false)}
+                variety={imageModalVariety}
+                currentDisplayImage={
+                    imageModalVariety
+                        ? getVarietyDisplayImage(
+                              imageModalVariety,
+                              collectionsList,
+                          )
+                        : null
+                }
+                onImageUpdated={handleVarietyImageUpdated}
+                onError={(errMsg) =>
+                    setNotification({ type: 'error', message: errMsg })
+                }
+            />
         </AdminLayout>
     );
 }

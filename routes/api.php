@@ -93,6 +93,8 @@ Route::prefix('v1/admin')->middleware([
         Route::patch('/varieties/{variety}/status', [AdminVarietyController::class, 'updateStatus'])->name('api.v1.admin.varieties.status');
         Route::patch('/varieties/{variety}/order', [AdminVarietyController::class, 'updateOrder'])->name('api.v1.admin.varieties.order');
         Route::delete('/varieties/{variety}', [AdminVarietyController::class, 'destroy'])->name('api.v1.admin.varieties.destroy');
+        Route::post('/varieties/{variety}/image', [AdminVarietyController::class, 'updateImage'])->name('api.v1.admin.varieties.image.update');
+        Route::delete('/varieties/{variety}/image', [AdminVarietyController::class, 'destroyImage'])->name('api.v1.admin.varieties.image.destroy');
 
         // Media Library Module
         Route::get('/media', [AdminMediaController::class, 'index'])->name('api.v1.admin.media.index');

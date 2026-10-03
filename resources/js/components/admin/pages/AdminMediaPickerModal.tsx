@@ -16,7 +16,7 @@ interface MediaItem {
 interface AdminMediaPickerModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSelect: (media: { url: string; alt: string }) => void;
+    onSelect: (media: { url: string; alt: string; id?: number }) => void;
     currentUrl?: string;
 }
 
@@ -31,6 +31,7 @@ export function AdminMediaPickerModal({
     const [isLoading, setIsLoading] = useState(false);
     const [selectedUrl, setSelectedUrl] = useState(currentUrl);
     const [selectedAlt, setSelectedAlt] = useState('');
+    const [selectedId, setSelectedId] = useState<number | undefined>(undefined);
     const [customUrl, setCustomUrl] = useState('');
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export function AdminMediaPickerModal({
 
         setSelectedUrl(currentUrl);
         setCustomUrl(currentUrl);
+        setSelectedId(undefined);
 
         const fetchMedia = async () => {
             setIsLoading(true);
@@ -76,6 +78,7 @@ export function AdminMediaPickerModal({
             onSelect({
                 url: urlToUse,
                 alt: selectedAlt,
+                id: selectedUrl === urlToUse ? selectedId : undefined,
             });
             onClose();
         }
@@ -132,6 +135,7 @@ export function AdminMediaPickerModal({
                             onChange={(e) => {
                                 setCustomUrl(e.target.value);
                                 setSelectedUrl(e.target.value);
+                                setSelectedId(undefined);
                             }}
                             className="w-full border border-stone-300 bg-white px-3 py-2 text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100 dark:placeholder:text-stone-500 dark:focus:border-stone-100"
                         />
@@ -167,6 +171,7 @@ export function AdminMediaPickerModal({
                                         onClick={() => {
                                             setSelectedUrl(item.url);
                                             setCustomUrl(item.url);
+                                            setSelectedId(item.id);
                                             if (item.alt_text) {
                                                 setSelectedAlt(item.alt_text);
                                             }
