@@ -962,6 +962,10 @@ class VarietySeeder extends Seeder
                 continue;
             }
 
+            if ($this->command) {
+                $this->command->info("Seeding {$collection->name} (" . count($varieties) . ' varieties)...');
+            }
+
             // Remove obsolete varieties not in the configured list
             $validSlugs = array_column($varieties, 'slug');
             Variety::where('collection_id', $collection->id)

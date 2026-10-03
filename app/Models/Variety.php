@@ -72,18 +72,21 @@ class Variety extends Model implements HasMedia
             ->width(400)
             ->height(400)
             ->format('webp')
-            ->quality(85);
+            ->quality(85)
+            ->performOnCollections('gallery');
 
         $this->addMediaConversion('medium')
             ->width(800)
             ->height(800)
             ->format('webp')
-            ->quality(88);
+            ->quality(88)
+            ->performOnCollections('gallery');
 
         $this->addMediaConversion('large')
             ->width(1920)
             ->height(1280)
             ->format('webp')
-            ->quality(90);
+            ->quality(90)
+            ->performOnCollections('gallery');
     }
 }
