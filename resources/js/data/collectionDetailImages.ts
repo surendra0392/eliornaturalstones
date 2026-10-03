@@ -111,7 +111,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Continuous vein-matched slabs creating uninterrupted visual rhythm across living pavilions.',
                 image: {
                     src: '/images/elior/collections/italian-marble/app-flooring.webp',
-                    alt: 'Light-drenched architectural living space with marble flooring',
+                    alt: 'Expansive continuous vein-matched Italian marble flooring in an architectural pavilion',
                 },
             },
             {
@@ -120,7 +120,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Bookmatched vertical installations creating monumental focal planes in formal spaces.',
                 image: {
                     src: '/images/elior/collections/italian-marble/app-feature-walls.webp',
-                    alt: 'Monolithic stone feature wall in contemporary residential gallery',
+                    alt: 'Monumental butterfly bookmatched Italian marble feature wall in a double-height gallery',
                 },
             },
             {
@@ -129,7 +129,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Full-slab shower walls and carved monolithic basins delivering quiet, spa-like stillness.',
                 image: {
                     src: '/images/elior/collections/italian-marble/app-bathrooms.webp',
-                    alt: 'Minimalist luxury bathroom framed by bookmatched marble slabs',
+                    alt: 'Luxury master sanctuary bathroom wrapped in continuous Italian marble with carved stone tub',
                 },
             },
             {
@@ -138,7 +138,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Floating vanity tops, hearth surrounds, and custom architectural credenza surfaces.',
                 image: {
                     src: '/images/elior/collections/italian-marble/app-joinery.webp',
-                    alt: 'Architectural fireplace hearth and bespoke marble credenza',
+                    alt: 'Bespoke Italian marble floating credenza and low hearth surround with waterfall mitered edges',
                 },
             },
         ],
