@@ -1235,6 +1235,10 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 src: '/images/elior/collections/pebbles/variety-natural-teak-unpolished-pebbles.webp',
                 alt: 'Natural Teak Unpolished Pebbles with woodgrain teak striations and biscuit ochre warmth',
             },
+                        'natural-red-pebbles': {
+                src: '/images/elior/collections/pebbles/variety-natural-red-pebbles.webp',
+                alt: 'Natural Red Pebbles with rich terracotta and earthy crimson tones',
+            },
             'natural-red-blood-red-unpolished-pebbles': {
                 src: '/images/elior/collections/pebbles/variety-natural-red-blood-red-unpolished-pebbles.webp',
                 alt: 'Natural Red (Blood-Red) Unpolished Pebbles with deep iron-rich blood red tones',
@@ -1383,21 +1387,110 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'platinum-statuario': {
+                src: '/images/elior/collections/quartz/variety-platinum-statuario.webp',
+                alt: 'Platinum Statuario engineered quartz slab with flowing platinum-grey veining',
+            },
+            'matisse-white': {
+                src: '/images/elior/collections/quartz/variety-matisse-white.webp',
+                alt: 'Matisse White cool-white quartz slab with atmospheric cloudy veining',
+            },
+            'matisse-gold': {
+                src: '/images/elior/collections/quartz/variety-matisse-gold.webp',
+                alt: 'Matisse Gold warm ivory quartz slab with golden-amber ribbon veins',
+            },
+            'river-gold': {
+                src: '/images/elior/collections/quartz/variety-river-gold.webp',
+                alt: 'River Gold engineered quartz slab with directional caramel currents',
+            },
+            'river-grey': {
+                src: '/images/elior/collections/quartz/variety-river-grey.webp',
+                alt: 'River Grey silver-grey quartz slab with delicate smoky movement',
+            },
+            'crystal-white': {
+                src: '/images/elior/collections/quartz/variety-crystal-white.webp',
+                alt: 'Crystal White high-reflectance engineered quartz with crystalline sparkles',
+            },
+            'bali-onyx': {
+                src: '/images/elior/collections/quartz/variety-bali-onyx.webp',
+                alt: 'Bali Onyx translucent amber and ivory concentric banded quartz slab',
+            },
+            'blue-quartzite': {
+                src: '/images/elior/collections/quartz/variety-blue-quartzite.webp',
+                alt: 'Blue Quartzite deep azure and oceanic blue slab with white crystal fractures',
+            },
+            'green-exatica-quartz': {
+                src: '/images/elior/collections/quartz/variety-green-exatica-quartz.webp',
+                alt: 'Green Exatica Quartz emerald-jade slab with golden filament veins',
+            },
+            'marmo-bernini-gold': {
+                src: '/images/elior/collections/quartz/variety-marmo-bernini-gold.webp',
+                alt: 'Marmo Bernini Gold alabaster slab with classical Tuscan gold veining',
+            },
+            'navigli-grey': {
+                src: '/images/elior/collections/quartz/variety-navigli-grey.webp',
+                alt: 'Navigli Grey urban pewter engineered quartz with suede tactile finish',
+            },
+            'navigli-brown': {
+                src: '/images/elior/collections/quartz/variety-navigli-brown.webp',
+                alt: 'Navigli Brown rich espresso and chocolate engineered quartz surface',
+            },
+            'rapheal-primo': {
+                src: '/images/elior/collections/quartz/variety-rapheal-primo.webp',
+                alt: 'Rapheal Primo soft cream quartz slab with gossamer grey veining',
+            },
+            'rapheal-madonna': {
+                src: '/images/elior/collections/quartz/variety-rapheal-madonna.webp',
+                alt: 'Rapheal Madonna statuario white quartz with multi-dimensional hazel veins',
+            },
+            'rapheal-ultimo': {
+                src: '/images/elior/collections/quartz/variety-rapheal-ultimo.webp',
+                alt: 'Rapheal Ultimo dramatic Calacatta white quartz with broad theatrical veins',
+            },
+            'vinci-eterno': {
+                src: '/images/elior/collections/quartz/variety-vinci-eterno.webp',
+                alt: 'Vinci Eterno dark charcoal quartzite slab with complex fracture matrices',
+            },
+            'amber': {
+                src: '/images/elior/collections/quartz/variety-amber.webp',
+                alt: 'Amber Quartz translucent honey-topaz slab with crystalline depth',
+            },
+            'bastille-black': {
+                src: '/images/elior/collections/quartz/variety-bastille-black.webp',
+                alt: 'Bastille Black monolithic obsidian engineered quartz worktop slab',
+            },
+            'opera-grey': {
+                src: '/images/elior/collections/quartz/variety-opera-grey.webp',
+                alt: 'Opera Grey mid-tone architectural grey quartz slab with chalk hairline fissures',
+            },
+            'pantheon-beige': {
+                src: '/images/elior/collections/quartz/variety-pantheon-beige.webp',
+                alt: 'Pantheon Beige warm travertine-toned engineered quartz with sedimentary striations',
+            },
+            'trocadero-white': {
+                src: '/images/elior/collections/quartz/variety-trocadero-white.webp',
+                alt: 'Trocadero White cool alabaster slab with delicate grey spiderweb veining',
+            },
+            'trocadero-gold': {
+                src: '/images/elior/collections/quartz/variety-trocadero-gold.webp',
+                alt: 'Trocadero Gold warm white quartz slab with champagne gold branching veins',
+            },
+            // Legacy fallbacks
             'calacatta-nuvo-quartz': {
-                src: '/images/elior/collections/quartz/variety-calacatta-nuvo-quartz.webp',
-                alt: 'Calacatta Nuvo engineered quartz slab with cascading grey veins',
+                src: '/images/elior/collections/quartz/variety-rapheal-ultimo.webp',
+                alt: 'Calacatta Nuvo engineered quartz slab',
             },
             'statuario-classic-quartz': {
-                src: '/images/elior/collections/quartz/variety-statuario-classic-quartz.webp',
-                alt: 'Statuario Classic engineered quartz slab with flowing graphite veining',
+                src: '/images/elior/collections/quartz/variety-platinum-statuario.webp',
+                alt: 'Statuario Classic engineered quartz slab',
             },
             'eternal-charcoal-quartz': {
-                src: '/images/elior/collections/quartz/variety-eternal-charcoal-quartz.webp',
-                alt: 'Eternal Charcoal engineered quartz slab with luminous white veins',
+                src: '/images/elior/collections/quartz/variety-bastille-black.webp',
+                alt: 'Eternal Charcoal engineered quartz slab',
             },
             'pure-blanco-quartz': {
-                src: '/images/elior/collections/quartz/variety-pure-blanco-quartz.webp',
-                alt: 'Pure Blanco engineered quartz slab with pristine monochromatic clarity',
+                src: '/images/elior/collections/quartz/variety-crystal-white.webp',
+                alt: 'Pure Blanco engineered quartz slab',
             },
         },
     },
@@ -1506,20 +1599,85 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
             },
         ],
         varietyFallbacks: {
+            'abstract-granite-thinker': {
+                src: '/images/elior/collections/sculptures/variety-abstract-granite-thinker.webp',
+                alt: 'Abstract Thinker Granite Monolith hand-chiseled figurative sculpture',
+            },
+            'carved-granite-mandapa-pavilion': {
+                src: '/images/elior/collections/sculptures/variety-carved-granite-mandapa-pavilion.webp',
+                alt: 'Carved Granite Mandapa Pavilion with fluted columns and floral capitals',
+            },
+            'elliptical-fluted-marble-stele': {
+                src: '/images/elior/collections/sculptures/variety-elliptical-fluted-marble-stele.webp',
+                alt: 'Elliptical Fluted Marble Stele carved in crystalline white marble',
+            },
+            'curvilinear-granite-wave-bench': {
+                src: '/images/elior/collections/sculptures/variety-curvilinear-granite-wave-bench.webp',
+                alt: 'Curvilinear Granite Wave Bench carved from solid speckled granite block',
+            },
+            'traditional-granite-garden-shrine': {
+                src: '/images/elior/collections/sculptures/variety-traditional-granite-garden-shrine.webp',
+                alt: 'Traditional Granite Garden Shrine temple pavilion with stepped eaves and lotus finials',
+            },
+            'black-galaxy-lotus-fountain': {
+                src: '/images/elior/collections/sculptures/variety-black-galaxy-lotus-fountain.webp',
+                alt: 'Black Galaxy Lotus Fountain two-tier cascading granite water feature',
+            },
+            'dual-monolith-aperture-sculpture': {
+                src: '/images/elior/collections/sculptures/variety-dual-monolith-aperture-sculpture.webp',
+                alt: 'Dual Monolith Aperture Sculpture architectural diptych on black granite base',
+            },
+            'carved-leaf-garden-feature-panels': {
+                src: '/images/elior/collections/sculptures/variety-carved-leaf-garden-feature-panels.webp',
+                alt: 'Carved Leaf Garden Feature Panels flanked by sandstone urns and granite palisades',
+            },
+            'monolithic-granite-garden-pergola': {
+                src: '/images/elior/collections/sculptures/variety-monolithic-granite-garden-pergola.webp',
+                alt: 'Monolithic Granite Garden Pergola with integrated stone dining table and benches',
+            },
+            'granite-moongate-portal-monolith': {
+                src: '/images/elior/collections/sculptures/variety-granite-moongate-portal-monolith.webp',
+                alt: 'Granite Moongate Portal Monolith split-face twin pillars with circular viewing aperture',
+            },
+            'ocean-crest-shark-granite-sculpture': {
+                src: '/images/elior/collections/sculptures/variety-ocean-crest-shark-granite-sculpture.webp',
+                alt: 'Ocean Crest Shark Granite Sculpture hand-carved black granite marine sculpture',
+            },
+            'organic-flame-sandstone-monolith': {
+                src: '/images/elior/collections/sculptures/variety-organic-flame-sandstone-monolith.webp',
+                alt: 'Organic Flame Sandstone Monolith soaring teardrop form with scooped cavity',
+            },
+            'curvilinear-harmony-granite-ribbon': {
+                src: '/images/elior/collections/sculptures/variety-curvilinear-harmony-granite-ribbon.webp',
+                alt: 'Curvilinear Harmony Granite Ribbon sweeping kinetic stone sculpture',
+            },
+            'dhyana-buddha-sandstone-sculpture': {
+                src: '/images/elior/collections/sculptures/variety-dhyana-buddha-sandstone-sculpture.webp',
+                alt: 'Dhyana Buddha Sandstone Sculpture hand-carved contemplative statue with halo',
+            },
+            'sunburst-crescent-granite-steles': {
+                src: '/images/elior/collections/sculptures/variety-sunburst-crescent-granite-steles.webp',
+                alt: 'Sunburst Crescent Granite Steles symmetrical pair with radial chiseled rays',
+            },
+            'cascading-raked-sandstone-waterfall': {
+                src: '/images/elior/collections/sculptures/variety-cascading-raked-sandstone-waterfall.webp',
+                alt: 'Cascading Raked Sandstone Waterfall architectural fluted water feature with basin',
+            },
+            // Legacy fallbacks
             'monolithic-carved-basin': {
-                src: '/images/elior/collections/sculptures/variety-monolithic-carved-basin.webp',
+                src: '/images/elior/collections/sculptures/variety-cascading-raked-sandstone-waterfall.webp',
                 alt: 'Monolithic Carved Basin carved from solid natural stone',
             },
             'architectural-stone-totem': {
-                src: '/images/elior/collections/sculptures/variety-architectural-stone-totem.webp',
+                src: '/images/elior/collections/sculptures/variety-elliptical-fluted-marble-stele.webp',
                 alt: 'Architectural Stone Totem with fine geometric reliefs',
             },
             'fluted-classical-pedestal': {
-                src: '/images/elior/collections/sculptures/variety-fluted-classical-pedestal.webp',
+                src: '/images/elior/collections/sculptures/variety-traditional-granite-garden-shrine.webp',
                 alt: 'Fluted Classical Pedestal hand-carved in noble stone',
             },
             'contemplative-stone-vessel': {
-                src: '/images/elior/collections/sculptures/variety-contemplative-stone-vessel.webp',
+                src: '/images/elior/collections/sculptures/variety-black-galaxy-lotus-fountain.webp',
                 alt: 'Contemplative Stone Vessel carved from dense basalt',
             },
         },
