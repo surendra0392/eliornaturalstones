@@ -992,7 +992,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Central gravel and stone courtyards that ground private residences in historic permanence.',
                 image: {
                     src: '/images/elior/collections/cobble-stones/app-promenades.webp',
-                    alt: 'Architectural courtyard paved with natural stone',
+                    alt: 'Minimalist residence courtyard paved in radiating concentric courses of split-face granite cobbles with sculptural olive tree',
                 },
             },
             {
@@ -1001,7 +1001,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Meandering stone walkways woven through structured hedges and landscape borders.',
                 image: {
                     src: '/images/elior/collections/cobble-stones/app-transitional-terraces.webp',
-                    alt: 'Garden promenade with natural stone borders',
+                    alt: 'Meandering estate garden promenade paved in hand-dressed granite cobbles flanked by structured hedges and pavilion',
                 },
             },
             {
@@ -1010,7 +1010,7 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                     'Artisan stone apron transitions delineating property boundaries and entry portals.',
                 image: {
                     src: '/images/elior/collections/cobble-stones/app-civic-plazas.webp',
-                    alt: 'Stone entry threshold of contemporary estate',
+                    alt: 'Artisan entrance threshold apron with alternating dark basalt and granite cobble banding courses and monolithic stone pillars',
                 },
             },
         ],
