@@ -1332,8 +1332,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Expansive seamless monolithic centerpieces where slab veining turns mitred 90-degree corners.',
                 image: {
-                    src: '/images/elior/collections/quartz/app-island-monoliths.webp',
-                    alt: 'Waterfall kitchen island featuring large quartz slab surface',
+                    src: '/images/elior/collections/quartz/app-waterfall-islands.webp',
+                    alt: 'Monolithic Calacatta quartz waterfall kitchen island with seamless mitred edge and continuous veining',
                 },
             },
             {
@@ -1341,8 +1341,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Ultra-hygienic preparation counters completely impervious to oils, acids, and wine spills.',
                 image: {
-                    src: '/images/elior/collections/quartz/app-backsplashes.webp',
-                    alt: 'Architectural kitchen worktop in marble-look quartz slab',
+                    src: '/images/elior/collections/quartz/app-culinary-worktops.webp',
+                    alt: 'Architectural culinary preparation worktop in non-porous engineered quartz with induction cooktop and undermount sink',
                 },
             },
             {
@@ -1350,8 +1350,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Floor-to-ceiling vertical slab installations eliminating grout joints behind cooktops.',
                 image: {
-                    src: '/images/elior/collections/quartz/app-vanity-tops.webp',
-                    alt: 'Monolithic quartz slab backsplash in minimalist kitchen',
+                    src: '/images/elior/collections/quartz/app-full-height-backsplashes.webp',
+                    alt: 'Seamless full-height floor-to-ceiling quartz slab backsplash with bookmatched veining behind luxury rangetop',
                 },
             },
             {
@@ -1359,8 +1359,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'High-wear continuous counter surfaces in luxury hotel lounges and private tasting rooms.',
                 image: {
-                    src: '/images/elior/collections/quartz/app-hospitality.webp',
-                    alt: 'Hospitality stone bar counter in refined architectural venue',
+                    src: '/images/elior/collections/quartz/app-hospitality-bars.webp',
+                    alt: 'Continuous illuminated engineered quartz bar top in luxury hotel cocktail lounge and tasting room',
                 },
             },
         ],
