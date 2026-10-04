@@ -1628,8 +1628,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Monumental outdoor plinths and carved basalt vessels grounding central reflection courtyards.',
                 image: {
-                    src: '/images/elior/collections/sculptures/app-courtyard-centerpieces.webp',
-                    alt: 'Architectural courtyard featuring stone sculpture anchor',
+                    src: '/images/elior/collections/sculptures/app-sculptural-courtyards.webp',
+                    alt: 'Monumental hand-carved basalt water vessel sculpture in reflection courtyard with Japanese maple',
                 },
             },
             {
@@ -1637,8 +1637,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Carved marble totems and pedestal forms creating immediate arrival prestige.',
                 image: {
-                    src: '/images/elior/collections/sculptures/app-vestibule-statements.webp',
-                    alt: 'Classical marble sculptures anchoring grand gallery foyer',
+                    src: '/images/elior/collections/sculptures/app-grand-entrance-foyers.webp',
+                    alt: 'Soaring hand-carved white marble totem stele sculpture in double-height luxury entrance foyer',
                 },
             },
             {
@@ -1646,8 +1646,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Bespoke carved stone water basins and monoliths defining luxury hotel lobbies.',
                 image: {
-                    src: '/images/elior/collections/sculptures/app-water-interactive.webp',
-                    alt: 'Monolithic stone focal feature in contemporary architectural lobby',
+                    src: '/images/elior/collections/sculptures/app-hospitality-rotundas.webp',
+                    alt: 'Custom-carved dark granite monolithic water sculpture basin in five-star luxury hotel lobby rotunda',
                 },
             },
             {
@@ -1655,8 +1655,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Intimate carved stone vessels and tactile pedestals curated for discerning private collectors.',
                 image: {
-                    src: '/images/elior/collections/sculptures/app-pedestal-commissions.webp',
-                    alt: 'Private living gallery featuring curated natural stone artwork',
+                    src: '/images/elior/collections/sculptures/app-private-art-sanctuaries.webp',
+                    alt: 'Artisan hand-carved natural stone sculptural bowl vessel on stone pedestal in private gallery sanctuary',
                 },
             },
         ],
