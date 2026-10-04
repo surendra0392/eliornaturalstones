@@ -442,8 +442,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Raked natural cleft wall tiles that cast changing architectural shadows throughout the day.',
                 image: {
-                    src: '/images/elior/collections/slate-stone/app-accent-walls.webp',
-                    alt: 'Architectural stone wall cladding in modern pavilion',
+                    src: '/images/elior/collections/slate-stone/app-exterior-cladding.webp',
+                    alt: 'Contemporary villa exterior facade clad in natural cleft slate stone wall tiles with directional sun shadows',
                 },
             },
             {
@@ -451,8 +451,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Naturally textured non-slip flagstones providing secure tactile footing around water.',
                 image: {
-                    src: '/images/elior/collections/slate-stone/app-floors.webp',
-                    alt: 'Stone pool surround and outdoor terrace paving',
+                    src: '/images/elior/collections/slate-stone/app-terrace-pool-paving.webp',
+                    alt: 'Slip-resistant natural cleft charcoal slate flagstone paving on luxury outdoor infinity pool terrace',
                 },
             },
             {
@@ -460,8 +460,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Textural backdrop for minimalist fireplaces, entry foyers, and living galleries.',
                 image: {
-                    src: '/images/elior/collections/slate-stone/app-water-features.webp',
-                    alt: 'Dark slate fireplace feature wall in contemporary interior',
+                    src: '/images/elior/collections/slate-stone/app-interior-feature-walls.webp',
+                    alt: 'Floor-to-ceiling split-face natural slate ledgestone fireplace feature wall in modern luxury interior',
                 },
             },
             {
@@ -469,8 +469,8 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 description:
                     'Dry-stacked or coursed stone walls that nestle modern architecture into topography.',
                 image: {
-                    src: '/images/elior/collections/slate-stone/app-hearth-cladding.webp',
-                    alt: 'Natural stone retaining wall integrated into landscape',
+                    src: '/images/elior/collections/slate-stone/app-landscape-retaining-walls.webp',
+                    alt: 'Multi-tiered dry-stacked natural slate stone retaining walls and integrated stone steps in terraced landscape',
                 },
             },
         ],
