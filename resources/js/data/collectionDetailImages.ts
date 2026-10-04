@@ -1475,6 +1475,90 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 src: '/images/elior/collections/quartz/variety-trocadero-gold.webp',
                 alt: 'Trocadero Gold warm white quartz slab with champagne gold branching veins',
             },
+            'palais-white': {
+                src: '/images/elior/collections/quartz/variety-palais-white.webp',
+                alt: 'Palais White engineered quartz slab with luminous alabaster ground and soft pearl undertones',
+            },
+            'luna': {
+                src: '/images/elior/collections/quartz/variety-luna.webp',
+                alt: 'Luna Quartz celestial silvery-white engineered quartz slab with fine particulate matrices',
+            },
+            'atlantis-grey': {
+                src: '/images/elior/collections/quartz/variety-atlantis-grey.webp',
+                alt: 'Atlantis Grey Quartz deep oceanic charcoal-grey slab with subtle sea-foam white veins',
+            },
+            'barbican-grey': {
+                src: '/images/elior/collections/quartz/variety-barbican-grey.webp',
+                alt: 'Barbican Grey architectural mid-grey engineered quartz surface with subtle concrete texture',
+            },
+            'brighton-brown': {
+                src: '/images/elior/collections/quartz/variety-brighton-brown.webp',
+                alt: 'Brighton Brown warm cognac and roasted chestnut engineered quartz slab',
+            },
+            'chancery-silver': {
+                src: '/images/elior/collections/quartz/variety-chancery-silver.webp',
+                alt: 'Chancery Silver refined silver-pewter engineered quartz slab with micro-crystalline sparkles',
+            },
+            'cement-grey': {
+                src: '/images/elior/collections/quartz/variety-cement-grey.webp',
+                alt: 'Cement Grey contemporary industrial matte grey engineered quartz surface',
+            },
+            'windsor-beige': {
+                src: '/images/elior/collections/quartz/variety-windsor-beige.webp',
+                alt: 'Windsor Beige stately warm limestone-toned engineered quartz slab',
+            },
+            'epping-green': {
+                src: '/images/elior/collections/quartz/variety-epping-green.webp',
+                alt: 'Epping Green deep forest and sage green engineered quartz slab with mossy depth',
+            },
+            'glasgow-grey': {
+                src: '/images/elior/collections/quartz/variety-glasgow-grey.webp',
+                alt: 'Glasgow Grey granitic heather and charcoal grey engineered quartz slab',
+            },
+            'kensington-white': {
+                src: '/images/elior/collections/quartz/variety-kensington-white.webp',
+                alt: 'Kensington White regal pure white engineered quartz slab with feathered dove grey veining',
+            },
+            'roosevelt-grey': {
+                src: '/images/elior/collections/quartz/variety-roosevelt-grey.webp',
+                alt: 'Roosevelt Grey architectural charcoal-grey engineered quartz surface',
+            },
+            'flatiron-black-crystal': {
+                src: '/images/elior/collections/quartz/variety-flatiron-black-crystal.webp',
+                alt: 'Flatiron Black Crystal jet-black engineered quartz slab with sparkling micro-facets',
+            },
+            'hamptons-beige': {
+                src: '/images/elior/collections/quartz/variety-hamptons-beige.webp',
+                alt: 'Hamptons Beige coastal warm sand and buttermilk engineered quartz slab',
+            },
+            'soho-white': {
+                src: '/images/elior/collections/quartz/variety-soho-white.webp',
+                alt: 'Soho White minimalist loft-style ultra-white engineered quartz slab',
+            },
+            'empire-grey': {
+                src: '/images/elior/collections/quartz/variety-empire-grey.webp',
+                alt: 'Empire Grey monumental architectural mid-tone grey engineered quartz slab',
+            },
+            'edo-beige': {
+                src: '/images/elior/collections/quartz/variety-edo-beige.webp',
+                alt: 'Edo Beige minimalist Japanese-inspired warm oat and linen engineered quartz surface',
+            },
+            'edo-white': {
+                src: '/images/elior/collections/quartz/variety-edo-white.webp',
+                alt: 'Edo White soft porcelain-white engineered quartz slab with serene washi undertones',
+            },
+            'kimono-white': {
+                src: '/images/elior/collections/quartz/variety-kimono-white.webp',
+                alt: 'Kimono White luminous silk-white engineered quartz slab with pale grey ribbons',
+            },
+            'fuji-white': {
+                src: '/images/elior/collections/quartz/variety-fuji-white.webp',
+                alt: 'Fuji White crisp snow-peak white engineered quartz slab with crystalline brilliance',
+            },
+            'calacatta-lava': {
+                src: '/images/elior/collections/quartz/variety-calacatta-lava.webp',
+                alt: 'Calacatta Lava theatrical white engineered quartz slab with dramatic volcanic charcoal veins',
+            },
             // Legacy fallbacks
             'calacatta-nuvo-quartz': {
                 src: '/images/elior/collections/quartz/variety-rapheal-ultimo.webp',
