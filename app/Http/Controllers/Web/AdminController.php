@@ -8,6 +8,7 @@ use App\Http\Resources\V1\Admin\AdminEnquiryResource;
 use App\Http\Resources\V1\Admin\AdminMediaResource;
 use App\Http\Resources\V1\Admin\AdminPageResource;
 use App\Http\Resources\V1\Admin\AdminSliderResource;
+use App\Http\Resources\V1\CollectionResource;
 use App\Models\Collection;
 use App\Models\Enquiry;
 use App\Models\Page;
@@ -45,7 +46,7 @@ class AdminController extends Controller
             ->get();
 
         return Inertia::render('admin/Collections', [
-            'initialCollections' => $collections,
+            'initialCollections' => CollectionResource::collection($collections)->resolve(),
         ]);
     }
 

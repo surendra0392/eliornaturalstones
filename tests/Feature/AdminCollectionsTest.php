@@ -6,7 +6,9 @@ use App\Models\Variety;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\CollectionSeeder;
 use Database\Seeders\VarietySeeder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -467,3 +469,83 @@ test('24: Existing public pages remain functional with HTTP 200', function (stri
     '/projects',
     '/contact',
 ]);
+
+test('25: Collection hero image upload and remove endpoints work correctly', function () {
+    Storage::fake('public');
+    $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
+    $collection = Collection::where('slug', 'italian-marble')->firstOrFail();
+
+    $file = UploadedFile::fake()->image('hero_test.webp', 1920, 1080);
+
+    // Upload
+    $uploadRes = $this->actingAs($admin)
+        ->postJson("/api/v1/admin/collections/{$collection->id}/image", [
+            'image' => $file,
+            'alt_text' => 'Custom Italian Marble hero banner',
+        ]);
+
+    $uploadRes->assertOk()
+        ->assertJsonPath('data.id', $collection->id);
+    expect($uploadRes->json('data.hero_image'))->not->toBeNull();
+
+    // Verify Collection model reflects updated hero image
+    $collection->refresh();
+    expect($collection->hero_image)->not->toBeNull();
+
+    // Remove
+    $deleteRes = $this->actingAs($admin)
+        ->deleteJson("/api/v1/admin/collections/{$collection->id}/image");
+
+    $deleteRes->assertOk();
+    expect($deleteRes->json('data.hero_image'))->toBeNull();
+
+    $collection->refresh();
+    expect($collection->hero_image)->toBeNull();
+});
+
+test('26: Collection hero image upload rejects invalid files', function () {
+    Storage::fake('public');
+    $admin = User::where('email', 'admin@eliornaturalstones.com')->firstOrFail();
+    $collection = Collection::where('slug', 'italian-marble')->firstOrFail();
+
+    // Invalid file format (text/plain)
+    $textDoc = UploadedFile::fake()->create('document.txt', 100, 'text/plain');
+
+    $response = $this->actingAs($admin)
+        ->postJson("/api/v1/admin/collections/{$collection->id}/image", [
+            'image' => $textDoc,
+        ]);
+
+    $response->assertUnprocessable()
+        ->assertJsonValidationErrors(['image']);
+});
+
+test('27: Unauthorized access to collection image management is rejected', function () {
+    $collection = Collection::where('slug', 'italian-marble')->firstOrFail();
+    $file = UploadedFile::fake()->image('hero_test.jpg', 800, 600);
+
+    // Unauthenticated POST
+    $this->postJson("/api/v1/admin/collections/{$collection->id}/image", ['image' => $file])
+        ->assertUnauthorized();
+
+    // Unauthenticated DELETE
+    $this->deleteJson("/api/v1/admin/collections/{$collection->id}/image")
+        ->assertUnauthorized();
+
+    // Non-admin user
+    $regularUser = User::create([
+        'name' => 'Regular User',
+        'email' => 'client@studio.com',
+        'password' => Hash::make('password'),
+        'is_admin' => false,
+    ]);
+
+    $this->actingAs($regularUser)
+        ->postJson("/api/v1/admin/collections/{$collection->id}/image", ['image' => $file])
+        ->assertForbidden();
+
+    $this->actingAs($regularUser)
+        ->deleteJson("/api/v1/admin/collections/{$collection->id}/image")
+        ->assertForbidden();
+});
+

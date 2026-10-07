@@ -84,6 +84,8 @@ Route::prefix('v1/admin')->middleware([
         Route::patch('/collections/{collection}/status', [AdminCollectionController::class, 'updateStatus'])->name('api.v1.admin.collections.status');
         Route::patch('/collections/{collection}/order', [AdminCollectionController::class, 'updateOrder'])->name('api.v1.admin.collections.order');
         Route::delete('/collections/{collection}', [AdminCollectionController::class, 'destroy'])->name('api.v1.admin.collections.destroy');
+        Route::post('/collections/{collection}/image', [AdminCollectionController::class, 'updateImage'])->name('api.v1.admin.collections.image.update');
+        Route::delete('/collections/{collection}/image', [AdminCollectionController::class, 'destroyImage'])->name('api.v1.admin.collections.image.destroy');
 
         // Varieties Management Module
         Route::get('/varieties', [AdminVarietyController::class, 'index'])->name('api.v1.admin.varieties.index');

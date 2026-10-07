@@ -23,6 +23,15 @@ class Collection extends Model implements HasMedia
         'is_active',
     ];
 
+    protected $appends = [
+        'hero_image',
+    ];
+
+    public function getHeroImageAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('hero') ?: null;
+    }
+
     protected function casts(): array
     {
         return [

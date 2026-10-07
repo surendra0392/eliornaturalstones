@@ -16,6 +16,9 @@ import { AdminInput } from '../../components/admin/ui/AdminInput';
 import { AdminTextarea } from '../../components/admin/ui/AdminTextarea';
 import { AdminModal } from '../../components/admin/ui/AdminModal';
 import { AdminEmptyState } from '../../components/admin/ui/AdminEmptyState';
+import { AdminCollectionImageModal } from '../../components/admin/collections/AdminCollectionImageModal';
+import { COLLECTION_DETAIL_REGISTRY } from '../../data/collectionDetailImages';
+import { COLLECTIONS_IMAGES } from '../../data/collectionsImages';
 import { apiClient, ApiError } from '../../api/client';
 
 export interface AdminCollectionItem {
@@ -48,6 +51,27 @@ const CANONICAL_SLUGS = [
     'quartz',
     'sculptures',
 ];
+
+export function getCollectionDisplayImage(
+    collection: AdminCollectionItem,
+): string | null {
+    if (collection.hero_image) {
+        return collection.hero_image;
+    }
+    const registryHero =
+        COLLECTION_DETAIL_REGISTRY[collection.slug]?.heroImage?.src;
+    if (registryHero) {
+        return registryHero;
+    }
+    const fallbackCard =
+        COLLECTIONS_IMAGES.cards[
+            collection.slug as keyof typeof COLLECTIONS_IMAGES.cards
+        ]?.src;
+    if (fallbackCard) {
+        return fallbackCard;
+    }
+    return null;
+}
 
 export default function CollectionsAdmin({
     initialCollections = [],
@@ -100,6 +124,33 @@ export default function CollectionsAdmin({
         collection: null,
         isProcessing: false,
     });
+
+    // Collection Image Modal State
+    const [imageModalCollection, setImageModalCollection] =
+        useState<AdminCollectionItem | null>(null);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
+    const handleOpenImageModal = (col: AdminCollectionItem) => {
+        setImageModalCollection(col);
+        setIsImageModalOpen(true);
+    };
+
+    const handleCollectionImageUpdated = (
+        updatedCollection: AdminCollectionItem,
+    ) => {
+        setCollections((prev) =>
+            prev.map((c) =>
+                c.id === updatedCollection.id ? updatedCollection : c,
+            ),
+        );
+        if (editingCollection && editingCollection.id === updatedCollection.id) {
+            setEditingCollection(updatedCollection);
+        }
+        setNotification({
+            type: 'success',
+            message: `Hero image updated successfully for ${updatedCollection.name}.`,
+        });
+    };
 
     // Auto-dismiss notification after 5s
     useEffect(() => {
@@ -619,6 +670,9 @@ export default function CollectionsAdmin({
                                     <AdminTableHead className="w-20">
                                         Order
                                     </AdminTableHead>
+                                    <AdminTableHead className="w-16">
+                                        Image
+                                    </AdminTableHead>
                                     <AdminTableHead>Collection</AdminTableHead>
                                     <AdminTableHead>Slug</AdminTableHead>
                                     <AdminTableHead>Status</AdminTableHead>
@@ -634,6 +688,8 @@ export default function CollectionsAdmin({
                             <AdminTableBody>
                                 {collections.map((col) => {
                                     const canonical = isCanonical(col.slug);
+                                    const displayImage =
+                                        getCollectionDisplayImage(col);
                                     return (
                                         <AdminTableRow key={col.id}>
                                             {/* Order */}
@@ -673,6 +729,68 @@ export default function CollectionsAdmin({
                                                         </button>
                                                     </div>
                                                 </div>
+                                            </AdminTableCell>
+
+                                            {/* Image Thumbnail with quick modal launch */}
+                                            <AdminTableCell>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        handleOpenImageModal(
+                                                            col,
+                                                        )
+                                                    }
+                                                    className="group relative flex h-12 w-12 flex-shrink-0 cursor-pointer overflow-hidden border border-stone-200 bg-stone-100 transition-all hover:border-stone-900 focus:outline-none dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-100"
+                                                    title={`Click to change image for ${col.name}`}
+                                                    aria-label={`Change image for ${col.name}`}
+                                                >
+                                                    {displayImage ? (
+                                                        <img
+                                                            src={displayImage}
+                                                            alt={col.name}
+                                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                        />
+                                                    ) : (
+                                                        <div className="flex h-full w-full items-center justify-center text-stone-400">
+                                                            <svg
+                                                                className="h-5 w-5"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                viewBox="0 0 24 24"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    strokeWidth={
+                                                                        1.5
+                                                                    }
+                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2 2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    )}
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-stone-950/60 opacity-0 transition-opacity group-hover:opacity-100">
+                                                        <svg
+                                                            className="h-4 w-4 text-white"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                                            />
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                </button>
                                             </AdminTableCell>
 
                                             {/* Collection Name & Tagline */}
@@ -751,6 +869,18 @@ export default function CollectionsAdmin({
                                             {/* Actions */}
                                             <AdminTableCell className="text-right">
                                                 <div className="flex items-center justify-end gap-2">
+                                                    <AdminButton
+                                                        variant="outline"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            handleOpenImageModal(
+                                                                col,
+                                                            )
+                                                        }
+                                                        title={`Change hero image for ${col.name}`}
+                                                    >
+                                                        Image
+                                                    </AdminButton>
                                                     <AdminButton
                                                         variant="outline"
                                                         size="sm"
@@ -927,6 +1057,47 @@ export default function CollectionsAdmin({
                         </div>
                     </div>
 
+                    {/* Collection Hero Image Section */}
+                    {editingCollection && (
+                        <div className="rounded border border-stone-200 bg-stone-50 p-4 dark:border-stone-800 dark:bg-stone-900/60">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h4 className="text-xs font-medium text-stone-900 dark:text-stone-100">
+                                        Collection Hero Image
+                                    </h4>
+                                    <p className="mt-0.5 text-[11px] text-stone-500 dark:text-stone-400">
+                                        {editingCollection.hero_image
+                                            ? 'Custom uploaded hero photo active.'
+                                            : 'Currently using authentic catalog default imagery.'}
+                                    </p>
+                                </div>
+                                <AdminButton
+                                    type="button"
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() =>
+                                        handleOpenImageModal(editingCollection)
+                                    }
+                                >
+                                    Change Hero Image
+                                </AdminButton>
+                            </div>
+                            {(() => {
+                                const editDisplayImg =
+                                    getCollectionDisplayImage(editingCollection);
+                                return editDisplayImg ? (
+                                    <div className="mt-3 relative aspect-[16/9] w-full max-w-sm overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-950">
+                                        <img
+                                            src={editDisplayImg}
+                                            alt={editingCollection.name}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    </div>
+                                ) : null;
+                            })()}
+                        </div>
+                    )}
+
                     {/* SEO Meta Fields */}
                     <div className="space-y-4 border-t border-stone-200 pt-2 dark:border-stone-800">
                         <h4 className="font-mono text-[10px] tracking-wider text-stone-500 uppercase">
@@ -1004,6 +1175,22 @@ export default function CollectionsAdmin({
                     </p>
                 </div>
             </AdminModal>
+
+            {/* Collection Image Modal */}
+            <AdminCollectionImageModal
+                isOpen={isImageModalOpen}
+                onClose={() => setIsImageModalOpen(false)}
+                collection={imageModalCollection}
+                currentDisplayImage={
+                    imageModalCollection
+                        ? getCollectionDisplayImage(imageModalCollection)
+                        : null
+                }
+                onImageUpdated={handleCollectionImageUpdated}
+                onError={(message) =>
+                    setNotification({ type: 'error', message })
+                }
+            />
         </AdminLayout>
     );
 }

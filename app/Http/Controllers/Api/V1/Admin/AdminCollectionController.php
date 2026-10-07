@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCollectionRequest;
+use App\Http\Requests\Admin\UpdateCollectionImageRequest;
 use App\Http\Requests\Admin\UpdateCollectionRequest;
 use App\Http\Resources\V1\CollectionResource;
 use App\Models\Collection;
@@ -183,6 +184,45 @@ class AdminCollectionController extends Controller
 
         return response()->json([
             'message' => 'Collection deleted successfully.',
+        ]);
+    }
+
+    /**
+     * Replace the collection's primary hero image shown on public pages and card grids.
+     */
+    public function updateImage(UpdateCollectionImageRequest $request, Collection $collection): JsonResponse
+    {
+        $file = $request->file('image');
+        $dimensions = @getimagesize($file->getRealPath());
+
+        // 'hero' is configured as singleFile(), so Spatie replaces any previous hero media automatically.
+        $collection->addMedia($file)
+            ->withCustomProperties([
+                'alt_text' => $request->input('alt_text') ?: $collection->name,
+                'width' => is_array($dimensions) ? $dimensions[0] : null,
+                'height' => is_array($dimensions) ? $dimensions[1] : null,
+            ])
+            ->toMediaCollection('hero');
+
+        $collection->refresh()->loadCount('varieties');
+
+        return response()->json([
+            'data' => new CollectionResource($collection),
+            'message' => "Hero image updated for {$collection->name}.",
+        ]);
+    }
+
+    /**
+     * Remove the uploaded hero image so the collection reverts to its default authentic photography.
+     */
+    public function destroyImage(Collection $collection): JsonResponse
+    {
+        $collection->clearMediaCollection('hero');
+        $collection->refresh()->loadCount('varieties');
+
+        return response()->json([
+            'data' => new CollectionResource($collection),
+            'message' => "Hero image removed. {$collection->name} now uses its default authentic imagery.",
         ]);
     }
 }
