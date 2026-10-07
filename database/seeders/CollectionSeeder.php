@@ -164,15 +164,24 @@ class CollectionSeeder extends Seeder
             if (isset($heroImages[$collection->slug])) {
                 $imageConfig = $heroImages[$collection->slug];
                 if (file_exists($imageConfig['path'])) {
-                    $collection->clearMediaCollection('hero');
-                    $collection->addMedia($imageConfig['path'])
-                        ->preservingOriginal()
-                        ->withCustomProperties([
-                            'alt_text' => $imageConfig['alt'],
-                            'width' => 1200,
-                            'height' => 800,
-                        ])
-                        ->toMediaCollection('hero');
+                    $existingMedia = $collection->getFirstMedia('hero');
+                    $expectedFileName = basename($imageConfig['path']);
+
+                    if (! $existingMedia || $existingMedia->file_name !== $expectedFileName) {
+                        try {
+                            $collection->clearMediaCollection('hero');
+                            $collection->addMedia($imageConfig['path'])
+                                ->preservingOriginal()
+                                ->withCustomProperties([
+                                    'alt_text' => $imageConfig['alt'],
+                                    'width' => 1200,
+                                    'height' => 800,
+                                ])
+                                ->toMediaCollection('hero');
+                        } catch (\Throwable $e) {
+                            logger()->warning("Could not attach hero image for {$collection->slug}: {$e->getMessage()}");
+                        }
+                    }
                 }
             }
         }
