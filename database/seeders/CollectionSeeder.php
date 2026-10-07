@@ -72,7 +72,7 @@ class CollectionSeeder extends Seeder
                 'meta_title' => 'Natural Sandstone Slabs & Facade Cladding | Hyderabad & India | ELIOR',
                 'meta_description' => 'Curated natural sandstone slabs and wall cladding in Hyderabad, Telangana & Andhra Pradesh. Dholpur Beige, Teakwood, Rainbow & Mint sandstone for exterior facades.',
                 'sort_order' => 5,
-                'is_active' => true,
+                'is_active' => false,
             ],
             [
                 'name' => 'Cobble Stones',
@@ -116,11 +116,65 @@ class CollectionSeeder extends Seeder
             ],
         ];
 
-        foreach ($collections as $collection) {
-            Collection::updateOrCreate(
-                ['slug' => $collection['slug']],
-                $collection
+        $heroImages = [
+            'italian-marble' => [
+                'path' => public_path('images/elior/collections/overview/collection-italian-marble.webp'),
+                'alt' => 'Monumental bookmatched white marble architectural feature wall with expressive charcoal veining',
+            ],
+            'granites' => [
+                'path' => public_path('images/elior/collections/overview/collection-granites.webp'),
+                'alt' => 'Monumental waterfall kitchen island and backsplash crafted from exotic black and terracotta veined granite',
+            ],
+            'slate-stone' => [
+                'path' => public_path('images/elior/collections/overview/collection-slate-stone.webp'),
+                'alt' => 'Monumental architectural feature wall clad in multi-color copper, golden amber, and silver-grey natural cleft slate stone panels',
+            ],
+            'limestones' => [
+                'path' => public_path('images/elior/collections/overview/collection-limestones.webp'),
+                'alt' => 'Expansive Tandur natural cleft-honed limestone flooring with warm olive-khaki and golden-sage tonal variation in architectural pavilion',
+            ],
+            'sandstone' => [
+                'path' => public_path('images/elior/collections/overview/collection-sandstone.webp'),
+                'alt' => 'Monumental architectural elevation of natural sandstone facade wall cladding and columns with reflection pools',
+            ],
+            'cobble-stones' => [
+                'path' => public_path('images/elior/collections/overview/collection-cobble-stones.webp'),
+                'alt' => 'Hand-hewn natural cobble stone courtyard promenade with distinct stone blocks',
+            ],
+            'pebbles' => [
+                'path' => public_path('images/elior/collections/overview/collection-pebbles.webp'),
+                'alt' => 'Multi-color natural river pebbles as decorative groundcover in a garden bed with Japanese maple alongside a paved stone walkway',
+            ],
+            'quartz' => [
+                'path' => public_path('images/elior/collections/overview/collection-quartz.webp'),
+                'alt' => 'Seamless monolithic engineered quartz slab island in luxury architectural kitchen',
+            ],
+            'sculptures' => [
+                'path' => public_path('images/elior/collections/sculptures/variety-abstract-granite-thinker.webp'),
+                'alt' => 'Abstract Thinker Granite Monolith hand-carved modernist stone sculpture on plinth',
+            ],
+        ];
+
+        foreach ($collections as $collectionData) {
+            $collection = Collection::updateOrCreate(
+                ['slug' => $collectionData['slug']],
+                $collectionData
             );
+
+            if (isset($heroImages[$collection->slug])) {
+                $imageConfig = $heroImages[$collection->slug];
+                if (file_exists($imageConfig['path'])) {
+                    $collection->clearMediaCollection('hero');
+                    $collection->addMedia($imageConfig['path'])
+                        ->preservingOriginal()
+                        ->withCustomProperties([
+                            'alt_text' => $imageConfig['alt'],
+                            'width' => 1200,
+                            'height' => 800,
+                        ])
+                        ->toMediaCollection('hero');
+                }
+            }
         }
     }
 }

@@ -68,8 +68,8 @@ export const HOMEPAGE_IMAGES = {
             alt: 'Seamless monolithic engineered quartz slab island in high-end architectural kitchen',
         },
         sculptures: {
-            src: '/images/elior/collections/overview/collection-sculptures.webp',
-            alt: 'Hand-carved natural stone Buddha sculpture seated in meditation on ornamental plinth within architectural reflection pool courtyard',
+            src: '/images/elior/collections/sculptures/variety-abstract-granite-thinker.webp',
+            alt: 'Abstract Thinker Granite Monolith modernist hand-carved grey granite sculpture on plinth',
         },
     } as Record<string, { src: string; alt: string }>,
 

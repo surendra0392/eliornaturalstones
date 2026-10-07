@@ -48,13 +48,12 @@ test('02: Baseline Blade template contains global robots crawler directive', fun
     expect($content)->toContain('ELIOR Natural Stones');
 });
 
-test('03: All 15 canonical public routes return 200 OK and valid Inertia components', function () {
+test('03: All 14 canonical public routes return 200 OK and valid Inertia components', function () {
     $canonicalSlugs = [
         'italian-marble',
         'granites',
         'slate-stone',
         'limestones',
-        'sandstone',
         'cobble-stones',
         'pebbles',
         'quartz',
@@ -67,7 +66,7 @@ test('03: All 15 canonical public routes return 200 OK and valid Inertia compone
     // 2. Collections Index
     $this->get('/collections')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Collections/Index'));
 
-    // 3-11. Nine Canonical Collection Detail pages
+    // 3-10. Eight Canonical Active Collection Detail pages
     foreach ($canonicalSlugs as $slug) {
         $this->get('/collections/'.$slug)
             ->assertOk()
@@ -78,16 +77,19 @@ test('03: All 15 canonical public routes return 200 OK and valid Inertia compone
             );
     }
 
-    // 12. Our Story
+    // Verify deactivated collection returns 404 for public visitors
+    $this->get('/collections/sandstone')->assertNotFound();
+
+    // 11. Our Story
     $this->get('/our-story')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/OurStory'));
 
-    // 13. From Source to Space
+    // 12. From Source to Space
     $this->get('/from-source-to-space')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/FromSourceToSpace'));
 
-    // 14. Projects
+    // 13. Projects
     $this->get('/projects')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Projects'));
 
-    // 15. Contact
+    // 14. Contact
     $this->get('/contact')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Contact'));
 });
 
@@ -96,7 +98,7 @@ test('04: Strict 404 guardrails are active for prohibited routes', function () {
     $this->get('/non-existent-page')->assertNotFound();
 });
 
-test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited routes', function () {
+test('05: Dynamic XML sitemap contains all 14 canonical URLs and zero prohibited routes', function () {
     $response = $this->get('/sitemap.xml');
     $response->assertOk();
     $content = $response->getContent();
@@ -109,13 +111,12 @@ test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited
     expect($content)->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
 
-    // Canonical collections
+    // Canonical active collections
     $canonicalSlugs = [
         'italian-marble',
         'granites',
         'slate-stone',
         'limestones',
-        'sandstone',
         'cobble-stones',
         'pebbles',
         'quartz',
@@ -126,7 +127,8 @@ test('05: Dynamic XML sitemap contains all 15 canonical URLs and zero prohibited
         expect($content)->toContain('/collections/'.$slug);
     }
 
-    // Zero prohibited routes
+    // Zero prohibited or deactivated routes
+    expect($content)->not->toContain('/collections/sandstone');
     expect($content)->not->toContain('/architect-designer-services');
     expect($content)->not->toContain('/admin');
 });
@@ -170,7 +172,7 @@ test('08: Baseline Blade SSR renders rich OpenGraph, Twitter, and canonical tags
     $routes = [
         '/',
         '/collections',
-        '/collections/sandstone',
+        '/collections/sculptures',
         '/our-story',
         '/from-source-to-space',
         '/projects',
@@ -204,12 +206,13 @@ test('08: Baseline Blade SSR renders rich OpenGraph, Twitter, and canonical tags
     }
 });
 
-test('09: Sand Stone collection is fully represented in dynamic XML sitemap with lastmod', function () {
+test('09: Deactivated Sand Stone is excluded from sitemap while active collections like Sculptures are included with lastmod', function () {
     $response = $this->get('/sitemap.xml');
     $response->assertOk();
     $content = $response->getContent();
 
-    expect($content)->toContain('/collections/sandstone</loc>');
+    expect($content)->not->toContain('/collections/sandstone</loc>');
+    expect($content)->toContain('/collections/sculptures</loc>');
     expect($content)->toContain('<lastmod>');
     expect($content)->toContain('<priority>0.8</priority>');
 });

@@ -1581,11 +1581,10 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
 
     sculptures: {
         descriptor: 'Stone shaped into lasting form.',
-        index: '09',
+        index: '08',
         heroImage: {
-            // STRICT REQUIREMENT: Hand-carved marble sculpture, architectural gallery presentation
-            src: '/images/elior/collections/sculptures/hero.webp',
-            alt: 'Classical carved marble sculpture figures in architectural gallery setting',
+            src: '/images/elior/collections/sculptures/variety-abstract-granite-thinker.webp',
+            alt: 'Abstract Thinker Granite Monolith hand-carved modernist stone sculpture on plinth',
         },
         intro: {
             statement:

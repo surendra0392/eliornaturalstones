@@ -34,7 +34,6 @@ test('all 8 canonical collection detail pages return 200 and render frontend/Col
     ['granites', 'Granites'],
     ['slate-stone', 'Slate Stone'],
     ['limestones', 'Limestones'],
-    ['sandstone', 'Sand Stone'],
     ['cobble-stones', 'Cobble Stones'],
     ['pebbles', 'Pebbles'],
     ['quartz', 'Quartz'],
@@ -46,9 +45,17 @@ test('invalid collection slug returns 404', function () {
     $this->get('/collections/random-category')->assertNotFound();
 });
 
-test('sandstone collection renders successfully with varieties', function () {
+test('deactivated sandstone collection exists with varieties and is hidden from public route until reactivated', function () {
     expect(Collection::where('slug', 'sandstone')->exists())->toBeTrue();
+    $sandstone = Collection::where('slug', 'sandstone')->firstOrFail();
+    expect($sandstone->is_active)->toBeFalse();
+    expect($sandstone->varieties()->count())->toBe(4);
 
+    // Public route returns 404 while deactivated
+    $this->get('/collections/sandstone')->assertNotFound();
+
+    // When reactivated by admin, public route becomes accessible
+    $sandstone->update(['is_active' => true]);
     $response = $this->get('/collections/sandstone');
     $response->assertOk()
         ->assertInertia(fn (Assert $page) => $page
@@ -57,6 +64,9 @@ test('sandstone collection renders successfully with varieties', function () {
             ->where('collection.name', 'Sand Stone')
             ->has('collection.varieties', 4)
         );
+
+    // Restore deactivated state
+    $sandstone->update(['is_active' => false]);
 });
 
 test('projects route returns 200 OK', function () {

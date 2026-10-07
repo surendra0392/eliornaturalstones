@@ -41,13 +41,12 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
     expect($content)->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
 
-    // 8 canonical collections
+    // 8 canonical active collections
     $canonicalSlugs = [
         'italian-marble',
         'granites',
         'slate-stone',
         'limestones',
-        'sandstone',
         'cobble-stones',
         'pebbles',
         'quartz',
@@ -58,7 +57,8 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
         expect($content)->toContain('/collections/'.$slug);
     }
 
-    // Critical exclusions
+    // Critical exclusions (including deactivated collections)
+    expect($content)->not->toContain('/collections/sandstone');
     expect($content)->not->toContain('/architect-designer-services');
     expect($content)->not->toContain('/admin');
     expect($content)->not->toContain('/api');
@@ -138,7 +138,7 @@ test('07: Public Enquiry submission allows Sand Stone interest', function () {
     $response->assertJsonPath('data.collection', 'Sand Stone');
 });
 
-test('08: All 9 canonical stone collections are seeded, active, and ordered', function () {
+test('08: All 9 canonical stone collections are seeded with 8 active, sandstone preserved and deactivated', function () {
     $collections = Collection::orderBy('sort_order')->get();
     expect($collections)->toHaveCount(9);
 
@@ -157,7 +157,11 @@ test('08: All 9 canonical stone collections are seeded, active, and ordered', fu
     expect($collections->pluck('slug')->all())->toBe($expectedSlugs);
 
     foreach ($collections as $col) {
-        expect($col->is_active)->toBeTrue();
+        if ($col->slug === 'sandstone') {
+            expect($col->is_active)->toBeFalse();
+        } else {
+            expect($col->is_active)->toBeTrue();
+        }
         expect($col->varieties()->count())->toBeGreaterThan(0);
     }
 });
