@@ -33,6 +33,11 @@ export const PUBLIC_NAV_ITEMS: NavItem[] = [
         description: 'Curated architectural stone reserves',
     },
     {
+        label: 'Gallery',
+        href: '/gallery',
+        description: 'Curated architectural applications & installations',
+    },
+    {
         label: 'From Source to Space',
         href: '/from-source-to-space',
         description: 'Geology to architectural installation',
@@ -53,6 +58,7 @@ export const ADMIN_NAV_ITEMS: NavItem[] = [
     { label: 'Dashboard', href: '/admin/dashboard' },
     { label: 'Collections', href: '/admin/collections' },
     { label: 'Varieties', href: '/admin/varieties' },
+    { label: 'Gallery', href: '/admin/gallery' },
     { label: 'Media Library', href: '/admin/media' },
     { label: 'Pages', href: '/admin/pages' },
     { label: 'Enquiries', href: '/admin/enquiries' },

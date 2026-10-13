@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreEnquiryRequest;
+use App\Http\Resources\V1\GalleryItemResource;
 use App\Http\Resources\V1\SliderResource;
 use App\Models\Collection;
+use App\Models\GalleryItem;
 use App\Models\Page;
 use App\Models\Slider;
 use Database\Seeders\PageSeeder;
@@ -144,6 +146,29 @@ class PublicPageController extends Controller
     {
         return Inertia::render('frontend/FromSourceToSpace', [
             'cmsContent' => $this->getCmsContent('from-source-to-space'),
+        ]);
+    }
+
+    /**
+     * Architectural Gallery Showcase.
+     */
+    public function gallery(): Response
+    {
+        $galleryItems = GalleryItem::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+
+        $categories = GalleryItem::where('is_active', true)
+            ->distinct()
+            ->whereNotNull('category')
+            ->pluck('category');
+
+        return Inertia::render('frontend/Gallery/Index', [
+            'galleryItems' => GalleryItemResource::collection($galleryItems)->resolve(),
+            'categories' => $categories,
+            'cmsContent' => $this->getCmsContent('gallery'),
         ]);
     }
 

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             SettingSeeder::class,
             SliderSeeder::class,
+            GallerySeeder::class,
         ];
 
         // Production Safety: Never seed fake/demo customer enquiries in production

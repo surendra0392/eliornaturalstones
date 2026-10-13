@@ -22,6 +22,7 @@ Route::get('/collections', [PublicPageController::class, 'collections'])->name('
 Route::get('/collections/{slug}', [PublicPageController::class, 'collection'])->name('collections.show');
 Route::get('/our-story', [PublicPageController::class, 'ourStory'])->name('our-story');
 Route::get('/from-source-to-space', [PublicPageController::class, 'fromSourceToSpace'])->name('from-source-to-space');
+Route::get('/gallery', [PublicPageController::class, 'gallery'])->name('gallery');
 Route::get('/projects', [PublicPageController::class, 'projects'])->name('projects');
 Route::permanentRedirect('/architect-designer-services', '/projects');
 Route::get('/contact', [PublicPageController::class, 'contact'])->name('contact');
@@ -46,6 +47,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/collections', [AdminController::class, 'collections'])->name('collections');
         Route::get('/varieties', [AdminController::class, 'varieties'])->name('varieties');
+        Route::get('/gallery', [AdminController::class, 'gallery'])->name('gallery');
         Route::get('/media', [AdminController::class, 'media'])->name('media');
         Route::get('/pages', [AdminController::class, 'pages'])->name('pages');
         Route::get('/sliders', [AdminController::class, 'sliders'])->name('sliders');

@@ -9,8 +9,10 @@ use App\Http\Resources\V1\Admin\AdminMediaResource;
 use App\Http\Resources\V1\Admin\AdminPageResource;
 use App\Http\Resources\V1\Admin\AdminSliderResource;
 use App\Http\Resources\V1\CollectionResource;
+use App\Http\Resources\V1\GalleryItemResource;
 use App\Models\Collection;
 use App\Models\Enquiry;
+use App\Models\GalleryItem;
 use App\Models\Page;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -72,6 +74,29 @@ class AdminController extends Controller
                 'total' => $varieties->total(),
             ],
             'canonicalCollections' => $canonicalCollections,
+        ]);
+    }
+
+    public function gallery(): Response
+    {
+        $galleryItems = GalleryItem::query()
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->paginate(12);
+
+        $categories = GalleryItem::distinct()
+            ->whereNotNull('category')
+            ->pluck('category');
+
+        return Inertia::render('admin/Gallery', [
+            'initialItems' => GalleryItemResource::collection($galleryItems->items())->resolve(),
+            'initialMeta' => [
+                'current_page' => $galleryItems->currentPage(),
+                'last_page' => $galleryItems->lastPage(),
+                'per_page' => $galleryItems->perPage(),
+                'total' => $galleryItems->total(),
+            ],
+            'categories' => $categories,
         ]);
     }
 

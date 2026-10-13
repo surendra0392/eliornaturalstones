@@ -20,6 +20,7 @@ export const ADMIN_NAVIGATION: AdminNavGroup[] = [
             { name: 'Sliders', href: '/admin/sliders' },
             { name: 'Collections', href: '/admin/collections' },
             { name: 'Varieties', href: '/admin/varieties' },
+            { name: 'Gallery', href: '/admin/gallery' },
             { name: 'Projects', href: '/admin/pages?edit=projects' },
             { name: 'Media', href: '/admin/media' },
             { name: 'Pages', href: '/admin/pages' },

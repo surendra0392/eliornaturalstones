@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Admin\AdminCollectionController;
 use App\Http\Controllers\Api\V1\Admin\AdminDashboardController;
 use App\Http\Controllers\Api\V1\Admin\AdminEnquiryController;
+use App\Http\Controllers\Api\V1\Admin\AdminGalleryController;
 use App\Http\Controllers\Api\V1\Admin\AdminMediaController;
 use App\Http\Controllers\Api\V1\Admin\AdminPageController;
 use App\Http\Controllers\Api\V1\Admin\AdminSettingController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Api\V1\Admin\AdminSliderController;
 use App\Http\Controllers\Api\V1\Admin\AdminVarietyController;
 use App\Http\Controllers\Api\V1\CollectionController;
 use App\Http\Controllers\Api\V1\EnquiryController;
+use App\Http\Controllers\Api\V1\GalleryController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\SliderController;
 use App\Http\Controllers\Api\V1\VarietyController;
@@ -43,6 +45,10 @@ Route::prefix('v1')->middleware(['throttle:60,1'])->group(function () {
     // Varieties (Stones)
     Route::get('/varieties', [VarietyController::class, 'index'])->name('api.v1.varieties.index');
     Route::get('/varieties/{slug}', [VarietyController::class, 'show'])->name('api.v1.varieties.show');
+
+    // Architectural Gallery
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('api.v1.gallery.index');
+    Route::get('/gallery/{slug}', [GalleryController::class, 'show'])->name('api.v1.gallery.show');
 
     // Editorial Pages
     Route::get('/pages/{slug}', [PageController::class, 'show'])->name('api.v1.pages.show');
@@ -97,6 +103,17 @@ Route::prefix('v1/admin')->middleware([
         Route::delete('/varieties/{variety}', [AdminVarietyController::class, 'destroy'])->name('api.v1.admin.varieties.destroy');
         Route::post('/varieties/{variety}/image', [AdminVarietyController::class, 'updateImage'])->name('api.v1.admin.varieties.image.update');
         Route::delete('/varieties/{variety}/image', [AdminVarietyController::class, 'destroyImage'])->name('api.v1.admin.varieties.image.destroy');
+
+        // Gallery Management Module
+        Route::get('/gallery', [AdminGalleryController::class, 'index'])->name('api.v1.admin.gallery.index');
+        Route::post('/gallery', [AdminGalleryController::class, 'store'])->name('api.v1.admin.gallery.store');
+        Route::get('/gallery/{gallery_item}', [AdminGalleryController::class, 'show'])->name('api.v1.admin.gallery.show');
+        Route::match(['put', 'patch'], '/gallery/{gallery_item}', [AdminGalleryController::class, 'update'])->name('api.v1.admin.gallery.update');
+        Route::patch('/gallery/{gallery_item}/status', [AdminGalleryController::class, 'updateStatus'])->name('api.v1.admin.gallery.status');
+        Route::patch('/gallery/{gallery_item}/order', [AdminGalleryController::class, 'updateOrder'])->name('api.v1.admin.gallery.order');
+        Route::delete('/gallery/{gallery_item}', [AdminGalleryController::class, 'destroy'])->name('api.v1.admin.gallery.destroy');
+        Route::post('/gallery/{gallery_item}/image', [AdminGalleryController::class, 'updateImage'])->name('api.v1.admin.gallery.image.update');
+        Route::delete('/gallery/{gallery_item}/image', [AdminGalleryController::class, 'destroyImage'])->name('api.v1.admin.gallery.image.destroy');
 
         // Media Library Module
         Route::get('/media', [AdminMediaController::class, 'index'])->name('api.v1.admin.media.index');
