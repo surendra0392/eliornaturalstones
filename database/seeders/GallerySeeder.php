@@ -335,8 +335,12 @@ class GallerySeeder extends Seeder
         ];
 
         $imageDir = public_path('images/elior/gallery');
+        $total = count($items);
 
-        foreach ($items as $data) {
+        $this->command?->info("Seeding {$total} architectural gallery items...");
+
+        foreach ($items as $index => $data) {
+            $idx = $index + 1;
             $imageFile = $data['image_file'];
             unset($data['image_file']);
 
@@ -344,6 +348,8 @@ class GallerySeeder extends Seeder
                 ['slug' => $data['slug']],
                 $data
             );
+
+            $this->command?->line("  [{$idx}/{$total}] {$item->title}");
 
             $imagePath = $imageDir.DIRECTORY_SEPARATOR.$imageFile;
             if (file_exists($imagePath)) {
@@ -365,5 +371,7 @@ class GallerySeeder extends Seeder
                 }
             }
         }
+
+        $this->command?->info("Successfully seeded all {$total} gallery items!");
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class GalleryItem extends Model implements HasMedia
 {
@@ -53,7 +52,7 @@ class GalleryItem extends Model implements HasMedia
 
     public function getThumbUrlAttribute(): ?string
     {
-        return $this->getFirstMediaUrl('image', 'thumb') ?: $this->getFirstMediaUrl('image') ?: null;
+        return $this->getFirstMediaUrl('image') ?: null;
     }
 
     protected function casts(): array
@@ -86,20 +85,5 @@ class GalleryItem extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('image')->singleFile();
-    }
-
-    public function registerMediaConversions(?Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(600)
-            ->height(480)
-            ->format('webp')
-            ->quality(85);
-
-        $this->addMediaConversion('large')
-            ->width(1500)
-            ->height(1200)
-            ->format('webp')
-            ->quality(92);
     }
 }
