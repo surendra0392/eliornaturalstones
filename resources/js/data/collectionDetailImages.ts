@@ -217,6 +217,94 @@ export const COLLECTION_DETAIL_REGISTRY: Record<
                 src: '/images/elior/collections/italian-marble/variety-botochino.webp',
                 alt: 'Botochino compact marble with warm ivory ground and golden-hazel micro-veining',
             },
+            '3d-black-marble': {
+                src: '/images/elior/collections/italian-marble/variety-3d-black-marble.webp',
+                alt: '3D Black Marble architectural slab with multi-dimensional crystalline angular fractures',
+            },
+            'almod-beige': {
+                src: '/images/elior/collections/italian-marble/variety-almod-beige.webp',
+                alt: 'Almod Beige marble slab with subtle cloudy micro-strata and warm earthen tones',
+            },
+            'armani-brown': {
+                src: '/images/elior/collections/italian-marble/variety-armani-brown.webp',
+                alt: 'Armani Brown marble slab with rich espresso ground and fine bronze-amber hairline veining',
+            },
+            'athena-gold': {
+                src: '/images/elior/collections/italian-marble/variety-athena-gold.webp',
+                alt: 'Athena Gold warm ivory marble slab with flowing honey-gold ribbons and crystalline transitions',
+            },
+            'beige-travertine': {
+                src: '/images/elior/collections/italian-marble/variety-beige-travertine.webp',
+                alt: 'Beige Travertine sedimentary marble slab with parallel linear banded strata',
+            },
+            'blue-roma': {
+                src: '/images/elior/collections/italian-marble/variety-blue-roma.webp',
+                alt: 'Blue Roma theatrical stone slab with cerulean blue ground and warm copper-gold fracture veins',
+            },
+            'brescia-grey': {
+                src: '/images/elior/collections/italian-marble/variety-brescia-grey.webp',
+                alt: 'Brescia Grey brecciated marble slab with fragmented silver-grey angular clasts and graphite matrix',
+            },
+            'brown-satuario': {
+                src: '/images/elior/collections/italian-marble/variety-brown-satuario.webp',
+                alt: 'Brown Satuario marble slab with bold directional chocolate-mocha veining on warm ivory ground',
+            },
+            'brown-statuario': {
+                src: '/images/elior/collections/italian-marble/variety-brown-satuario.webp',
+                alt: 'Brown Satuario marble slab with bold directional chocolate-mocha veining on warm ivory ground',
+            },
+            'fandi-blue': {
+                src: '/images/elior/collections/italian-marble/variety-fandi-blue.webp',
+                alt: 'Fandi Blue marble slab with soft denim-blue clouds and stormy pearl-grey mineral waves',
+            },
+            'floresta-verde': {
+                src: '/images/elior/collections/italian-marble/variety-floresta-verde.webp',
+                alt: 'Floresta Verde deep emerald and forest green marble slab with branching pale jade filaments',
+            },
+            'graphito': {
+                src: '/images/elior/collections/italian-marble/variety-graphito.webp',
+                alt: 'Graphito marble slab with moody smoky charcoal fields and subtle pewter micro-veins',
+            },
+            'grey-william': {
+                src: '/images/elior/collections/italian-marble/variety-grey-william.webp',
+                alt: 'Grey William refined dove-grey marble slab with fine spiderweb calcite veining',
+            },
+            'grey-willam': {
+                src: '/images/elior/collections/italian-marble/variety-grey-william.webp',
+                alt: 'Grey William refined dove-grey marble slab with fine spiderweb calcite veining',
+            },
+            'gsl': {
+                src: '/images/elior/collections/italian-marble/variety-gsl.webp',
+                alt: 'GSL architectural grey marble slab with parallel linear mineral banding and pewter accents',
+            },
+            'haseen-burberry': {
+                src: '/images/elior/collections/italian-marble/variety-haseen-burberry.webp',
+                alt: 'Haseen Burberry luxury beige marble slab with intersecting caramel and chocolate vein matrix',
+            },
+            'latte-grey': {
+                src: '/images/elior/collections/italian-marble/variety-latte-grey.webp',
+                alt: 'Latte Grey transitional marble slab with warm greige tone and horizontal sediment flow',
+            },
+            'midnight-gold-vein': {
+                src: '/images/elior/collections/italian-marble/variety-midnight-gold-vein.webp',
+                alt: 'Midnight Gold Vein deep black marble slab electrified by intense golden-amber lightning veins',
+            },
+            'rosa-statuario': {
+                src: '/images/elior/collections/italian-marble/variety-rosa-statuario.webp',
+                alt: 'Rosa Statuario ethereal white marble slab with romantic blush-rose undertones and soft grey veins',
+            },
+            'silver-river': {
+                src: '/images/elior/collections/italian-marble/variety-silver-river.webp',
+                alt: 'Silver River dynamic linear marble slab with flowing silver and pewter riverbed currents',
+            },
+            'spider-beige': {
+                src: '/images/elior/collections/italian-marble/variety-spider-beige.webp',
+                alt: 'Spider Beige marble slab with dense web-like terracotta and amber calcite veining',
+            },
+            'vienna-cloud': {
+                src: '/images/elior/collections/italian-marble/variety-vienna-cloud.webp',
+                alt: 'Vienna Cloud white marble slab with billowing smoky mineral clouds and serene feathered movement',
+            },
         },
     },
 

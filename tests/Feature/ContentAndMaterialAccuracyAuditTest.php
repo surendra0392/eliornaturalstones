@@ -110,6 +110,16 @@ test('03: Authentic varieties are seeded with zero speculative lab specification
     // Verify Cobble Stones varieties exist under cobble-stones collection
     $cobbleVarieties = Variety::whereHas('collection', fn ($q) => $q->where('slug', 'cobble-stones'))->get();
     expect($cobbleVarieties->count())->toBeGreaterThan(0);
+
+    // Verify Marble varieties include authentic selections
+    $marbleVarieties = Variety::whereHas('collection', fn ($q) => $q->where('slug', 'italian-marble'))->get();
+    expect($marbleVarieties->count())->toBe(29);
+    $marbleSlugs = $marbleVarieties->pluck('slug')->all();
+    expect($marbleSlugs)->toContain('3d-black-marble');
+    expect($marbleSlugs)->toContain('blue-roma');
+    expect($marbleSlugs)->toContain('floresta-verde');
+    expect($marbleSlugs)->toContain('midnight-gold-vein');
+    expect($marbleSlugs)->toContain('satuario');
 });
 
 test('04: Variety validation allows Cobble Stones in cobble-stones collection and rejects reserved slugs', function () {
