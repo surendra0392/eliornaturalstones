@@ -70,10 +70,19 @@ class PublicPageController extends Controller
 
         $sliderData = $slider ? (new SliderResource($slider))->resolve() : null;
 
+        $featuredGallery = GalleryItem::query()
+            ->where('is_active', true)
+            ->orderBy('is_featured', 'desc')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->take(6)
+            ->get();
+
         return Inertia::render('frontend/Home', [
             'collections' => $collections,
             'cmsContent' => $this->getCmsContent('home'),
             'heroSlider' => $sliderData,
+            'featuredGalleryItems' => GalleryItemResource::collection($featuredGallery)->resolve(),
         ]);
     }
 

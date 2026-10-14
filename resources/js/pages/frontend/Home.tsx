@@ -13,6 +13,7 @@ import { CollectionsSection } from '../../components/sections/home/CollectionsSe
 import { MaterialPhilosophySection } from '../../components/sections/home/MaterialPhilosophySection';
 import { HeritageSection } from '../../components/sections/home/HeritageSection';
 import { SignatureMaterialSection } from '../../components/sections/home/SignatureMaterialSection';
+import { HomeGallerySection } from '../../components/sections/home/HomeGallerySection';
 import { SourceToSpaceSection } from '../../components/sections/home/SourceToSpaceSection';
 import { FeaturedProjectsSection } from '../../components/sections/home/FeaturedProjectsSection';
 import { FinalStatementSection } from '../../components/sections/home/FinalStatementSection';
@@ -20,6 +21,7 @@ import { HOMEPAGE_IMAGES } from '../../data/homepageImages';
 import type { Collection } from '../../types/stone';
 import type { PublicSiteSettings } from '../../types/setting';
 import type { Slider } from '../../types/slider';
+import type { GalleryItemData } from './Gallery/Index';
 
 interface HomeProps {
     collections: Collection[];
@@ -31,12 +33,14 @@ interface HomeProps {
         content?: Record<string, any>;
     } | null;
     heroSlider?: Slider | null;
+    featuredGalleryItems?: GalleryItemData[];
 }
 
 export default function Home({
     collections,
     cmsContent,
     heroSlider,
+    featuredGalleryItems = [],
 }: HomeProps) {
     const { siteSettings, appUrl } = usePage<{
         siteSettings?: PublicSiteSettings;
@@ -128,7 +132,10 @@ export default function Home({
             {/* 06 — SIGNATURE MATERIAL MOMENT */}
             <SignatureMaterialSection content={cmsContent?.content?.signature} />
 
-            {/* 07 — FROM SOURCE TO SPACE */}
+            {/* 07 — ARCHITECTURAL GALLERY (Two Rows Curated Showcase) */}
+            <HomeGallerySection items={featuredGalleryItems} />
+
+            {/* 08 — FROM SOURCE TO SPACE */}
             <SourceToSpaceSection
                 content={cmsContent?.content?.sourceToSpace}
             />

@@ -134,27 +134,40 @@ export default function GalleryIndex({
                 canonical={canonicalUrl}
             />
 
-            {/* Architectural Gallery Hero */}
-            <header className="relative border-b border-stone-200 bg-[#FAF9F5] pt-28 pb-16 dark:border-stone-800 dark:bg-stone-950">
-                <Container>
-                    <div className="mx-auto max-w-4xl text-center">
-                        <div className="inline-flex items-center gap-2 rounded-full border border-amber-800/20 bg-amber-500/5 px-3 py-1 font-mono text-[11px] tracking-[0.28em] text-amber-800 uppercase dark:border-amber-400/20 dark:text-amber-300">
+            {/* Architectural Gallery Hero with Ambient Stone Backdrop */}
+            <header className="relative flex min-h-[50vh] flex-col justify-center overflow-hidden border-b border-stone-800 bg-[#0c0a09] pt-28 pb-16 lg:min-h-[56vh] lg:pt-36 lg:pb-20">
+                {/* Background Architectural Canvas */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/images/elior/gallery/gallery-29.webp"
+                        alt="Architectural Stone Gallery Atmosphere"
+                        className="h-full w-full object-cover object-center scale-105 opacity-35 filter contrast-125 brightness-90 transition-transform duration-1000 ease-out"
+                    />
+                    {/* Deep multi-stop luxury gradients */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a09] via-[#0c0a09]/75 to-[#0c0a09]/85" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                <Container className="relative z-10 text-center">
+                    <div className="mx-auto max-w-4xl">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/35 bg-amber-950/40 px-4 py-1.5 font-mono text-[11px] tracking-[0.28em] text-amber-300 uppercase backdrop-blur-md shadow-lg shadow-black/40">
+                            <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
                             <span>ARCHITECTURAL CURATION</span>
                             <span>•</span>
                             <span>PROPORTION 5:4</span>
                         </div>
-                        <h1 className="mt-5 font-serif text-4xl font-light tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-100">
+                        <h1 className="mt-6 font-serif text-4xl font-light tracking-tight text-white drop-shadow-md sm:text-5xl lg:text-6xl">
                             The Architectural Gallery
                         </h1>
-                        <p className="mt-6 font-sans text-base leading-relaxed text-stone-600 sm:text-lg dark:text-stone-300">
+                        <p className="mx-auto mt-5 max-w-2xl font-sans text-base leading-relaxed text-stone-300 sm:text-lg">
                             A curated retrospective of bespoke stone applications across private residences,
                             sanctuary suites, and hospitality pavilions. Each image captured in golden 5:4
                             framing, honoring mineral veining, light transmission, and monolithic geometry.
                         </p>
                     </div>
 
-                    {/* Filter Pills */}
-                    <div className="mt-12 flex flex-wrap items-center justify-center gap-2">
+                    {/* Filter Pills with Frosted Glass Styling */}
+                    <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
                         {categoriesList.map((cat) => {
                             const count = categoryCounts[cat] || 0;
                             const isActive = activeCategory === cat;
@@ -168,18 +181,18 @@ export default function GalleryIndex({
                                         setActiveCategory(cat);
                                         setLightboxIndex(null);
                                     }}
-                                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-all ${
+                                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-all backdrop-blur-md ${
                                         isActive
-                                            ? 'bg-stone-900 text-stone-50 shadow-sm dark:bg-stone-100 dark:text-stone-950'
-                                            : 'border border-stone-200 bg-white text-stone-600 hover:border-stone-400 hover:text-stone-900 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400 dark:hover:border-stone-600 dark:hover:text-stone-100'
+                                            ? 'border border-amber-500 bg-amber-600 text-white shadow-lg shadow-amber-950/50'
+                                            : 'border border-white/15 bg-white/10 text-stone-200 hover:border-amber-400/50 hover:bg-white/15 hover:text-white'
                                     }`}
                                 >
                                     <span>{label}</span>
                                     <span
-                                        className={`rounded-full px-1.5 py-0.2 font-mono text-[10px] ${
+                                        className={`rounded-full px-2 py-0.5 font-mono text-[10px] ${
                                             isActive
-                                                ? 'bg-stone-800 text-stone-200 dark:bg-stone-200 dark:text-stone-800'
-                                                : 'bg-stone-100 text-stone-500 dark:bg-stone-800 dark:text-stone-400'
+                                                ? 'bg-amber-800 text-amber-100'
+                                                : 'bg-black/40 text-stone-300'
                                         }`}
                                     >
                                         {count}

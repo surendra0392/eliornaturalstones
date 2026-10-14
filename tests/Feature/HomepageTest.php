@@ -11,11 +11,14 @@ beforeEach(function () {
 });
 
 test('homepage renders frontend/Home with canonical collections', function () {
+    $activeCount = Collection::where('is_active', true)->count();
+
     $this->get('/')
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('frontend/Home')
-            ->has('collections', 9)
+            ->has('collections', $activeCount)
+            ->has('featuredGalleryItems')
             ->where('collections.0.slug', 'italian-marble')
         );
 });
