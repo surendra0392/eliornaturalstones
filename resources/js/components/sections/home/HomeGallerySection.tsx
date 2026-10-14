@@ -17,7 +17,12 @@ export function HomeGallerySection({ items = [] }: HomeGallerySectionProps) {
     const displayItems = items.slice(0, 6);
 
     return (
-        <Section className="border-b border-stone-200 bg-[#FAF9F5] py-20 lg:py-28 dark:border-stone-800 dark:bg-stone-900/50">
+        <Section
+            background="transparent"
+            border="none"
+            spacing="spacious"
+            aria-label="The Architectural Gallery"
+        >
             <Container>
                 {/* Section Header */}
                 <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">

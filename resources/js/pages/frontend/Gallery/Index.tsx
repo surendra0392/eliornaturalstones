@@ -474,32 +474,68 @@ export default function GalleryIndex({
                 </div>
             )}
 
-            {/* Inquiries Banner */}
-            <Section className="border-t border-stone-200 bg-[#FAF9F5] py-20 dark:border-stone-800 dark:bg-stone-900/40">
-                <Container>
-                    <div className="mx-auto max-w-3xl text-center">
-                        <span className="font-mono text-xs tracking-[0.25em] text-amber-800 uppercase dark:text-amber-400">
-                            COMMISSION YOUR SPACE
-                        </span>
-                        <h2 className="mt-3 font-serif text-3xl font-light text-stone-900 sm:text-4xl dark:text-stone-100">
+            {/* Inquiries / Commission Section with Authentic Quarry Backdrop */}
+            <section
+                aria-label="Commission Your Architectural Space"
+                className="relative overflow-hidden bg-[#0c0a09] py-24 sm:py-28 lg:py-32"
+            >
+                {/* Background Quarry Image with Ambient Lighting */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/images/elior/source-to-space/source-to-space-01-quarries.webp"
+                        alt="Authentic quarry face with monumental raw stone blocks"
+                        loading="lazy"
+                        className="h-full w-full object-cover object-center opacity-35 filter contrast-125 brightness-85 scale-105 transition-transform duration-1000 ease-out"
+                    />
+                    {/* Deep multi-stop luxury gradients */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0a09] via-[#0c0a09]/80 to-[#0c0a09]/90" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                <Container className="relative z-10 text-center">
+                    <div className="mx-auto max-w-3xl">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/35 bg-amber-950/40 px-4 py-1.5 font-mono text-[11px] tracking-[0.28em] text-amber-300 uppercase backdrop-blur-md shadow-lg shadow-black/40">
+                            <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                            <span>COMMISSION YOUR SPACE</span>
+                        </div>
+                        <h2 className="mt-6 font-serif text-3xl font-light text-white drop-shadow-md sm:text-4xl lg:text-5xl">
                             Custom Quarry Sourcing & Architectural Masonry
                         </h2>
-                        <p className="mt-4 font-sans text-base leading-relaxed text-stone-600 dark:text-stone-300">
+                        <p className="mx-auto mt-5 max-w-2xl font-sans text-base leading-relaxed text-stone-300 sm:text-lg">
                             Every residence and commercial pavilion showcased in our gallery began with
                             raw block selection at the quarry face. Partner with our master stonemasons
                             and material engineers to bring your vision into reality.
                         </p>
-                        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                            <Button asChild size="lg">
-                                <Link href="/contact">Schedule Private Consultation</Link>
-                            </Button>
-                            <Button asChild variant="secondary" size="lg">
-                                <Link href="/collections">Explore All Collections</Link>
-                            </Button>
+                        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-7 py-3.5 text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-amber-950/50 transition-all hover:bg-amber-500 hover:shadow-xl hover:shadow-amber-900/60"
+                            >
+                                <span>Schedule Private Consultation</span>
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                    />
+                                </svg>
+                            </Link>
+                            <Link
+                                href="/collections"
+                                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-3.5 text-xs font-semibold tracking-wider text-stone-200 uppercase backdrop-blur-md transition-all hover:border-amber-400/50 hover:bg-white/15 hover:text-white"
+                            >
+                                <span>Explore All Collections</span>
+                            </Link>
                         </div>
                     </div>
                 </Container>
-            </Section>
+            </section>
         </PublicLayout>
     );
 }
