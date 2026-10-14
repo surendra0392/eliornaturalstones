@@ -93,6 +93,10 @@ class UpdateSettingsRequest extends FormRequest
                     if (is_string($value) && mb_strlen($value) > 2000) {
                         $validator->errors()->add("settings.{$key}", "The setting '{$key}' cannot exceed 2,000 characters.");
                     }
+                } elseif ($type === 'boolean') {
+                    if (! is_bool($value) && ! in_array($value, [0, 1, '0', '1', 'true', 'false', true, false], true)) {
+                        $validator->errors()->add("settings.{$key}", "The setting '{$key}' must be a valid boolean value.");
+                    }
                 }
             }
         });

@@ -55,15 +55,6 @@ class SitemapController extends Controller
                 'image_caption' => 'Quarry origin extraction, precision gangsaw processing, dry-lay inspection and transit',
             ],
             [
-                'url' => route('projects'),
-                'lastmod' => $pages->get('projects')?->updated_at?->toAtomString() ?? now()->toAtomString(),
-                'priority' => '0.8',
-                'changefreq' => 'monthly',
-                'image' => $appUrl.'/images/elior/projects/projects-hero.jpg',
-                'image_title' => 'Architectural Natural Stone Commissions & Private Villas in India',
-                'image_caption' => 'Distinguished private residences and cultural pavilions executed with ELIOR stone reserves',
-            ],
-            [
                 'url' => route('contact'),
                 'lastmod' => $pages->get('contact')?->updated_at?->toAtomString() ?? now()->toAtomString(),
                 'priority' => '0.8',
@@ -73,6 +64,18 @@ class SitemapController extends Controller
                 'image_caption' => 'Private material viewing showroom and specification desk in Hyderabad, Telangana',
             ],
         ];
+
+        if (\App\Models\Setting::get('projects_enabled', true)) {
+            $staticRoutes[] = [
+                'url' => route('projects'),
+                'lastmod' => $pages->get('projects')?->updated_at?->toAtomString() ?? now()->toAtomString(),
+                'priority' => '0.8',
+                'changefreq' => 'monthly',
+                'image' => $appUrl.'/images/elior/projects/projects-hero.jpg',
+                'image_title' => 'Architectural Natural Stone Commissions & Private Villas in India',
+                'image_caption' => 'Distinguished private residences and cultural pavilions executed with ELIOR stone reserves',
+            ];
+        }
 
         // Canonical natural stone collections (active only)
         $collections = Collection::query()

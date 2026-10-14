@@ -92,6 +92,15 @@ class Setting extends Model
             'default' => 'info@eliornaturalstones.com',
             'is_public' => true,
         ],
+        'projects_enabled' => [
+            'key' => 'projects_enabled',
+            'group' => self::GROUP_GENERAL,
+            'type' => 'boolean',
+            'label' => 'Enable Projects Portfolio',
+            'description' => 'Master toggle to enable or disable the architectural projects section across the website (homepage showcase, navigation menus, footer, and the /projects page).',
+            'default' => true,
+            'is_public' => true,
+        ],
 
         // B. Branding
         'logo_media_id' => [
@@ -230,6 +239,7 @@ class Setting extends Model
         'default_location',
         'primary_phone',
         'primary_email',
+        'projects_enabled',
         'logo_media_id',
         'favicon_media_id',
         'default_share_image_id',
@@ -284,6 +294,12 @@ class Setting extends Model
      */
     public function setValueAttribute(mixed $value): void
     {
+        if ($this->type === 'boolean') {
+            $this->attributes['value'] = json_encode(filter_var($value, FILTER_VALIDATE_BOOLEAN));
+
+            return;
+        }
+
         $this->attributes['value'] = is_null($value) ? null : json_encode($value);
     }
 
@@ -295,6 +311,10 @@ class Setting extends Model
         $setting = static::where('key', $key)->first();
 
         if ($setting !== null && $setting->value !== null) {
+            if ($setting->type === 'boolean') {
+                return filter_var($setting->value, FILTER_VALIDATE_BOOLEAN);
+            }
+
             return $setting->value;
         }
 
@@ -362,7 +382,11 @@ class Setting extends Model
 
         foreach (self::DEFINITIONS as $key => $def) {
             if (isset($dbSettings[$key]) && $dbSettings[$key]->value !== null) {
-                $result[$key] = $dbSettings[$key]->value;
+                $val = $dbSettings[$key]->value;
+                if ($def['type'] === 'boolean') {
+                    $val = filter_var($val, FILTER_VALIDATE_BOOLEAN);
+                }
+                $result[$key] = $val;
             } else {
                 $result[$key] = $def['default'];
             }

@@ -121,7 +121,12 @@ export function Footer() {
                             Studio & Process
                         </h4>
                         <ul className="mt-5 space-y-2.5">
-                            {PUBLIC_NAV_ITEMS.map((item) => (
+                            {PUBLIC_NAV_ITEMS.filter((item) => {
+                                if (item.href === '/projects' && siteSettings?.projects_enabled === false) {
+                                    return false;
+                                }
+                                return true;
+                            }).map((item) => (
                                 <li key={item.href}>
                                     <Link
                                         href={item.href}

@@ -67,7 +67,10 @@ export default function SettingsAdmin({
         const initial: Record<string, any> = {};
         for (const group of Object.keys(initialSettings) as SettingGroup[]) {
             for (const item of initialSettings[group] || []) {
-                initial[item.key] = item.value ?? '';
+                initial[item.key] =
+                    item.type === 'boolean'
+                        ? Boolean(item.value ?? item.default ?? true)
+                        : (item.value ?? '');
             }
         }
         return initial;
@@ -158,7 +161,10 @@ export default function SettingsAdmin({
                         res.data,
                     ) as SettingGroup[]) {
                         for (const item of res.data[group] || []) {
-                            updatedVals[item.key] = item.value ?? '';
+                            updatedVals[item.key] =
+                                item.type === 'boolean'
+                                    ? Boolean(item.value ?? item.default ?? true)
+                                    : (item.value ?? '');
                         }
                     }
                     setFormValues(updatedVals);
@@ -455,6 +461,67 @@ export default function SettingsAdmin({
                                     Official email destination for general trade
                                     inquiries and correspondence.
                                 </p>
+                            </div>
+
+                            {/* Feature Modules & Visibility Toggles */}
+                            <div className="sm:col-span-2 border-t border-stone-200/80 pt-6 dark:border-stone-800">
+                                <div className="mb-4">
+                                    <h3 className="font-mono text-xs font-semibold tracking-wider text-stone-900 uppercase dark:text-stone-100">
+                                        Feature Modules & Visibility
+                                    </h3>
+                                    <p className="mt-0.5 text-xs text-stone-500 dark:text-stone-400">
+                                        Enable or disable major website sections globally across navigation, layouts, and public routes.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col gap-4 border border-stone-200/80 bg-stone-50/50 p-5 sm:flex-row sm:items-center sm:justify-between dark:border-stone-800 dark:bg-stone-950/40">
+                                    <div className="space-y-1">
+                                        <div className="flex items-center gap-2.5">
+                                            <span className="font-mono text-xs font-semibold tracking-wider text-stone-900 uppercase dark:text-stone-100">
+                                                Projects Portfolio Showcase
+                                            </span>
+                                            <span
+                                                className={`inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${
+                                                    Boolean(formValues.projects_enabled ?? true)
+                                                        ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400'
+                                                        : 'bg-stone-200 text-stone-600 dark:bg-stone-800 dark:text-stone-400'
+                                                }`}
+                                            >
+                                                {Boolean(formValues.projects_enabled ?? true) ? 'Active' : 'Disabled'}
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-stone-500 dark:text-stone-400">
+                                            When disabled, all Projects links in header navigation, mobile drawer, footer, and the homepage showcase are completely hidden, and direct visits to /projects will return 404.
+                                        </p>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        role="switch"
+                                        aria-checked={Boolean(formValues.projects_enabled ?? true)}
+                                        onClick={() =>
+                                            handleFieldChange(
+                                                'projects_enabled',
+                                                !Boolean(formValues.projects_enabled ?? true),
+                                            )
+                                        }
+                                        className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-2 dark:focus:ring-stone-100 ${
+                                            Boolean(formValues.projects_enabled ?? true)
+                                                ? 'bg-emerald-600'
+                                                : 'bg-stone-300 dark:bg-stone-700'
+                                        }`}
+                                    >
+                                        <span className="sr-only">Toggle Projects Portfolio</span>
+                                        <span
+                                            aria-hidden="true"
+                                            className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out ${
+                                                Boolean(formValues.projects_enabled ?? true)
+                                                    ? 'translate-x-5'
+                                                    : 'translate-x-0'
+                                            }`}
+                                        />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}

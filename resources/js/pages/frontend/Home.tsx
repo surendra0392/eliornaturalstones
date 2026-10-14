@@ -141,12 +141,14 @@ export default function Home({
             />
 
             {/* 08 — FEATURED ARCHITECTURAL COMMISSIONS (PROJECTS) */}
-            <FeaturedProjectsSection
-                content={
-                    cmsContent?.content?.featuredProjects ||
-                    cmsContent?.content?.architectServices
-                }
-            />
+            {siteSettings?.projects_enabled !== false && (
+                <FeaturedProjectsSection
+                    content={
+                        cmsContent?.content?.featuredProjects ||
+                        cmsContent?.content?.architectServices
+                    }
+                />
+            )}
 
             {/* 09 — FINAL BRAND STATEMENT */}
             <FinalStatementSection content={cmsContent?.content?.closing} />

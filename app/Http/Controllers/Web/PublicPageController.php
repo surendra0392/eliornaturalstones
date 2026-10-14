@@ -9,6 +9,7 @@ use App\Http\Resources\V1\SliderResource;
 use App\Models\Collection;
 use App\Models\GalleryItem;
 use App\Models\Page;
+use App\Models\Setting;
 use App\Models\Slider;
 use Database\Seeders\PageSeeder;
 use Inertia\Inertia;
@@ -186,6 +187,10 @@ class PublicPageController extends Controller
      */
     public function projects(): Response
     {
+        if (! Setting::get('projects_enabled', true)) {
+            abort(404);
+        }
+
         return Inertia::render('frontend/Projects', [
             'cmsContent' => $this->getCmsContent('projects'),
         ]);

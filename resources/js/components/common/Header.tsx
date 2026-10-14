@@ -115,7 +115,12 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                         aria-label="Primary Navigation"
                         className="hidden items-center space-x-8 lg:flex lg:space-x-10"
                     >
-                        {PUBLIC_NAV_ITEMS.map((item) => {
+                        {PUBLIC_NAV_ITEMS.filter((item) => {
+                            if (item.href === '/projects' && siteSettings?.projects_enabled === false) {
+                                return false;
+                            }
+                            return true;
+                        }).map((item) => {
                             const active = isActive(item.href);
                             const isCollections = item.href === '/collections';
 

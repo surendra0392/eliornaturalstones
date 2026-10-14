@@ -58,6 +58,7 @@ export interface PublicSiteSettings {
     default_location?: string;
     primary_phone?: string;
     primary_email?: string;
+    projects_enabled?: boolean;
     enquiry_phone?: string;
     enquiry_email?: string;
     business_location?: string;
