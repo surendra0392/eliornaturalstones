@@ -224,11 +224,14 @@ test('12: API validation rejects invalid email format', function () {
         ->assertJsonValidationErrors(['email']);
 });
 
-test('13: /projects strictly returns HTTP 200 OK', function () {
+test('13: /projects returns 404 by default when disabled, and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 
 test('14: all previously established public routes remain 200 OK', function (string $route) {
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get($route)->assertOk();
 })->with([
     '/',

@@ -86,8 +86,11 @@ test('03: All 14 canonical public routes return 200 OK and valid Inertia compone
     // 12. From Source to Space
     $this->get('/from-source-to-space')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/FromSourceToSpace'));
 
-    // 13. Projects
+    // 13. Projects (assert 404 by default when disabled, and 200 when enabled)
+    $this->get('/projects')->assertNotFound();
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Projects'));
+    Setting::set('projects_enabled', false, Setting::GROUP_GENERAL, 'boolean');
 
     // 14. Contact
     $this->get('/contact')->assertOk()->assertInertia(fn (Assert $page) => $page->component('frontend/Contact'));
@@ -98,18 +101,23 @@ test('04: Strict 404 guardrails are active for prohibited routes', function () {
     $this->get('/non-existent-page')->assertNotFound();
 });
 
-test('05: Dynamic XML sitemap contains all 14 canonical URLs and zero prohibited routes', function () {
+test('05: Dynamic XML sitemap contains all canonical URLs and zero prohibited routes', function () {
     $response = $this->get('/sitemap.xml');
     $response->assertOk();
     $content = $response->getContent();
 
-    // 6 static routes
+    // Static routes (projects excluded by default when disabled)
     expect($content)->toContain('<loc>'.route('home').'</loc>');
     expect($content)->toContain('<loc>'.route('collections.index').'</loc>');
     expect($content)->toContain('<loc>'.route('our-story').'</loc>');
     expect($content)->toContain('<loc>'.route('from-source-to-space').'</loc>');
-    expect($content)->toContain('<loc>'.route('projects').'</loc>');
+    expect($content)->not->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
+
+    // Dynamic inclusion when projects enabled
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
+    expect($this->get('/sitemap.xml')->getContent())->toContain('<loc>'.route('projects').'</loc>');
+    Setting::set('projects_enabled', false, Setting::GROUP_GENERAL, 'boolean');
 
     // Canonical active collections
     $canonicalSlugs = [
@@ -169,6 +177,7 @@ test('07: CMS Page SEO precedence provides custom meta_title and meta_descriptio
 });
 
 test('08: Baseline Blade SSR renders rich OpenGraph, Twitter, and canonical tags for crawlers', function () {
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
     $routes = [
         '/',
         '/collections',

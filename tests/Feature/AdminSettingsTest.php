@@ -276,7 +276,9 @@ test('15: Regressions: all canonical collections remain intact, Projects returns
     // Sandstone exists in database
     expect(Collection::where('slug', 'sandstone')->exists())->toBeTrue();
 
-    // Projects route is canonical 200 and /admin/projects returns 404
+    // Projects route returns 404 by default when disabled, 200 when enabled, and /admin/projects returns 404
+    $this->get('/projects')->assertNotFound();
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });

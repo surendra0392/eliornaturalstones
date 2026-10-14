@@ -23,6 +23,10 @@ test('homepage renders frontend/Home with canonical collections', function () {
         );
 });
 
-test('homepage features projects and route is accessible', function () {
+test('projects route returns 404 by default when disabled and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
+
     $this->get('/projects')->assertOk();
 });

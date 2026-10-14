@@ -133,7 +133,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
                     className="my-auto flex flex-col space-y-5 py-10 md:space-y-7"
                 >
                     {PUBLIC_NAV_ITEMS.filter((item) => {
-                        if (item.href === '/projects' && siteSettings?.projects_enabled === false) {
+                        if (item.href === '/projects' && !siteSettings?.projects_enabled) {
                             return false;
                         }
                         return true;

@@ -355,6 +355,7 @@ test('19: Public /from-source-to-space renders published CMS content', function 
 });
 
 test('20: Public /projects renders published CMS content', function () {
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $response = $this->get('/projects');
 
     $response->assertOk()
@@ -429,7 +430,8 @@ test('25: Duplicate page slug rejected during page creation', function () {
         ->assertJsonValidationErrors(['slug']);
 });
 
-test('26: Canonical /projects returns 200 OK and legacy architect services redirects 301', function () {
+test('26: Canonical /projects returns 200 OK when enabled and legacy architect services redirects 301', function () {
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $response = $this->get('/projects');
     $response->assertOk();
 

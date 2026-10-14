@@ -38,8 +38,13 @@ test('01: Dynamic XML Sitemap is available and properly formatted', function () 
     expect($content)->toContain('<loc>'.route('collections.index').'</loc>');
     expect($content)->toContain('<loc>'.route('our-story').'</loc>');
     expect($content)->toContain('<loc>'.route('from-source-to-space').'</loc>');
-    expect($content)->toContain('<loc>'.route('projects').'</loc>');
+    expect($content)->not->toContain('<loc>'.route('projects').'</loc>');
     expect($content)->toContain('<loc>'.route('contact').'</loc>');
+
+    // When projects_enabled is toggled on, sitemap includes projects
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
+    expect($this->get('/sitemap.xml')->getContent())->toContain('<loc>'.route('projects').'</loc>');
+    Setting::set('projects_enabled', false, Setting::GROUP_GENERAL, 'boolean');
 
     // 8 canonical active collections
     $canonicalSlugs = [

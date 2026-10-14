@@ -122,7 +122,7 @@ export function Footer() {
                         </h4>
                         <ul className="mt-5 space-y-2.5">
                             {PUBLIC_NAV_ITEMS.filter((item) => {
-                                if (item.href === '/projects' && siteSettings?.projects_enabled === false) {
+                                if (item.href === '/projects' && !siteSettings?.projects_enabled) {
                                     return false;
                                 }
                                 return true;

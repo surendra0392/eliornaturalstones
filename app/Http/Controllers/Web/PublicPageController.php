@@ -187,7 +187,7 @@ class PublicPageController extends Controller
      */
     public function projects(): Response
     {
-        if (! Setting::get('projects_enabled', true)) {
+        if (! Setting::get('projects_enabled', false)) {
             abort(404);
         }
 

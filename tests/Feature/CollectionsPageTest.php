@@ -27,9 +27,11 @@ test('collections overview page renders frontend/Collections/Index with 8 active
         );
 });
 
-test('collections page contains sandstone in database as deactivated and canonical projects page is accessible', function () {
+test('collections page contains sandstone in database as deactivated and canonical projects page is toggle-aware', function () {
     expect(Collection::where('slug', 'sandstone')->exists())->toBeTrue();
     expect(Collection::where('slug', 'sandstone')->value('is_active'))->toBeFalse();
 
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });

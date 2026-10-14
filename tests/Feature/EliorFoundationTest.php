@@ -13,6 +13,7 @@ beforeEach(function () {
 });
 
 test('public routes are accessible and return 200', function (string $route) {
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get($route)->assertOk();
 })->with([
     '/',
@@ -24,7 +25,9 @@ test('public routes are accessible and return 200', function (string $route) {
     '/contact',
 ]);
 
-test('projects route exists and renders successfully', function () {
+test('projects route returns 404 by default when disabled and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 

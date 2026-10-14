@@ -192,12 +192,15 @@ test('14: placeholder admin module routes are protected and accessible to admin'
     ['/admin/settings', 'admin/Settings'],
 ]);
 
-test('15: /projects returns 200 and /admin/projects strictly returns HTTP 404', function () {
+test('15: /projects returns 404 by default when disabled, 200 when enabled, and /admin/projects strictly returns HTTP 404', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });
 
 test('16: all public website routes remain 200 OK', function (string $route) {
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get($route)->assertOk();
 })->with([
     '/',

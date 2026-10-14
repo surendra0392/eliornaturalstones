@@ -141,7 +141,7 @@ export default function Home({
             />
 
             {/* 08 — FEATURED ARCHITECTURAL COMMISSIONS (PROJECTS) */}
-            {siteSettings?.projects_enabled !== false && (
+            {Boolean(siteSettings?.projects_enabled) && (
                 <FeaturedProjectsSection
                     content={
                         cmsContent?.content?.featuredProjects ||

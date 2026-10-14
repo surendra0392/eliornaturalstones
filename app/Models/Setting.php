@@ -98,7 +98,7 @@ class Setting extends Model
             'type' => 'boolean',
             'label' => 'Enable Projects Portfolio',
             'description' => 'Master toggle to enable or disable the architectural projects section across the website (homepage showcase, navigation menus, footer, and the /projects page).',
-            'default' => true,
+            'default' => false,
             'is_public' => true,
         ],
 

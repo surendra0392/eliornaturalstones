@@ -59,7 +59,9 @@ test('01: Canonical 9 collections are locked and active in exact order with zero
     expect(Collection::where('slug', 'projects')->exists())->toBeFalse();
 });
 
-test('02: Route guardrails: canonical /projects returns 200 and /admin/projects returns 404', function () {
+test('02: Route guardrails: canonical /projects returns 404 by default when disabled, 200 when enabled, and /admin/projects returns 404', function () {
+    $this->get('/projects')->assertNotFound();
+    Setting::set('projects_enabled', true, Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
     $this->get('/admin/projects')->assertNotFound();
 });

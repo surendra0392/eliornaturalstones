@@ -69,7 +69,9 @@ test('deactivated sandstone collection exists with varieties and is hidden from 
     $sandstone->update(['is_active' => false]);
 });
 
-test('projects route returns 200 OK', function () {
+test('projects route returns 404 by default when disabled and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 

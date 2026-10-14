@@ -65,7 +65,7 @@ class SitemapController extends Controller
             ],
         ];
 
-        if (\App\Models\Setting::get('projects_enabled', true)) {
+        if (\App\Models\Setting::get('projects_enabled', false)) {
             $staticRoutes[] = [
                 'url' => route('projects'),
                 'lastmod' => $pages->get('projects')?->updated_at?->toAtomString() ?? now()->toAtomString(),

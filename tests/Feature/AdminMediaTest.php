@@ -399,7 +399,9 @@ test('23: Public variety image output reflects assigned slab image', function ()
     expect($apiResponse->json('data.slab_image'))->not->toBeNull();
 });
 
-test('24: /projects route remains HTTP 200 OK', function () {
+test('24: /projects route returns 404 by default when disabled, and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 
@@ -428,6 +430,5 @@ test('28: Existing public pages remain functional', function () {
     $this->get('/collections')->assertOk();
     $this->get('/our-story')->assertOk();
     $this->get('/from-source-to-space')->assertOk();
-    $this->get('/projects')->assertOk();
     $this->get('/contact')->assertOk();
 });

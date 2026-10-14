@@ -97,7 +97,9 @@ test('from-source-to-space page contains closing statement and contact conversat
     $response->assertSee('/contact');
 });
 
-test('projects route returns 200 OK', function () {
+test('projects route returns 404 by default when disabled and 200 when enabled', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 

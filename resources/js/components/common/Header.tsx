@@ -116,7 +116,7 @@ export function Header({ variant = 'solid', className }: HeaderProps) {
                         className="hidden items-center space-x-8 lg:flex lg:space-x-10"
                     >
                         {PUBLIC_NAV_ITEMS.filter((item) => {
-                            if (item.href === '/projects' && siteSettings?.projects_enabled === false) {
+                            if (item.href === '/projects' && !siteSettings?.projects_enabled) {
                                 return false;
                             }
                             return true;

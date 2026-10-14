@@ -69,7 +69,7 @@ export default function SettingsAdmin({
             for (const item of initialSettings[group] || []) {
                 initial[item.key] =
                     item.type === 'boolean'
-                        ? Boolean(item.value ?? item.default ?? true)
+                        ? Boolean(item.value ?? item.default ?? false)
                         : (item.value ?? '');
             }
         }
@@ -163,7 +163,7 @@ export default function SettingsAdmin({
                         for (const item of res.data[group] || []) {
                             updatedVals[item.key] =
                                 item.type === 'boolean'
-                                    ? Boolean(item.value ?? item.default ?? true)
+                                    ? Boolean(item.value ?? item.default ?? false)
                                     : (item.value ?? '');
                         }
                     }
@@ -482,12 +482,12 @@ export default function SettingsAdmin({
                                             </span>
                                             <span
                                                 className={`inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider ${
-                                                    Boolean(formValues.projects_enabled ?? true)
+                                                    Boolean(formValues.projects_enabled ?? false)
                                                         ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400'
                                                         : 'bg-stone-200 text-stone-600 dark:bg-stone-800 dark:text-stone-400'
                                                 }`}
                                             >
-                                                {Boolean(formValues.projects_enabled ?? true) ? 'Active' : 'Disabled'}
+                                                {Boolean(formValues.projects_enabled ?? false) ? 'Active' : 'Disabled'}
                                             </span>
                                         </div>
                                         <p className="text-xs text-stone-500 dark:text-stone-400">
@@ -498,15 +498,15 @@ export default function SettingsAdmin({
                                     <button
                                         type="button"
                                         role="switch"
-                                        aria-checked={Boolean(formValues.projects_enabled ?? true)}
+                                        aria-checked={Boolean(formValues.projects_enabled ?? false)}
                                         onClick={() =>
                                             handleFieldChange(
                                                 'projects_enabled',
-                                                !Boolean(formValues.projects_enabled ?? true),
+                                                !Boolean(formValues.projects_enabled ?? false),
                                             )
                                         }
                                         className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-2 dark:focus:ring-stone-100 ${
-                                            Boolean(formValues.projects_enabled ?? true)
+                                            Boolean(formValues.projects_enabled ?? false)
                                                 ? 'bg-emerald-600'
                                                 : 'bg-stone-300 dark:bg-stone-700'
                                         }`}
@@ -515,7 +515,7 @@ export default function SettingsAdmin({
                                         <span
                                             aria-hidden="true"
                                             className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out ${
-                                                Boolean(formValues.projects_enabled ?? true)
+                                                Boolean(formValues.projects_enabled ?? false)
                                                     ? 'translate-x-5'
                                                     : 'translate-x-0'
                                             }`}

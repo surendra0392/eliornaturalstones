@@ -97,7 +97,9 @@ test('our story page contains final brand statement and collections link', funct
     $response->assertSee('/collections');
 });
 
-test('canonical projects route is operational', function () {
+test('canonical projects route is toggle-aware', function () {
+    $this->get('/projects')->assertNotFound();
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
     $this->get('/projects')->assertOk();
 });
 

@@ -18,6 +18,7 @@ beforeEach(function () {
     if (Page::count() === 0 || ! Page::where('slug', 'projects')->exists()) {
         (new PageSeeder)->run();
     }
+    \App\Models\Setting::set('projects_enabled', true, \App\Models\Setting::GROUP_GENERAL, 'boolean');
 });
 
 test('it renders the projects page with HTTP 200 and frontend/Projects component', function () {
